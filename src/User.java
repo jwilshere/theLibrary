@@ -6,7 +6,6 @@ public class User {
     int BorrowLimit;
     boolean Active;
     int Delays;
-    String philliponk;
 
     public boolean canBorrow(){
         return false;
