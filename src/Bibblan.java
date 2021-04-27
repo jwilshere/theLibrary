@@ -1,6 +1,6 @@
 public class Bibblan {
 
     String bookName;
-  int antal;
-
+    int antal;
+    int dagar;
 }
