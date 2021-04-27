@@ -1,5 +1,10 @@
 public class User {
 
+    // 1: Undergraduate
+    // 2: Postgraduate
+    // 3: PHD/candidate
+    // 4: Teacher/Professor
+
     int Id;
     int Type;
     int ItemBorrowed;
@@ -20,8 +25,24 @@ public class User {
         Delays = delays;
     }
 
-    public boolean canBorrow(int id){
+    public boolean canBorrow(){
+        switch (getType())
+        {
+            case 1:
 
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+            default:
+                 break;
+        }
 
         return false;
     }
