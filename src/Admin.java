@@ -18,6 +18,9 @@ public class Admin {
 
     }
 
+    public void martindabosss(){
+        
+    }
 
 
 }
