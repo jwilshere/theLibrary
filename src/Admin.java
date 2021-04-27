@@ -6,5 +6,15 @@ public class Admin {
 
     }
 
-    public void deleteUser(){}
+    public void deleteUser(){
+
+    }
+
+    public void canUserBorrow(){
+
+
+    }
+
+
+
 }

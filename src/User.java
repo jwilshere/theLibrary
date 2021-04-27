@@ -1,11 +1,15 @@
 public class User {
 
+    // Attribut "Type" =
     // 1: Undergraduate
     // 2: Postgraduate
     // 3: PHD/candidate
     // 4: Teacher/Professor
 
     int Id;
+    String Fnamn;
+    String Lnamn;
+    int PersonId;
     int Type;
     int ItemBorrowed;
     int BorrowLimit;
@@ -16,42 +20,17 @@ public class User {
 
     }
 
-    public User(int id, int type, int itemBorrowed, int borrowLimit, boolean active, int delays) {
-        Id = id;
-        Type = type;
-        ItemBorrowed = itemBorrowed;
-        BorrowLimit = borrowLimit;
-        Active = active;
-        Delays = delays;
+    public User(int id, String fnamn, String lnamn, int personId, int type, int itemBorrowed, int borrowLimit, boolean active, int delays) {
+        this.Id = id;
+        this.Fnamn = fnamn;
+        this.Lnamn = lnamn;
+        this.PersonId = personId;
+        this.Type = type;
+        this.ItemBorrowed = itemBorrowed;
+        this.BorrowLimit = borrowLimit;
+        this.Active = active;
+        this.Delays = delays;
     }
-
-    public boolean canBorrow(){
-        switch (getType())
-        {
-            case 1:
-
-                break;
-            case 2:
-
-                break;
-            case 3:
-
-                break;
-            case 4:
-
-                break;
-            default:
-                 break;
-        }
-
-        return false;
-    }
-
-    public void borrowBook(){
-
-
-    }
-
 
     public int getId() {
         return Id;
