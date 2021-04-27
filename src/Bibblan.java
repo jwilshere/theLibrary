@@ -4,5 +4,5 @@ public class Bibblan {
     int antal;
     int dagar;
 
-    String hej = "jogge åker båt";
+    String hej = "jogge åker gärna båt på sommaren";
 }
