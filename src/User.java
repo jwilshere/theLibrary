@@ -7,7 +7,9 @@ public class User {
     boolean Active;
     int Delays;
 
-    public User(){}
+    public User(){
+
+    }
 
     public User(int id, int type, int itemBorrowed, int borrowLimit, boolean active, int delays) {
         Id = id;
@@ -21,11 +23,13 @@ public class User {
     public boolean canBorrow(int id){
 
 
-
         return false;
     }
 
-    public void borrowBook(){}
+    public void borrowBook(){
+
+
+    }
 
 
     public int getId() {
