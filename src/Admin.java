@@ -7,54 +7,36 @@ public class Admin {
 
     public void addUser(User User){
         //select statement som kollar ifall
-
     }
 
     public void deleteUser(){
+    }
+
+    public void checkIfUserDelayed(int id){
 
     }
 
-    public void canUserBorrow(int id){
-        //Jämföra id:t med databas idn för att se att den finns
-        //Om den finns så kolla vilken type det är och vad borrowlimiten ligger på
-
-
-        try(Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://@vhost6.lnu.se:23306/1ik013v20-20?useSSL=false",
-                "1ik013v20-20", "kiwi")) {
-            System.out.println("Connected");
-
-            System.out.println();
-            System.out.println("---Album---");
-
-            Statement statement = conn.createStatement();
-
-            ResultSet result = statement.executeQuery("Select * FROM album");
-
-            while(result.next()){
-                System.out.println(result.getString(1) + ": " + result.getString(2) + ": " + result.getString(3));
-            }
-
-            System.out.println();
-            System.out.println("---Artister---");
-
-            Statement statement1 = conn.createStatement();
-
-            ResultSet result1 = statement1.executeQuery("Select * FROM artist");
-
-            while(result1.next()){
-                System.out.println(result1.getString(1) + ": " + result1.getString(2) + ": " + result1.getString(3));
-            }
-
-        }
-        catch(SQLException ex){
-            System.out.println("Something went wrong");
-        }
-
+    public void suspendUser (Date startDate, Date endDate, int id){
+        //if a member delays to return library items more than twice,
+        // he/she gets suspended for 15 days.
+        // If he/she has been suspended more than twice, then the account is deleted.
     }
 
-    public void martindabosss(){
+    public void checkIfBookIsAvaible(int ISBN)  { //inparametern blir en metod (requestForBook)
 
+        //Afterward, the librarian is looking for the library title with the ISBN (an integer of 6 digits, e.g., 238103):
+        //• If it does not exist then the member is notified (i.e., you should print a message to the librarian who uses the system).
+
+        //• If the library title is found, then the librarian checks if there is an available item for borrowing
+        // and in case there is not an available item you notify the librarian (i.e., you should print a message to the librarian who uses the system).
+
+        //• If there is an available item, then the item is given to the member,
+        // and the system updates the number of the member’s borrowed items appropriately and the available items of this title.
+    }
+
+    public void ReturnBook (int PersonID, int ISBN){
+        //Kolla ifall usern finns, ta bort antal lånade items på usern
+        //Uppdatera i BookRegister att en bok av denna titel är tillgänglig
     }
 
 
