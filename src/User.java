@@ -13,14 +13,14 @@ public class User {
     int Type;
     int ItemBorrowed;
     int BorrowLimit;
-    boolean Active;
+    int Active;
     int Delays;
 
     public User(){
 
     }
 
-    public User(int id, String fnamn, String lnamn, int personId, int type, int itemBorrowed, int borrowLimit, boolean active, int delays) {
+    public User(int id, String fnamn, String lnamn, int personId, int type, int itemBorrowed, int borrowLimit, int active, int delays) {
         this.Id = id;
         this.Fnamn = fnamn;
         this.Lnamn = lnamn;
@@ -64,11 +64,11 @@ public class User {
         BorrowLimit = borrowLimit;
     }
 
-    public boolean isActive() {
+    public int isActive() {
         return Active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(int active) {
         Active = active;
     }
 
