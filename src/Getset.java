@@ -1,7 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 public class Getset {
 
@@ -118,6 +117,25 @@ public class Getset {
         }
     }
 
+    public void setBook(int id, String title, int ISBN, Date borrowed){
+
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
+                "root","philip98")) {
+            System.out.println("Connected");
+
+            PreparedStatement bookIn = conn.prepareStatement("INSERT INTO Book VALUES (?,?,?,?)");
+            bookIn.setInt(1, id);
+            bookIn.setString(2, title);
+            bookIn.setInt(3, ISBN);
+            bookIn.setDate(4, borrowed);
+
+            bookIn.executeUpdate();
+        }
+        catch (SQLException ex) {
+            System.out.println("Something went wrong" + ex.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         Getset hej = new Getset();
 
@@ -126,19 +144,19 @@ public class Getset {
         System.out.println(Arrays.toString(hej.getBooks()));
         System.out.println();
 
-        for(User s: hej.getUsers()){
-            System.out.println(s.getId());
+        for(User s: hej.getUsers()) {
+            if (s.getId() == 1234) {
+                System.out.println(s.getId());
+            }
         }
-
         System.out.println();
 
-        hej.setUser(5555, "Rasmus", "Johansson", 980428, 2, 2, 5, 1, 0);
+       // hej.setUser(5555, "Rasmus", "Johansson", 980428, 2, 2, 5, 1, 0);
+        //hej.setBook(2200, "Moa's Inredningstips", 566756, null);
+        System.out.println();
 
         for(User s: hej.getUsers()){
             System.out.println(s.getId());
         }
-
-
-
     }
 }

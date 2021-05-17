@@ -105,9 +105,5 @@ public class User {
 
         //Antingen läggas som en ny användare eller ej
     }
-
-
-
-
 }
 
