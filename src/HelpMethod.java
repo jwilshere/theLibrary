@@ -33,31 +33,7 @@ public class HelpMethod {
         return bok;
     }
 
-    public void addBookToUser(int userId, int bookId){
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
-                "root","philip98")) {
-            System.out.println("Connected");
 
-            PreparedStatement bookIn = conn.prepareStatement("UPDATE Book SET User_id = " + "'" + userId + "'" + "WHERE book.id = " + "'" + bookId + "'");
-            bookIn.executeUpdate();
-        }
-        catch (SQLException ex) {
-            System.out.println("Something went wrong" + ex.getMessage());
-        }
-    }
-
-    public void removeBookFromUSer(int bookId){
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
-                "root","philip98")) {
-            System.out.println("Connected");
-
-            PreparedStatement bookIn = conn.prepareStatement("UPDATE Book SET User_id = null WHERE book.id = " + "'" + bookId + "'");
-            bookIn.executeUpdate();
-        }
-        catch (SQLException ex) {
-            System.out.println("Something went wrong" + ex.getMessage());
-        }
-    }
 
     public void checkIfSuspended(int UserId){
         int delay;
