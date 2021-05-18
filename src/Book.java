@@ -8,6 +8,8 @@ public class Book {
     private int ISBN;
     private Date borrowed;
 
+    public Book(){}
+
     public Book(int id, String title, int ISBN, Date borrowed) {
         this.id = id;
         this.title = title;

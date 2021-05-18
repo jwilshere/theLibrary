@@ -18,7 +18,6 @@ public class Getset {
     }
 
     public User[] getUsers(){
-        connectDB();
         userLista = new ArrayList<>();
         int index = 0;
 
@@ -44,7 +43,6 @@ public class Getset {
     }
 
     public Book[] getBooks(){
-        connectDB();
         bookLista = new ArrayList<>();
         int index = 0;
 
@@ -136,8 +134,11 @@ public class Getset {
         }
     }
 
+
     public static void main(String[] args) {
         Getset hej = new Getset();
+
+        hej.connectDB(); // FÖRSTA GÅNGEN MAN STARTAR BARA !!!!!!!!!!!!!!!!!
 
         System.out.println(Arrays.toString(hej.getUsers()));
         System.out.println();
@@ -150,6 +151,7 @@ public class Getset {
             }
         }
         System.out.println();
+
 
        // hej.setUser(5555, "Rasmus", "Johansson", 980428, 2, 2, 5, 1, 0);
         //hej.setBook(2200, "Moa's Inredningstips", 566756, null);
