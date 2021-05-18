@@ -1,13 +1,8 @@
 public class UserInteraction {
     HelpMethod object;
 
-    public int requestForBook(String title, int id) {
-        object = new HelpMethod();
-        int antalBockerFarLanas;
+    public int requestBook(String title, int userId) {
         int ISBN = 0;
-
-        object.getAUser(id);
-
 
 
     //Then, the system checks whether this member is an undergraduate,

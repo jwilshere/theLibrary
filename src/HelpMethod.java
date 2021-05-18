@@ -2,18 +2,46 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
-public class HelpMethod {
-    Getset object;
+public class HelpMethod extends Getset{
     User anvandare;
     Book bok;
 
-    public User getAUser(int UserId){
-        object = new Getset();
-        anvandare = new User();
+    ArrayList<User> userLista = new ArrayList<>();
+    ArrayList<Book> bookLista = new ArrayList<>();
 
-        for(User s: object.getUsers()) {
+    @Override
+    public User[] getUsers() {
+        User[] UsLista = new User[0];
+        int count = 0;
+        for(User s: userLista){
+            UsLista[count] = s;
+            count++;
+        }
+        return UsLista;
+    }
+
+    @Override
+    public Book[] getBooks() {
+        Book[] BoLista = new Book[bookLista.size()];
+                bookLista.toArray(BoLista);
+        return BoLista;
+    }
+
+    @Override
+    public void addBookToUser(int userId, int bookId) {
+                for(Book p: getBooks()){
+                    if(p.getId() == bookId){
+                        getAUser(userId).addBook(p);
+                    }
+                }
+            }
+
+    public User getAUser(int UserId){
+        anvandare = new User();
+        for(User s: userLista) {
             if (s.getId() == UserId) {
                 anvandare = s;
             }
@@ -22,18 +50,14 @@ public class HelpMethod {
     }
 
     public Book getABookOnId(int bookId){
-        object = new Getset();
         bok = new Book();
-
-        for(Book s: object.getBooks()) {
+        for(Book s: bookLista) {
             if (s.getId() == bookId) {
                 bok = s;
             }
         }
         return bok;
     }
-
-
 
     public void checkIfSuspended(int UserId){
         int delay;
@@ -53,7 +77,13 @@ public class HelpMethod {
         HelpMethod hej = new HelpMethod();
         System.out.println(hej.getAUser(1234));
         System.out.println(hej.getABookOnId(987654));
-        //hej.addBookToUser(1234, 4444);
-        //hej.removeBookFromUSer(4444);
+
+        hej.bookLista.add(new Book(12, "Tja", 1234, null));
+        hej.bookLista.add(new Book(13, "Tja", 1235, null));
+        hej.userLista.add(new User(1234, "Philip", "Nilsson", 9802, 1, 0,1,1,1));
+
+        System.out.println(Arrays.toString(hej.getBooks()));
+        hej.addBookToUser(1234, 12);
+        System.out.println(Arrays.toString(hej.getAUser(1234).getBookLista()));
     }
 }

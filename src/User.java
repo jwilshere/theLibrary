@@ -88,5 +88,12 @@ public class User {
     public Book[] getBookLista(){
         return bookLista;
     }
+
+    public void addBook(Book newBook){
+        if(ItemsBorrowed < 11){
+            bookLista[ItemsBorrowed] = newBook;
+            ItemsBorrowed++;
+        }
+    }
 }
 

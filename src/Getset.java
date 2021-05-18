@@ -4,9 +4,6 @@ import java.util.Arrays;
 
 public class Getset {
 
-    ArrayList<User> userLista = null;
-    ArrayList<Book> bookLista = null;
-
     public void connectDB(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -18,8 +15,8 @@ public class Getset {
     }
 
     public User[] getUsers(){
-        userLista = new ArrayList<>();
         int index = 0;
+        ArrayList<User> userLista = new ArrayList<>();
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
@@ -43,8 +40,8 @@ public class Getset {
     }
 
     public Book[] getBooks(){
-        bookLista = new ArrayList<>();
         int index = 0;
+        ArrayList<Book> bookLista = new ArrayList<>();
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
@@ -62,34 +59,10 @@ public class Getset {
         catch(SQLException ex){
             System.out.println("Something went wrong");
         }
-        Book[] buLista = new Book[index];
-        bookLista.toArray(buLista);
-        return buLista;
+        Book[] BoLista = new Book[index];
+        bookLista.toArray(BoLista);
+        return BoLista;
     }
-
-
-    /* public String getFnamn(int id){
-        connectDB();
-        String Fnamn = "";
-
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
-                "root","philip98")) {
-
-            System.out.println("Connected");
-
-            Statement statement = conn.createStatement();
-
-            ResultSet result = statement.executeQuery("Select Fnamn FROM user WHERE Id =" + "'" + id + "'");
-
-            while(result.next()){
-            Fnamn= result.getString(1);
-            }
-        }
-        catch(SQLException ex){
-            System.out.println("Something went wrong");
-        }
-        return Fnamn;
-    } */
 
     public void setUser(int id, String fnamn, String lnamn, int personId, int type, int itemBorrowed, int borrowLimit, int active, int delays){
 
