@@ -7,14 +7,16 @@ public class Book {
     private String title;
     private int ISBN;
     private Date borrowed;
+    private int userID;
 
     public Book(){}
 
-    public Book(int id, String title, int ISBN, Date borrowed) {
+    public Book(int id, String title, int ISBN, Date borrowed, int userID) {
         this.id = id;
         this.title = title;
         this.ISBN = ISBN;
         this.borrowed = borrowed;
+        this.userID = userID;
     }
 
     public int getId() {
@@ -47,5 +49,13 @@ public class Book {
 
     public void setBorrowed(Date borrowed) {
         this.borrowed = borrowed;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 }
