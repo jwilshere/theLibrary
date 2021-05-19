@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class HelpMethod extends Getset{
     User anvandare;
@@ -59,6 +60,19 @@ public class HelpMethod extends Getset{
         return bok;
     }
 
+    public int generateUserId(){
+        Random random = new Random();
+        int randomUserID = random.nextInt(10000);
+
+        for(User s: getUsers()){
+            if(s.getId() == randomUserID){
+                generateUserId();
+            }
+        }
+        return randomUserID;
+    }
+
+
     public void checkIfSuspended(int UserId){
         int delay;
         if(getAUser(UserId).isActive() == 1)
@@ -80,7 +94,9 @@ public class HelpMethod extends Getset{
 
         hej.bookLista.add(new Book(12, "Tja", 1234, null));
         hej.bookLista.add(new Book(13, "Tja", 1235, null));
-        hej.userLista.add(new User(1234, "Philip", "Nilsson", 9802, 1, 0,1,1,1));
+        hej.userLista.add(new User(1234, "Philip", "Nilsson", 9802, 1, 0,1,1,1,null));
+
+
 
         System.out.println(Arrays.toString(hej.getBooks()));
         hej.addBookToUser(1234, 12);

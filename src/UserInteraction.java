@@ -15,8 +15,20 @@ public class UserInteraction {
         return ISBN;
 }
 
-    public void RegisterUser(String Fnamn, String Lnamn, int PersonID){
+    public void RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ){
 
+        for(User s: object.getUsers()){
+            if(s.getPersonId() == PersonID){
+                System.out.printf("Användare är redan registrerad!");
+            }
+            if(s.getSuspendDate() != null){
+                System.out.println("Användare är suspenderad");
+            }
+        }
+
+        int id = 0;
+
+        object.setUser(id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0);
 
         //If the personal number was already registered, but the person had violated the regulation,
         // then a notice is informing the librarian that the registration is not allowed and the process ends without registration.
