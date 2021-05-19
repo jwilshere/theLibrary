@@ -1,8 +1,10 @@
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Calendar;
 
 public class AdminInteraction {
-    HelpMethod object;
-    Getset getSet;
+    HelpMethod object = null;
+    Getset getSet = null;
 
     AdminInteraction(){
 
@@ -25,8 +27,26 @@ public class AdminInteraction {
         }
     }
 
-    public void checkIfUserDelayed(int id){
+    public boolean checkIfSuspended(int UserId) {
+        getSet = new Getset();
+        if (object.getAUser(UserId).getSuspendDate() == null){
+            System.out.println("Användaren är inte suspenderad!");
+            return false;
+        }
+        java.util.Date datum = object.getAUser(UserId).getSuspendDate();
+        java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
 
+        Calendar c = Calendar.getInstance();
+        c.setTime(datum);
+        c.add(Calendar.DATE, 1);
+        if (c.getTime().compareTo(dagensdatum) < 0) {
+            object.resetSuspend(UserId);
+            System.out.println("Det har gått 15 dagar");
+            return true;
+        }
+
+        System.out.println("Är suspenderad");
+        return false;
     }
 
     public void checkIfBookIsAvaible(int ISBN)  { //inparametern blir en metod (requestForBook)
@@ -80,6 +100,7 @@ public class AdminInteraction {
         AdminInteraction hej = new AdminInteraction();
         hej.RegisterUser("Martin", "Nilssn", 880528, 3);
 
+        hej.checkIfSuspended(1234);
     }
 
 }

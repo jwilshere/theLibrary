@@ -163,6 +163,19 @@ public class Getset {
         }
     }
 
+    public void resetSuspend(int userId){
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
+                "root","philip98")) {
+            System.out.println("Connected");
+
+            PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET suspendDate = null  WHERE User.id = " + "'" + userId + "'");
+            bookIn.executeUpdate();
+        }
+        catch (SQLException ex) {
+            System.out.println("Something went wrong" + ex.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         Getset hej = new Getset();
 

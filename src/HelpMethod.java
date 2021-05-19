@@ -97,26 +97,6 @@ public class HelpMethod extends Getset{
         return randomUserID;
     }
 
-    public boolean checkIfSuspended(int UserId) {
-        object = new Getset();
-        if (getAUser(UserId).getSuspendDate() == null){
-            return false;
-        }
-        Date datum = getAUser(UserId).getSuspendDate();
-        java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
-
-        Calendar c = Calendar.getInstance();
-        c.setTime(datum);
-        c.add(Calendar.DATE, 1);
-        if (c.getTime().compareTo(dagensdatum) < 0) {
-            object.resetSuspend(UserId);
-            System.out.println("Det har gått 15 dagar");
-            return true;
-        }
-
-        System.out.println("Är suspenderad");
-        return false;
-    }
 
     public int requestBook(String title, int userId) {
         int ISBN = 0;
