@@ -160,7 +160,6 @@ public class Getset {
         }
     }
 
-
     public void removeBookFromUSer(int bookId){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {

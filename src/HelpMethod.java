@@ -52,7 +52,6 @@ public class HelpMethod {
             c.add(Calendar.DATE, 1);
             if (c.getTime().compareTo(dagensdatum) < 0) {
                 object.resetSuspend(UserId);
-                //getAUser(UserId).setSuspendDate(null);
                 System.out.println("Det har gått 15 dagar");
                 return true;
             }
