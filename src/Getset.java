@@ -42,6 +42,22 @@ public class Getset {
         return usLista;
     }
 
+    public void deleteUser(int userId) {
+
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
+                "root", "philip98")) {
+            System.out.println("Connected");
+
+            PreparedStatement deleteAUser = conn.prepareStatement("DELETE FROM admin.User WHERE id= " + "'" + userId + "'");
+            deleteAUser.executeUpdate();
+
+        }
+        catch(SQLException ex){
+            System.out.println("Something went wrong");
+        }
+        System.out.println("User deleted successfully!");
+    }
+
     public Book[] getBooks(){
         bookLista = new ArrayList<>();
         int index = 0;
@@ -182,6 +198,7 @@ public class Getset {
         //hej.setUser(5555, "Rasmus", "Johansson", 980428, 2, 2, 5, 1, 0);
         hej.setBook(2200, "Moa's Inredningstips", 566756, null, 0);
         System.out.println();
+        hej.deleteUser(1234);
 
         for(User s: hej.getUsers()){
             System.out.println(s.getId());

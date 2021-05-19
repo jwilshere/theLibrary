@@ -33,6 +33,17 @@ public class HelpMethod {
         return bok;
     }
 
+    public void deleteUser(int userId){
+        User hej = getAUser(userId);
+
+        if (hej.getId() == userId) {
+            deleteUser(userId);
+        }
+        else {
+            System.out.println("User dosen't exist");
+        }
+
+    }
 
 
     public void checkIfSuspended(int UserId){

@@ -9,7 +9,15 @@ public class Admin {
         //select statement som kollar ifall
     }
 
-    public void deleteUser(){
+    public void deleteUser(int userId){
+
+        if (hej.getId() == userId) {
+            deleteUser(userId);
+        }
+        else {
+            System.out.println("User dosen't exist");
+        }
+
     }
 
     public void checkIfUserDelayed(int id){
