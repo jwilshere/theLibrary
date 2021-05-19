@@ -170,6 +170,21 @@ public class Getset {
             System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE Book SET User_id = null WHERE book.id = " + "'" + bookId + "'");
+            PreparedStatement bookIn2 = conn.prepareStatement("UPDATE Book SET borrowed = null WHERE book.id = " + "'" + bookId + "'");
+            bookIn.executeUpdate();
+            bookIn2.executeUpdate();
+        }
+        catch (SQLException ex) {
+            System.out.println("Something went wrong" + ex.getMessage());
+        }
+    }
+
+    public void updateItemBorrowed(int itemBorrowed, int userId){
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
+                "root","philip98")) {
+            System.out.println("Connected");
+
+            PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET itemBorrowed = " + "'" + itemBorrowed + "'" + "WHERE user.id = " + "'" + userId + "'");
             bookIn.executeUpdate();
         }
         catch (SQLException ex) {

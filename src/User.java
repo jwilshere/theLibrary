@@ -85,6 +85,14 @@ public class User {
         Delays = delays;
     }
 
+    public int getPersonId() {
+        return PersonId;
+    }
+
+    public void setPersonId(int personId) {
+        PersonId = personId;
+    }
+
     public Book[] getBookLista(){
         return bookLista;
     }

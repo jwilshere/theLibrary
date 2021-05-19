@@ -34,16 +34,40 @@ public class HelpMethod {
     }
 
     public void deleteUser(int userId){
-        User hej = getAUser(userId);
+        object = new Getset();
+        int nummer = getAUser(userId).getId();
 
-        if (hej.getId() == userId) {
-            deleteUser(userId);
+        if (nummer == userId) {
+            object.deleteUser(userId);
         }
         else {
             System.out.println("User dosen't exist");
         }
-
     }
+
+    public boolean checkIfBookIsAvaible(int ISBN){
+        object = new Getset();
+
+        return false;
+    }
+
+    public void ReturnBook (int userId, int bookId) {
+        object = new Getset();
+        int lanadeBocker;
+        int nummer = getAUser(userId).getId();
+
+                if (nummer == userId) {
+                    lanadeBocker = getAUser(userId).getItemBorrowed();
+                    lanadeBocker = lanadeBocker - 1;
+                    object.removeBookFromUSer(bookId);
+                    object.updateItemBorrowed(lanadeBocker, userId);
+                     }
+
+            else {
+                System.out.println("User dosen't exist");
+            }
+        }
+
 
 
     public void checkIfSuspended(int UserId){
@@ -63,8 +87,10 @@ public class HelpMethod {
     public static void main(String[] args) {
         HelpMethod hej = new HelpMethod();
         System.out.println(hej.getAUser(1234));
-        System.out.println(hej.getABookOnId(987654));
-        //hej.addBookToUser(1234, 4444);
+        //System.out.println(hej.getABookOnId(987654));
+        hej.ReturnBook(1234,2200);
+        //hej.deleteUser(1234);
+        //hej.addBookToUser(1234);
         //hej.removeBookFromUSer(4444);
     }
 }

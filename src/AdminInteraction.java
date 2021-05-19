@@ -2,6 +2,8 @@ import java.sql.Date;
 
 public class AdminInteraction {
 
+    User hej = new User();
+
     public void addUser(User User){
         //select statement som kollar ifall
     }
@@ -26,6 +28,8 @@ public class AdminInteraction {
     }
 
     public void ReturnBook (int PersonID, int bookId){
+
+
         //Kolla ifall usern finns, ta bort antal lånade items på usern
         //Uppdatera i BookRegister att en bok av denna titel är tillgänglig
     }
