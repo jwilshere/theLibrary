@@ -26,7 +26,7 @@ public class Getset {
             ResultSet rs = statement.executeQuery("Select * FROM user");
 
             while(rs.next()){
-                User anvandare = new User(rs.getInt("id"), rs.getString("Fnamn"), rs.getString("Lnamn"), rs.getInt("personid"), rs.getInt("type"), rs.getInt("itemBorrowed"), rs.getInt("borrowlimit"), rs.getInt("active"), rs.getInt("delays"));
+                User anvandare = new User(rs.getInt("id"), rs.getString("Fnamn"), rs.getString("Lnamn"), rs.getInt("personid"), rs.getInt("type"), rs.getInt("itemBorrowed"), rs.getInt("borrowlimit"), rs.getInt("active"), rs.getInt("delays"), rs.getDate("suspendDate"));
                 userLista.add(anvandare);
                 index++;
             }
