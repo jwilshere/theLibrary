@@ -49,6 +49,30 @@ public class AdminInteraction {
         return false;
     }
 
+    public boolean suspendUser (int UserId){
+        getSet = new Getset();
+
+        int antaldelays =0;
+        if (object.getAUser(UserId).Delays <=2 || object.getAUser(UserId).Delays ==4 || object.getAUser(UserId).Delays ==5 || object.getAUser(UserId).Delays ==7 || object.getAUser(UserId).Delays ==8 ){
+            return false;
+        }
+        if (object.getAUser(UserId).Delays ==9){
+            // kalla på radera användaren metoden
+            return false;
+        }
+        if(object.getAUser(UserId).Delays >2){
+            object.getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
+            getSet.suspendUser(UserId,java.sql.Date.valueOf(LocalDate.now()));
+            antaldelays = object.getAUser(UserId).Delays +1;
+            object.setDelays(UserId,antaldelays);
+            //getAUser(UserId).setDelays(+1);
+        }
+        return true;
+        //if a member delays to return library items more than twice,
+        // he/she gets suspended for 15 days.
+        // If he/she has been suspended more than twice, then the account is deleted.
+    }
+
     public void checkIfBookIsAvaible(int ISBN)  { //inparametern blir en metod (requestForBook)
 
         //Afterward, the librarian is looking for the library title with the ISBN (an integer of 6 digits, e.g., 238103):
