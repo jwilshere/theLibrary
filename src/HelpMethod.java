@@ -90,8 +90,9 @@ public class HelpMethod extends Getset{
 
             Calendar c = Calendar.getInstance();
             c.setTime(datum);
-            c.add(Calendar.DATE, 1);
+            c.add(Calendar.DATE, 15);
             if (c.getTime().compareTo(dagensdatum) < 0) {
+                getAUser(UserId).setSuspendDate(null);
                 System.out.println("Det har gått 15 dagar");
                 return true;
             }
