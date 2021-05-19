@@ -36,6 +36,18 @@ public class HelpMethod extends Getset{
         return boLista;
     }
 
+    public User getAUser(int UserId){
+        object = new Getset();
+        anvandare = new User();
+
+        for(User s: object.getUsers()) {
+            if (s.getId() == UserId) {
+                anvandare = s;
+            }
+        }
+        return anvandare;
+    }
+
     public void addBookToUser(int userId, int bookId) {
                 for(Book p: getBooks()){
                     if(p.getId() == bookId){
