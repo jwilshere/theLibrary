@@ -35,9 +35,23 @@ public class AdminInteraction {
         // and the system updates the number of the member’s borrowed items appropriately and the available items of this title.
     }
 
-    public void ReturnBook (int PersonID, int bookId){
-        //Kolla ifall usern finns, ta bort antal lånade items på usern
-        //Uppdatera i BookRegister att en bok av denna titel är tillgänglig
+    public void ReturnBook (int userId, int bookId) {
+        getSet = new Getset();
+        object = new HelpMethod();
+
+        int lanadeBocker;
+        int nummer = object.getAUser(userId).getId();
+
+        if (nummer == userId) {
+            lanadeBocker = object.getAUser(userId).getItemBorrowed();
+            lanadeBocker = lanadeBocker - 1;
+            getSet.removeBookFromUSer(bookId);
+            getSet.updateItemBorrowed(lanadeBocker, userId);
+        }
+
+        else {
+            System.out.println("User dosen't exist");
+        }
     }
 
     public void RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ){
@@ -52,20 +66,8 @@ public class AdminInteraction {
                 System.out.println("Användare är suspenderad");
             }
         }
-
         int Id = object.generateUserId();
         getSet.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
-
-        //If the personal number was already registered, but the person had violated the regulation,
-        // then a notice is informing the librarian that the registration is not allowed and the process ends without registration.
-
-        //• If the personal number was already registered and he/she has not violated the regulations,
-        // then nothing happens (i.e., a message is printed to the librarian that everything is already alright).
-
-        //• If the personal number was not in the database, the candidate member’s information
-        // (first name, last name, personal number) is registered, and the member gets a suitable unique ID.
-
-        //Antingen läggas som en ny användare eller ej
     }
 
     public static void main(String[] args) {
