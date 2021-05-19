@@ -79,7 +79,7 @@ public class HelpMethod extends Getset{
         // he/she gets suspended for 15 days.
         // If he/she has been suspended more than twice, then the account is deleted.
     }
-
+    
         public boolean checkIfSuspended(int UserId) {
             if (getAUser(UserId).suspendDate == null){
                 return false;
@@ -95,7 +95,6 @@ public class HelpMethod extends Getset{
                 System.out.println("Det har gått 15 dagar");
                 return true;
             }
-
             System.out.println("Är suspenderad");
             return false;
         }
