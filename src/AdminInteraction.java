@@ -1,6 +1,16 @@
 import java.sql.Date;
 
 public class AdminInteraction {
+    HelpMethod object;
+    Getset getSet;
+
+    AdminInteraction(){
+
+    }
+
+    AdminInteraction(Getset HM){
+        getSet = HM;
+    }
 
     User hej = new User();
 
@@ -27,10 +37,53 @@ public class AdminInteraction {
         // and the system updates the number of the member’s borrowed items appropriately and the available items of this title.
     }
 
+<<<<<<< HEAD
     public void ReturnBook (int PersonID, int bookId){
 
 
         //Kolla ifall usern finns, ta bort antal lånade items på usern
         //Uppdatera i BookRegister att en bok av denna titel är tillgänglig
+=======
+    public void ReturnBook (int userId, int bookId) {
+        getSet = new Getset();
+        object = new HelpMethod();
+
+        int lanadeBocker;
+        int nummer = object.getAUser(userId).getId();
+
+        if (nummer == userId) {
+            lanadeBocker = object.getAUser(userId).getItemBorrowed();
+            lanadeBocker = lanadeBocker - 1;
+            getSet.removeBookFromUSer(bookId);
+            getSet.updateItemBorrowed(lanadeBocker, userId);
+        }
+
+        else {
+            System.out.println("User dosen't exist");
+        }
+>>>>>>> Philip
     }
+
+    public void RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ){
+        getSet = new Getset();
+        object = new HelpMethod();
+
+        for(User s: object.getUsers()){
+            if(s.getPersonId() == PersonID){
+                System.out.println("Användare är redan registrerad!");
+            }
+            if(s.getSuspendDate() != null){
+                System.out.println("Användare är suspenderad");
+            }
+        }
+        int Id = object.generateUserId();
+        getSet.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
+    }
+
+    public static void main(String[] args) {
+        AdminInteraction hej = new AdminInteraction();
+        hej.RegisterUser("Martin", "Nilssn", 880528, 3);
+
+    }
+
 }

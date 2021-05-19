@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class User {
 
@@ -20,12 +21,13 @@ public class User {
     int BorrowLimit;
     int Active;
     int Delays;
+    Date SuspendDate;
     Book[] bookLista = new Book[10];
 
     public User(){
     }
 
-    public User(int id, String fnamn, String lnamn, int personId, int type, int itemBorrowed, int borrowLimit, int active, int delays) {
+    public User(int id, String fnamn, String lnamn, int personId, int type, int itemBorrowed, int borrowLimit, int active, int delays, Date suspendDate) {
         this.Id = id;
         this.Fnamn = fnamn;
         this.Lnamn = lnamn;
@@ -35,6 +37,7 @@ public class User {
         this.BorrowLimit = borrowLimit;
         this.Active = active;
         this.Delays = delays;
+        this.SuspendDate = suspendDate;
     }
 
     public int getId() {
@@ -93,8 +96,26 @@ public class User {
         PersonId = personId;
     }
 
+<<<<<<< HEAD
+=======
+    public Date getSuspendDate() {
+        return SuspendDate;
+    }
+
+    public void setSuspendDate(Date suspendDate) {
+        SuspendDate = suspendDate;
+    }
+
+>>>>>>> Philip
     public Book[] getBookLista(){
         return bookLista;
+    }
+
+    public void addBook(Book newBook){
+        if(ItemsBorrowed < 11){
+            bookLista[ItemsBorrowed] = newBook;
+            ItemsBorrowed++;
+        }
     }
 }
 
