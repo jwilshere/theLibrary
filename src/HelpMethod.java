@@ -74,6 +74,18 @@ public class HelpMethod extends Getset{
         return bok;
     }
 
+    public void deleteUser(int userId){
+        object = new Getset();
+        int nummer = getAUser(userId).getId();
+
+        if (nummer == userId) {
+            object.deleteUser(userId);
+        }
+        else {
+            System.out.println("User dosen't exist");
+        }
+    }
+
     public int generateUserId(){
         Random random = new Random();
         int randomUserID = random.nextInt(8999) + 1000;
