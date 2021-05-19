@@ -10,9 +10,11 @@ public class Admin {
     }
 
     public void deleteUser(){
+
     }
 
     public void checkIfUserDelayed(int id){
+
 
     }
 

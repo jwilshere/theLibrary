@@ -1,14 +1,13 @@
 public class UserInteraction {
     HelpMethod object;
 
+
     public int requestForBook(String title, int id) {
         object = new HelpMethod();
         int antalBockerFarLanas;
         int ISBN = 0;
 
         object.getAUser(id);
-
-
 
     //Then, the system checks whether this member is an undergraduate,
     // a postgraduate, a PhD student/candidate, or a teacher (professor, etc.).

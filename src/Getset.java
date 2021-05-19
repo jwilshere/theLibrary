@@ -16,20 +16,19 @@ public class Getset {
             System.out.println("Driver did not load");
         }
     }
-
     public User[] getUsers(){
         userLista = new ArrayList<>();
         int index = 0;
 
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
-                "root","philip98")) {
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
+                "root","hammarby")) {
             System.out.println("Connected");
 
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("Select * FROM user");
+            ResultSet rs = statement.executeQuery("Select * FROM User");
 
             while(rs.next()){
-                User anvandare = new User(rs.getInt("id"), rs.getString("Fnamn"), rs.getString("Lnamn"), rs.getInt("personid"), rs.getInt("type"), rs.getInt("itemBorrowed"), rs.getInt("borrowlimit"), rs.getInt("active"), rs.getInt("delays"));
+                User anvandare = new User(rs.getInt("id"), rs.getString("fnamn"), rs.getString("Lnamn"), rs.getInt("personId"), rs.getInt("type"), rs.getInt("itemBorrowed"), rs.getInt("Borrowlimit"), rs.getInt("active"), rs.getInt("delays"), rs.getDate("suspendDate"));
                 userLista.add(anvandare);
                 index++;
             }
@@ -42,12 +41,13 @@ public class Getset {
         return usLista;
     }
 
+
     public Book[] getBooks(){
         bookLista = new ArrayList<>();
         int index = 0;
 
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
-                "root","philip98")) {
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
+                "root","hammarby")) {
             System.out.println("Connected");
 
             Statement statement = conn.createStatement();
@@ -93,8 +93,8 @@ public class Getset {
 
     public void setUser(int id, String fnamn, String lnamn, int personId, int type, int itemBorrowed, int borrowLimit, int active, int delays){
 
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
-                "root","philip98")) {
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
+                "root","hammarby")) {
             System.out.println("Connected");
 
             PreparedStatement userIn = conn.prepareStatement("INSERT INTO User VALUES (?,?,?,?,?,?,?,?,?)");
@@ -117,8 +117,8 @@ public class Getset {
 
     public void setBook(int id, String title, int ISBN, Date borrowed){
 
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
-                "root","philip98")) {
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
+                "root","hammarby")) {
             System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("INSERT INTO Book VALUES (?,?,?,?)");
@@ -135,8 +135,8 @@ public class Getset {
     }
 
     public void addBookToUser(int userId, int bookId){
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
-                "root","philip98")) {
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
+                "root","hammarby")) {
             System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE Book SET User_id = " + "'" + userId + "'" + "WHERE book.id = " + "'" + bookId + "'");
@@ -147,9 +147,10 @@ public class Getset {
         }
     }
 
+
     public void removeBookFromUSer(int bookId){
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
-                "root","philip98")) {
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
+                "root","hammarby")) {
             System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE Book SET User_id = null WHERE book.id = " + "'" + bookId + "'");
@@ -176,7 +177,6 @@ public class Getset {
             }
         }
         System.out.println();
-
 
        // hej.setUser(5555, "Rasmus", "Johansson", 980428, 2, 2, 5, 1, 0);
         //hej.setBook(2200, "Moa's Inredningstips", 566756, null);

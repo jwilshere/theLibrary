@@ -1,7 +1,6 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class User {
 
@@ -20,12 +19,13 @@ public class User {
     int BorrowLimit;
     int Active;
     int Delays;
+    Date suspendDate;
     Book[] bookLista = new Book[10];
 
     public User(){
     }
 
-    public User(int id, String fnamn, String lnamn, int personId, int type, int itemBorrowed, int borrowLimit, int active, int delays) {
+    public User(int id, String fnamn, String lnamn, int personId, int type, int itemBorrowed, int borrowLimit, int active, int delays, Date suspendDate) {
         this.Id = id;
         this.Fnamn = fnamn;
         this.Lnamn = lnamn;
@@ -35,6 +35,8 @@ public class User {
         this.BorrowLimit = borrowLimit;
         this.Active = active;
         this.Delays = delays;
+        this.suspendDate =suspendDate;
+
     }
 
     public int getId() {
@@ -65,6 +67,14 @@ public class User {
         return BorrowLimit;
     }
 
+    public int getPersonId() {
+        return PersonId;
+    }
+
+    public void setPersonId(int personId) {
+        PersonId = personId;
+    }
+
     public void setBorrowLimit(int borrowLimit) {
         BorrowLimit = borrowLimit;
     }
@@ -85,8 +95,17 @@ public class User {
         Delays = delays;
     }
 
+    public Date getSuspendDate() {
+        return suspendDate;
+    }
+
+    public void setSuspendDate(Date suspendDate) {
+        this.suspendDate = suspendDate;
+    }
+
     public Book[] getBookLista(){
         return bookLista;
     }
+
 }
 
