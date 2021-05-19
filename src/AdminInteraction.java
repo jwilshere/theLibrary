@@ -11,10 +11,7 @@ public class AdminInteraction {
     AdminInteraction(Getset HM){
         getSet = HM;
     }
-
-    public void addUser(User User){
-        //select statement som kollar ifall
-    }
+    
 
     public void deleteUser(){
     }
