@@ -61,7 +61,24 @@ public class HelpMethod extends Getset{
         }
         return bok;
     }
+    public boolean suspendUser (int UserId){
 
+        if (getAUser(UserId).Delays <=2 || getAUser(UserId).Delays ==4 ||getAUser(UserId).Delays ==5 ||getAUser(UserId).Delays ==7 ||getAUser(UserId).Delays ==8 ){
+            return false;
+        }
+        if (getAUser(UserId).Delays ==9){
+            //radera användaren
+            return false;
+        }
+        if(getAUser(UserId).Delays >2){
+            getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
+            getAUser(UserId).setDelays(+1);
+        }
+        return true;
+        //if a member delays to return library items more than twice,
+        // he/she gets suspended for 15 days.
+        // If he/she has been suspended more than twice, then the account is deleted.
+    }
 
         public boolean checkIfSuspended(int UserId) {
             if (getAUser(UserId).suspendDate == null){
