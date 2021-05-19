@@ -39,6 +39,7 @@ public class HelpMethod {
 
 
     public boolean checkIfSuspended(int UserId) {
+        object = new Getset();
         if (getAUser(UserId).suspendDate == null){
             return false;
         }
@@ -50,6 +51,8 @@ public class HelpMethod {
             c.setTime(datum);
             c.add(Calendar.DATE, 1);
             if (c.getTime().compareTo(dagensdatum) < 0) {
+                object.resetSuspend(UserId);
+                //getAUser(UserId).setSuspendDate(null);
                 System.out.println("Det har gått 15 dagar");
                 return true;
             }
@@ -61,7 +64,7 @@ public class HelpMethod {
     public static void main(String[] args) {
         HelpMethod hej = new HelpMethod();
         System.out.println(LocalDate.now());
-        System.out.println(hej.checkIfSuspended(1));
+        System.out.println(hej.checkIfSuspended(1234));
         System.out.println(hej.getAUser(1234));
         System.out.println(hej.getABookOnId(987654));
 

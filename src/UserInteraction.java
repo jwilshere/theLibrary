@@ -21,7 +21,6 @@ public class UserInteraction {
 
     public void RegisterUser(String Fnamn, String Lnamn, int PersonID){
 
-
         //If the personal number was already registered, but the person had violated the regulation,
         // then a notice is informing the librarian that the registration is not allowed and the process ends without registration.
 
