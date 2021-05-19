@@ -64,22 +64,23 @@ public class Getset {
         return BoLista;
     }
 
-    public void setUser(int id, String fnamn, String lnamn, int personId, int type, int itemBorrowed, int borrowLimit, int active, int delays){
+    public void setUser(int id, String fnamn, String lnamn, int personId, int typ, int itemBorrowed, int borrowLimit, int active, int delays, Date suspendDate){
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
             System.out.println("Connected");
 
-            PreparedStatement userIn = conn.prepareStatement("INSERT INTO User VALUES (?,?,?,?,?,?,?,?,?)");
+            PreparedStatement userIn = conn.prepareStatement("INSERT INTO User VALUES (?,?,?,?,?,?,?,?,?,?)");
             userIn.setInt(1, id);
             userIn.setString(2, fnamn);
             userIn.setString(3, lnamn);
             userIn.setInt(4, personId);
-            userIn.setInt(5, type);
+            userIn.setInt(5, typ);
             userIn.setInt(6, itemBorrowed);
             userIn.setInt(7, borrowLimit);
             userIn.setInt(8, active);
             userIn.setInt(9, delays);
+            userIn.setDate(10, suspendDate);
 
             userIn.executeUpdate();
         }
@@ -138,7 +139,7 @@ public class Getset {
 
         hej.connectDB(); // FÖRSTA GÅNGEN MAN STARTAR BARA !!!!!!!!!!!!!!!!!
 
-        System.out.println(Arrays.toString(hej.getUsers()));
+        System.out.println("Detta är användare: " + Arrays.toString(hej.getUsers()));
         System.out.println();
         System.out.println(Arrays.toString(hej.getBooks()));
         System.out.println();
