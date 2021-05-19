@@ -88,6 +88,7 @@ public class User {
         Delays = delays;
     }
 
+<<<<<<< HEAD
     public int getPersonId() {
         return PersonId;
     }
@@ -107,6 +108,8 @@ public class User {
     }
 
 >>>>>>> Philip
+=======
+>>>>>>> parent of a4f892c (s)
     public Book[] getBookLista(){
         return bookLista;
     }

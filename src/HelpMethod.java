@@ -87,24 +87,26 @@ public class HelpMethod extends Getset{
     }
 
     public void deleteUser(int userId){
-        object = new Getset();
-        int nummer = getAUser(userId).getId();
+        User hej = getAUser(userId);
 
-        if (nummer == userId) {
-            object.deleteUser(userId);
+        if (hej.getId() == userId) {
+            deleteUser(userId);
         }
         else {
             System.out.println("User dosen't exist");
         }
+<<<<<<< HEAD
     }
 
 <<<<<<< HEAD
     public boolean checkIfBookIsAvaible(int ISBN){
         object = new Getset();
+=======
+>>>>>>> parent of a4f892c (s)
 
-        return false;
     }
 
+<<<<<<< HEAD
     public void ReturnBook (int userId, int bookId) {
         object = new Getset();
         int lanadeBocker;
@@ -135,6 +137,8 @@ public class HelpMethod extends Getset{
         }
         return randomUserID;
     }
+=======
+>>>>>>> parent of a4f892c (s)
 
     public void checkIfSuspended(int UserId){
         int delay;
@@ -168,10 +172,8 @@ public class HelpMethod extends Getset{
         HelpMethod hej = new HelpMethod();
 <<<<<<< HEAD
         System.out.println(hej.getAUser(1234));
-        //System.out.println(hej.getABookOnId(987654));
-        hej.ReturnBook(1234,2200);
-        //hej.deleteUser(1234);
-        //hej.addBookToUser(1234);
+        System.out.println(hej.getABookOnId(987654));
+        //hej.addBookToUser(1234, 4444);
         //hej.removeBookFromUSer(4444);
 =======
         System.out.println(hej.getAUserOnId(1234));
