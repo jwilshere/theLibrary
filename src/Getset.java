@@ -159,6 +159,31 @@ public class Getset {
             System.out.println("Something went wrong" + ex.getMessage());
         }
     }
+    public void suspendUser(int userId, Date suspendDate){
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
+                "root","hammarby")) {
+            System.out.println("Connected");
+
+            PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET suspendDate = " + "'" + suspendDate + "'" +  "WHERE User.id = " + "'" + userId + "'");
+            bookIn.executeUpdate();
+        }
+        catch (SQLException ex) {
+            System.out.println("Something went wrong" + ex.getMessage());
+        }
+    }
+    public void setDelays(int userId, int delays){
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
+                "root","hammarby")) {
+            System.out.println("Connected");
+
+            PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET delays = " + "'" + delays + "'" +  "WHERE User.id = " + "'" + userId + "'");
+            bookIn.executeUpdate();
+        }
+        catch (SQLException ex) {
+            System.out.println("Something went wrong" + ex.getMessage());
+        }
+    }
+
 
     public void removeBookFromUSer(int bookId){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",

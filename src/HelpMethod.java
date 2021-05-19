@@ -37,7 +37,8 @@ public class HelpMethod {
         return bok;
     }
     public boolean suspendUser (int UserId){
-
+        object = new Getset();
+        int antaldelays =0;
         if (getAUser(UserId).Delays <=2 || getAUser(UserId).Delays ==4 ||getAUser(UserId).Delays ==5 ||getAUser(UserId).Delays ==7 ||getAUser(UserId).Delays ==8 ){
             return false;
         }
@@ -47,7 +48,10 @@ public class HelpMethod {
         }
         if(getAUser(UserId).Delays >2){
             getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
-            getAUser(UserId).setDelays(+1);
+            object.suspendUser(UserId,java.sql.Date.valueOf(LocalDate.now()));
+            antaldelays = getAUser(UserId).Delays +1;
+            object.setDelays(UserId,antaldelays);
+            //getAUser(UserId).setDelays(+1);
         }
         return true;
         //if a member delays to return library items more than twice,
@@ -66,7 +70,7 @@ public class HelpMethod {
 
             Calendar c = Calendar.getInstance();
             c.setTime(datum);
-            c.add(Calendar.DATE, 1);
+            c.add(Calendar.DATE, 15);
             if (c.getTime().compareTo(dagensdatum) < 0) {
                 object.resetSuspend(UserId);
                 System.out.println("Det har gått 15 dagar");
@@ -79,7 +83,7 @@ public class HelpMethod {
 
     public static void main(String[] args) {
         HelpMethod hej = new HelpMethod();
-        System.out.println(LocalDate.now());
+        System.out.println(hej.suspendUser(1234));
         System.out.println(hej.checkIfSuspended(1234));
         System.out.println(hej.getAUser(1234));
         System.out.println(hej.getABookOnId(987654));
