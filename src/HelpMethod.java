@@ -67,7 +67,7 @@ public class HelpMethod extends Getset{
             return false;
         }
         if (getAUser(UserId).Delays ==9){
-            //radera användaren
+            // kalla på radera användaren metoden
             return false;
         }
         if(getAUser(UserId).Delays >2){
@@ -79,7 +79,7 @@ public class HelpMethod extends Getset{
         // he/she gets suspended for 15 days.
         // If he/she has been suspended more than twice, then the account is deleted.
     }
-    
+
         public boolean checkIfSuspended(int UserId) {
             if (getAUser(UserId).suspendDate == null){
                 return false;
