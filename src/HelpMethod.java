@@ -2,8 +2,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 
 public class HelpMethod extends Getset{
     User anvandare;
@@ -59,19 +62,27 @@ public class HelpMethod extends Getset{
         return bok;
     }
 
-    public void checkIfSuspended(int UserId){
-        int delay;
-        if(getAUser(UserId).isActive() == 1)
-            getAUser(UserId).getDelays();
 
+        public boolean checkIfSuspended(int UserId) {
+            if (getAUser(UserId).suspendDate == null){
+                return false;
+            }
 
-        else System.out.println("User is inactive");
+            Date datum = getAUser(UserId).getSuspendDate();
+            java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
 
+            Calendar c = Calendar.getInstance();
+            c.setTime(datum);
+            c.add(Calendar.DATE, 1);
+            if (c.getTime().compareTo(dagensdatum) < 0) {
+                System.out.println("Det har gått 15 dagar");
+                return true;
+            }
 
-        //if a member delays to return library items more than twice,
-        // he/she gets suspended for 15 days.
-        // If he/she has been suspended more than twice, then the account is deleted.
-    }
+            System.out.println("Är suspenderad");
+            return false;
+        }
+
 
     public static void main(String[] args) {
         HelpMethod hej = new HelpMethod();
@@ -80,7 +91,7 @@ public class HelpMethod extends Getset{
 
         hej.bookLista.add(new Book(12, "Tja", 1234, null));
         hej.bookLista.add(new Book(13, "Tja", 1235, null));
-        hej.userLista.add(new User(1234, "Philip", "Nilsson", 9802, 1, 0,1,1,1));
+        hej.userLista.add(new User(1234, "Philip", "Nilsson", 9802, 1, 0,1,1,1,null));
 
         System.out.println(Arrays.toString(hej.getBooks()));
         hej.addBookToUser(1234, 12);
