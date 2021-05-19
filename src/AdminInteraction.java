@@ -12,11 +12,17 @@ public class AdminInteraction {
         getSet = HM;
     }
 
-    public void addUser(User User){
-        //select statement som kollar ifall
-    }
 
-    public void deleteUser(){
+    public void deleteUser(int userId){
+        getSet = new Getset();
+        int nummer = object.getAUser(userId).getId();
+
+        if (nummer == userId) {
+            object.deleteUser(userId);
+        }
+        else {
+            System.out.println("User dosen't exist");
+        }
     }
 
     public void checkIfUserDelayed(int id){

@@ -2,9 +2,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
+import java.time.LocalDate;
+import java.util.*;
 
 public class HelpMethod extends Getset{
     User anvandare;
@@ -86,6 +85,7 @@ public class HelpMethod extends Getset{
         return bok;
     }
 
+<<<<<<< HEAD
     public void deleteUser(int userId){
         User hej = getAUser(userId);
 
@@ -125,6 +125,8 @@ public class HelpMethod extends Getset{
         }
 
 =======
+=======
+>>>>>>> Philip
     public int generateUserId(){
         Random random = new Random();
         int randomUserID = random.nextInt(8999) + 1000;
@@ -140,23 +142,31 @@ public class HelpMethod extends Getset{
 =======
 >>>>>>> parent of a4f892c (s)
 
-    public void checkIfSuspended(int UserId){
-        int delay;
-        if(getAUserOnId(UserId).isActive() == 1)
-            getAUserOnId(UserId).getDelays();
+    public boolean checkIfSuspended(int UserId) {
+        object = new Getset();
+        if (getAUser(UserId).getSuspendDate() == null){
+            return false;
+        }
+        Date datum = getAUser(UserId).getSuspendDate();
+        java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
 
+        Calendar c = Calendar.getInstance();
+        c.setTime(datum);
+        c.add(Calendar.DATE, 1);
+        if (c.getTime().compareTo(dagensdatum) < 0) {
+            object.resetSuspend(UserId);
+            System.out.println("Det har gått 15 dagar");
+            return true;
+        }
 
-        else System.out.println("User is inactive");
-
-
-        //if a member delays to return library items more than twice,
-        // he/she gets suspended for 15 days.
-        // If he/she has been suspended more than twice, then the account is deleted.
+        System.out.println("Är suspenderad");
+        return false;
     }
 
     public int requestBook(String title, int userId) {
         int ISBN = 0;
 
+        
 
         //Then, the system checks whether this member is an undergraduate,
         // a postgraduate, a PhD student/candidate, or a teacher (professor, etc.).
