@@ -40,7 +40,7 @@ public class HelpMethod {
         object = new Getset();
         int antaldelays =0;
         if (getAUser(UserId).Delays <=2 || getAUser(UserId).Delays ==4 ||getAUser(UserId).Delays ==5 ||getAUser(UserId).Delays ==7 ||getAUser(UserId).Delays ==8 ){
-            return false;
+            return false; // kontrollerar om användaren ska suspenderas
         }
         if (getAUser(UserId).Delays ==9){
             // kalla på radera användaren metoden
@@ -48,10 +48,10 @@ public class HelpMethod {
         }
         if(getAUser(UserId).Delays >2){
             getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
-            object.suspendUser(UserId,java.sql.Date.valueOf(LocalDate.now()));
+            object.suspendUser(UserId,java.sql.Date.valueOf(LocalDate.now()));//sätter suspendatum till dagens datum
             antaldelays = getAUser(UserId).Delays +1;
-            object.setDelays(UserId,antaldelays);
-            //getAUser(UserId).setDelays(+1);
+            object.setDelays(UserId,antaldelays); //Ökar delays med +1
+
         }
         return true;
         //if a member delays to return library items more than twice,
@@ -62,6 +62,7 @@ public class HelpMethod {
     public boolean checkIfSuspended(int UserId) {
         object = new Getset();
         if (getAUser(UserId).suspendDate == null){
+
             return false;
         }
 
