@@ -81,6 +81,7 @@ public class HelpMethod extends Getset{
     }
 
         public boolean checkIfSuspended(int UserId) {
+            Getset object = new Getset();
             if (getAUser(UserId).suspendDate == null){
                 return false;
             }
@@ -92,7 +93,7 @@ public class HelpMethod extends Getset{
             c.setTime(datum);
             c.add(Calendar.DATE, 15);
             if (c.getTime().compareTo(dagensdatum) < 0) {
-                getAUser(UserId).setSuspendDate(null);
+                object.resetSuspend(UserId);
                 System.out.println("Det har gått 15 dagar");
                 return true;
             }
