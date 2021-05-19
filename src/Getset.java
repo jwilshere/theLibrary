@@ -64,6 +64,22 @@ public class Getset {
         return BoLista;
     }
 
+    public void deleteUser(int userId) {
+
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
+                "root", "philip98")) {
+            System.out.println("Connected");
+
+            PreparedStatement deleteAUser = conn.prepareStatement("DELETE FROM admin.User WHERE id= " + "'" + userId + "'");
+            deleteAUser.executeUpdate();
+
+        }
+        catch(SQLException ex){
+            System.out.println("Something went wrong");
+        }
+        System.out.println("User deleted successfully!");
+    }
+
     public void setUser(int id, String fnamn, String lnamn, int personId, int typ, int itemBorrowed, int borrowLimit, int active, int delays, Date suspendDate){
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
