@@ -1,26 +1,18 @@
+import java.sql.SQLException;
 import java.util.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
 
 public class AdminInteraction {
-    Getset hoj;
+    Getset getSet;
+    HelpMethod object = new HelpMethod(getSet);
 
     AdminInteraction(Getset obj){
-        hoj = obj;
+        getSet = obj;
     }
 
-   /* public void deleteUser(int userId){
-        getSet = new Getset();
-        int nummer = object.getAUser(userId).getId();
 
-        if (nummer == userId) {
-            object.deleteUser(userId);
-        }
-        else {
-            System.out.println("User dosen't exist");
-        }
-    }
-*/
+
     public boolean checkIfSuspended(int UserId) {
         Getset hoj = new Getset();
         HelpMethod object = new HelpMethod(hoj);

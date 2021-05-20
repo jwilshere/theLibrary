@@ -54,7 +54,7 @@ public class Getset {
         return bookLista;
     }
 
-    public void deleteUser(int userId) {
+    public void deleteUser(int userId) throws SQLException {
 
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root", "philip98")) {

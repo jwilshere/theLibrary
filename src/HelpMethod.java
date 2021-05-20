@@ -53,6 +53,26 @@ public class HelpMethod extends Getset{
                 }
             }
 
+    public void deleteUser(int userId){
+        int nummer = getAUser(userId).getId();
+        User user = getAUser(userId);
+
+        try {
+            object.deleteUser(userId);
+        }catch (SQLException e) {
+            System.out.println("Something went wrong with database connection");
+        }
+
+        //ifall userId stämmer så hämtas indexet som användaren ligger på i arrayn, sedan tags denna bort med remove
+        if (nummer == userId) {
+           int index = getUsers().indexOf(user);
+           getUsers().remove(index);
+        }
+        else {
+            System.out.println("User dosen't exist");
+        }
+    }
+
            /*
 
     public User getAUserOnPersonId(int personId){
@@ -118,8 +138,6 @@ public class HelpMethod extends Getset{
         System.out.println(hej.generateUserId());
         System.out.println(hej.getAUserOnId(1));*/
 
-        System.out.println(hej.getUsers());
-        System.out.println(hej.getAUser(1234));
 
     }
 }
