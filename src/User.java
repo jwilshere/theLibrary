@@ -67,14 +67,6 @@ public class User {
         return BorrowLimit;
     }
 
-    public int getPersonId() {
-        return PersonId;
-    }
-
-    public void setPersonId(int personId) {
-        PersonId = personId;
-    }
-
     public void setBorrowLimit(int borrowLimit) {
         BorrowLimit = borrowLimit;
     }
@@ -95,17 +87,30 @@ public class User {
         Delays = delays;
     }
 
+    public int getPersonId() {
+        return PersonId;
+    }
+
+    public void setPersonId(int personId) {
+        PersonId = personId;
+    }
+
     public Date getSuspendDate() {
         return suspendDate;
     }
 
     public void setSuspendDate(Date suspendDate) {
-        this.suspendDate = suspendDate;
+        suspendDate = suspendDate;
     }
 
     public Book[] getBookLista(){
         return bookLista;
     }
 
+    public void addBook(Book newBook){
+        if(ItemsBorrowed <= BorrowLimit){
+            bookLista[getItemBorrowed()] = newBook;
+            setItemBorrowed(getItemBorrowed() + 1);
+        }
+    }
 }
-
