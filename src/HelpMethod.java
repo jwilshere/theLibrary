@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -37,6 +38,36 @@ public class HelpMethod {
         }
         return bok;
     }
+   /* public int requestBook(String title, int userId) {
+        int ISBN = 0;
+
+        bok = new Book();
+        object = new Getset();
+        for(Book s: anvandare.bookLista) {
+
+            if (s.getTitle() == title) {
+                bok = s;
+
+                if( bok = s) {
+
+                }
+
+                    if(getAUser(userId).Type == 3){
+                        getAUser(userId).ItemsBorrowed <4
+                    }
+
+            }
+            //Then, the system checks whether this member is an undergraduate,
+            // a postgraduate, a PhD student/candidate, or a teacher (professor, etc.).
+            // The number of library items that he/she has borrowed in the past ?????? SKITA I DETTA?
+            // is being checked and then whether he or she has the permission to borrow a new one according
+            // to the limitation applicable in each case (as described in the paragraph above).
+
+            //FÖRST KOLLA IFALL DEN FÅR LÅNA; IFALL DEN FÅR SÅ RETURNERA TITELNAMNET
+            return ISBN;
+        }*/
+
+
     public boolean suspendUser (int UserId){
         object = new Getset();
         int antaldelays =0;
@@ -67,26 +98,38 @@ public class HelpMethod {
         Date datum = getAUser(UserId).getSuspendDate();
         java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
 
+        if(getAUser(UserId).getSuspendDate() == null){
+            System.out.println("Värdet är null");
+            return false;
+        }
+
             Calendar c = Calendar.getInstance();
             c.setTime(datum);
             c.add(Calendar.DATE, 15);
-            if (c.getTime().compareTo(dagensdatum) < 0) {
-                object.resetSuspend(UserId);
+            if (c.getTime().compareTo(dagensdatum) <0) {
+                //object.resetSuspend(UserId);
                 System.out.println("Det har gått 15 dagar");
+                System.out.println(dagensdatum);
+                System.out.println(datum);
                 return true;
             }
 
             System.out.println("Är suspenderad");
-        return false;
+            return false;
     }
 
     public static void main(String[] args) {
         HelpMethod hej = new HelpMethod();
-        System.out.println(hej.suspendUser(1234));
+        //System.out.println(hej.suspendUser(1234));
         System.out.println(hej.checkIfSuspended(1234));
-        System.out.println(hej.getAUser(1234));
+        /*System.out.println(hej.getAUser(1234));
         System.out.println(hej.getABookOnId(987654));
+        System.out.println(java.sql.Date.valueOf(LocalDate.now()));
+        System.out.println(java.time.LocalDate.now());*/
 
+        /*DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM/dd");
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(dtf.format(now));*/
 
 
         //hej.addBookToUser(1234, 4444);
