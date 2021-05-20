@@ -4,9 +4,6 @@ import java.util.Arrays;
 
 public class Getset {
 
-    ArrayList<User> userLista = null;
-    ArrayList<Book> bookLista = null;
-
     public void connectDB(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -17,38 +14,31 @@ public class Getset {
         }
     }
 
+    public ArrayList<User> getUsers() throws SQLException{
+        ArrayList<User> userLista = new ArrayList<>();
 
-        public ArrayList<User> getUsers() throws SQLException{
-            ArrayList<User> userLista = new ArrayList<>();
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {
-            System.out.println("Connected");
 
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("Select * FROM User");
+            ResultSet rs = statement.executeQuery("Select * FROM user");
 
             while(rs.next()){
-                User anvandare = new User(rs.getInt("id"), rs.getString("fnamn"), rs.getString("Lnamn"), rs.getInt("personId"), rs.getInt("type"), rs.getInt("itemBorrowed"), rs.getInt("Borrowlimit"), rs.getInt("active"), rs.getInt("delays"), rs.getDate("suspendDate"));
+                User anvandare = new User(rs.getInt("id"), rs.getString("Fnamn"), rs.getString("Lnamn"), rs.getInt("personid"), rs.getInt("type"), rs.getInt("itemBorrowed"), rs.getInt("borrowlimit"), rs.getInt("active"), rs.getInt("delays"), rs.getDate("SuspendDate"));
                 userLista.add(anvandare);
-
             }
         }
         catch(SQLException ex){
             System.out.println("Something went wrong");
         }
-        User[] usLista = new User[index];
-        userLista.toArray(usLista);
-        return usLista;
+        return userLista;
     }
 
-
-    public Book[] getBooks(){
-        bookLista = new ArrayList<>();
-        int index = 0;
+    public ArrayList<Book> getBooks() throws SQLException{
+        ArrayList<Book> bookLista = new ArrayList<>();
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {
-            System.out.println("Connected");
 
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("Select * FROM book");
@@ -56,57 +46,45 @@ public class Getset {
             while(rs.next()){
                 Book bok = new Book(rs.getInt("id"), rs.getString("title"), rs.getInt("ISBN"), rs.getDate("borrowedOnDate"));
                 bookLista.add(bok);
-                index++;
             }
         }
         catch(SQLException ex){
             System.out.println("Something went wrong");
         }
-        Book[] buLista = new Book[index];
-        bookLista.toArray(buLista);
-        return buLista;
+        return bookLista;
     }
 
+    public void deleteUser(int userId) {
 
-    /* public String getFnamn(int id){
-        connectDB();
-        String Fnamn = "";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
+                "root", "hammarby")) {
 
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
-                "root","philip98")) {
+            PreparedStatement deleteAUser = conn.prepareStatement("DELETE FROM User WHERE id= " + "'" + userId + "'");
+            deleteAUser.executeUpdate();
 
-            System.out.println("Connected");
-
-            Statement statement = conn.createStatement();
-
-            ResultSet result = statement.executeQuery("Select Fnamn FROM user WHERE Id =" + "'" + id + "'");
-
-            while(result.next()){
-            Fnamn= result.getString(1);
-            }
         }
         catch(SQLException ex){
             System.out.println("Something went wrong");
         }
-        return Fnamn;
-    } */
+        System.out.println("User deleted successfully!");
+    }
 
-    public void setUser(int id, String fnamn, String lnamn, int personId, int type, int itemBorrowed, int borrowLimit, int active, int delays){
+    public void setUser(int id, String fnamn, String lnamn, int personId, int typ, int itemBorrowed, int borrowLimit, int active, int delays, Date suspendDate){
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {
-            System.out.println("Connected");
 
-            PreparedStatement userIn = conn.prepareStatement("INSERT INTO User VALUES (?,?,?,?,?,?,?,?,?)");
+            PreparedStatement userIn = conn.prepareStatement("INSERT INTO User VALUES (?,?,?,?,?,?,?,?,?,?)");
             userIn.setInt(1, id);
             userIn.setString(2, fnamn);
             userIn.setString(3, lnamn);
             userIn.setInt(4, personId);
-            userIn.setInt(5, type);
+            userIn.setInt(5, typ);
             userIn.setInt(6, itemBorrowed);
             userIn.setInt(7, borrowLimit);
             userIn.setInt(8, active);
             userIn.setInt(9, delays);
+            userIn.setDate(10, suspendDate);
 
             userIn.executeUpdate();
         }
@@ -119,7 +97,6 @@ public class Getset {
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {
-            System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("INSERT INTO Book VALUES (?,?,?,?)");
             bookIn.setInt(1, id);
@@ -137,9 +114,32 @@ public class Getset {
     public void addBookToUser(int userId, int bookId){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {
-            System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE Book SET User_id = " + "'" + userId + "'" + "WHERE book.id = " + "'" + bookId + "'");
+            bookIn.executeUpdate();
+        }
+        catch (SQLException ex) {
+            System.out.println("Something went wrong" + ex.getMessage());
+        }
+    }
+
+    public void removeBookFromUSer(int bookId){
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
+                "root","hammarby")) {
+
+            PreparedStatement bookIn = conn.prepareStatement("UPDATE Book SET User_id = null WHERE book.id = " + "'" + bookId + "'");
+            bookIn.executeUpdate();
+        }
+        catch (SQLException ex) {
+            System.out.println("Something went wrong" + ex.getMessage());
+        }
+    }
+
+    public void updateItemBorrowed(int itemBorrowed, int userId){
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
+                "root","hammarby")) {
+
+            PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET itemBorrowed = " + "'" + itemBorrowed + "'" + "WHERE user.id = " + "'" + userId + "'");
             bookIn.executeUpdate();
         }
         catch (SQLException ex) {
@@ -150,7 +150,6 @@ public class Getset {
     public void resetSuspend(int userId){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {
-            System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET suspendDate = null  WHERE User.id = " + "'" + userId + "'");
             bookIn.executeUpdate();
@@ -159,10 +158,10 @@ public class Getset {
             System.out.println("Something went wrong" + ex.getMessage());
         }
     }
+
     public void suspendUser(int userId, Date suspendDate){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {
-            System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET suspendDate = " + "'" + suspendDate + "'" +  "WHERE User.id = " + "'" + userId + "'");
             bookIn.executeUpdate();
@@ -174,23 +173,8 @@ public class Getset {
     public void setDelays(int userId, int delays){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {
-            System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET delays = " + "'" + delays + "'" +  "WHERE User.id = " + "'" + userId + "'");
-            bookIn.executeUpdate();
-        }
-        catch (SQLException ex) {
-            System.out.println("Something went wrong" + ex.getMessage());
-        }
-    }
-
-
-    public void removeBookFromUSer(int bookId){
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
-                "root","hammarby")) {
-            System.out.println("Connected");
-
-            PreparedStatement bookIn = conn.prepareStatement("UPDATE Book SET User_id = null WHERE book.id = " + "'" + bookId + "'");
             bookIn.executeUpdate();
         }
         catch (SQLException ex) {
@@ -203,24 +187,6 @@ public class Getset {
 
         hej.connectDB(); // FÖRSTA GÅNGEN MAN STARTAR BARA !!!!!!!!!!!!!!!!!
 
-        System.out.println(Arrays.toString(hej.getUsers()));
-        System.out.println();
-        System.out.println(Arrays.toString(hej.getBooks()));
-        System.out.println();
 
-        for(User s: hej.getUsers()) {
-            if (s.getId() == 1234) {
-                System.out.println(s.getId());
-            }
-        }
-        System.out.println();
-
-       // hej.setUser(5555, "Rasmus", "Johansson", 980428, 2, 2, 5, 1, 0);
-        //hej.setBook(2200, "Moa's Inredningstips", 566756, null);
-        System.out.println();
-
-        for(User s: hej.getUsers()){
-            System.out.println(s.getId());
-        }
     }
 }
