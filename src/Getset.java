@@ -16,10 +16,10 @@ public class Getset {
             System.out.println("Driver did not load");
         }
     }
-    public User[] getUsers(){
-        userLista = new ArrayList<>();
-        int index = 0;
 
+
+        public ArrayList<User> getUsers() throws SQLException{
+            ArrayList<User> userLista = new ArrayList<>();
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {
             System.out.println("Connected");
@@ -30,7 +30,7 @@ public class Getset {
             while(rs.next()){
                 User anvandare = new User(rs.getInt("id"), rs.getString("fnamn"), rs.getString("Lnamn"), rs.getInt("personId"), rs.getInt("type"), rs.getInt("itemBorrowed"), rs.getInt("Borrowlimit"), rs.getInt("active"), rs.getInt("delays"), rs.getDate("suspendDate"));
                 userLista.add(anvandare);
-                index++;
+
             }
         }
         catch(SQLException ex){
