@@ -10,6 +10,7 @@ public class HelpMethod extends Getset{
     Book bok;
     Getset object;
 
+
     public HelpMethod(Getset obj){
         object = obj;
     }

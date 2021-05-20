@@ -14,8 +14,23 @@ class AdminInteractionTest {
 
 
     @Test
-    void addUser() {
+    void suspendUser() throws SQLException{ //KLAR !!!!!!!!!!!!!!!
+        Getset mock = mock(Getset.class);
+        AdminInteraction AI = new AdminInteraction(mock);
+        HelpMethod hoj = new HelpMethod(mock);
 
+        //Skapar en Arraylist och lägger in en användare
+        ArrayList<User> users = new ArrayList<>();
+        users.add(new User(3, "Marre", "Jonson", 980103, 3, 0,3,1,3, null));
+        users.add(new User(4444, "Philip", "Lindquist", 980606, 3, 0,3,1,0, null));
+        users.add(new User(6666, "Philip", "Lindquist", 980606, 3, 0,3,1,0, null));
+
+        when(mock.getUsers())
+                .thenReturn(users);
+
+        System.out.println("Före delays är kollade: " + hoj.getAUser(3).SuspendDate);
+        assertTrue(AI.suspendUser(3));
+        System.out.println("Efter delays är kollade: " + hoj.getAUser(3).SuspendDate);
     }
 
     @Test
@@ -34,7 +49,6 @@ class AdminInteractionTest {
         System.out.println("Före deleten: " + HM.getUsers());
         HM.deleteUser(3333);
         System.out.println("Efter deleten: " + HM.getUsers());
-
 
     }
 
@@ -77,19 +91,19 @@ class AdminInteractionTest {
         System.out.println("Excpected: " + Arrays.toString(excpetedBooks) + " " + "Faktiska: " + Arrays.toString(HM.getAUser(4444).getBookLista()));
     }
 
-    @Test
+   @Test
     void checkIfSuspended() throws SQLException{
         Getset mock = mock(Getset.class);
         AdminInteraction AI = new AdminInteraction(mock);
         HelpMethod hejda = new HelpMethod(mock);
 
         ArrayList<User> hej = new ArrayList<>();
-        hej.add(new User(4444, "Flaska", "Jonson", 980603, 2, 0,3,1,0, new Date(1990, 4,18)));
+        hej.add(new User(4444, "Jogge", "Jonson", 980603, 2, 0,3,1,0, new Date(2021, 4,21)));
 
         when(mock.getUsers())
                 .thenReturn(hej);
 
-        assertFalse(AI.checkIfSuspended(4444));
+      AI.checkIfSuspended(4444);
         System.out.println(hejda.getAUser(4444).getSuspendDate());
     }
 
