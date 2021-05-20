@@ -17,6 +17,7 @@ public class UserInteraction {
 
     //FÖRST KOLLA IFALL DEN FÅR LÅNA; IFALL DEN FÅR SÅ RETURNERA TITELNAMNET
         return ISBN;
+
 }
 
     public void RegisterUser(String Fnamn, String Lnamn, int PersonID){

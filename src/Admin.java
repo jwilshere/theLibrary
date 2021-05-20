@@ -39,6 +39,7 @@ public class Admin {
     public void ReturnBook (int PersonID, int ISBN){
         //Kolla ifall usern finns, ta bort antal lånade items på usern
         //Uppdatera i BookRegister att en bok av denna titel är tillgänglig
+        
     }
 
 

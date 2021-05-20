@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -46,6 +47,7 @@ public class HelpMethod {
             // kalla på radera användaren metoden
             return false;
         }
+
         if(getAUser(UserId).Delays >2){
             getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
             object.suspendUser(UserId,java.sql.Date.valueOf(LocalDate.now()));//sätter suspendatum till dagens datum
@@ -61,10 +63,6 @@ public class HelpMethod {
 
     public boolean checkIfSuspended(int UserId) {
         object = new Getset();
-        if (getAUser(UserId).suspendDate == null){
-
-            return false;
-        }
 
         Date datum = getAUser(UserId).getSuspendDate();
         java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
