@@ -10,16 +10,46 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
-public class HelpMethod {
-    Getset object;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.*;
+
+public class HelpMethod extends Getset{
     User anvandare;
     Book bok;
+    Getset object;
+
+    public HelpMethod(Getset obj){
+        object = obj;
+    }
+
+    public ArrayList<User> getUsers() {
+        ArrayList<User> userLista = new ArrayList<>();
+        try {
+            userLista = object.getUsers();
+        }catch (SQLException e) {
+            System.out.println("Something went wrong with database connection");
+        }
+        return userLista;
+    }
+
+    public ArrayList<Book> getBooks() {
+        ArrayList<Book> bookLista = new ArrayList<>();
+        try {
+            bookLista = object.getBooks();
+        }catch (SQLException e) {
+            System.out.println("Something went wrong with database connection");
+        }
+        return bookLista;
+    }
 
     public User getAUser(int UserId){
-        object = new Getset();
         anvandare = new User();
 
-        for(User s: object.getUsers()) {
+        for(User s: getUsers()) {
             if (s.getId() == UserId) {
                 anvandare = s;
             }
@@ -27,112 +57,81 @@ public class HelpMethod {
         return anvandare;
     }
 
-    public Book getABookOnId(int bookId){
-        object = new Getset();
-        bok = new Book();
+    public void addBookToUser(int userId, int bookId) {
+        for(Book p: getBooks()){
+            if(p.getId() == bookId){
+                getAUser(userId).addBook(p);
+            }
+        }
+    }
 
-        for(Book s: object.getBooks()) {
+           /*
+
+    public User getAUserOnPersonId(int personId){
+        anvandare = new User();
+        for(User s: userLista) {
+            if (s.getPersonId() == personId) {
+                anvandare = s;
+            }
+        }
+        return anvandare;
+    }
+
+    public Book getABookOnId(int bookId){
+        bok = new Book();
+        for(Book s: bookLista) {
             if (s.getId() == bookId) {
                 bok = s;
             }
         }
         return bok;
     }
-   /* public int requestBook(String title, int userId) {
+
+    public int generateUserId(){
+        Random random = new Random();
+        int randomUserID = random.nextInt(8999) + 1000;
+
+        for(User s: getUsers()){
+            if(s.getId() == randomUserID){
+                generateUserId();
+            }
+        }
+        return randomUserID;
+    }
+
+
+    public int requestBook(String title, int userId) {
         int ISBN = 0;
 
-        bok = new Book();
-        object = new Getset();
-        for(Book s: anvandare.bookLista) {
+        //Then, the system checks whether this member is an undergraduate,
+        // a postgraduate, a PhD student/candidate, or a teacher (professor, etc.).
+        // The number of library items that he/she has borrowed in the past ?????? SKITA I DETTA?
+        // is being checked and then whether he or she has the permission to borrow a new one according
+        // to the limitation applicable in each case (as described in the paragraph above).
 
-            if (s.getTitle() == title) {
-                bok = s;
-
-                if( bok = s) {
-
-                }
-
-                    if(getAUser(userId).Type == 3){
-                        getAUser(userId).ItemsBorrowed <4
-                    }
-
-            }
-            //Then, the system checks whether this member is an undergraduate,
-            // a postgraduate, a PhD student/candidate, or a teacher (professor, etc.).
-            // The number of library items that he/she has borrowed in the past ?????? SKITA I DETTA?
-            // is being checked and then whether he or she has the permission to borrow a new one according
-            // to the limitation applicable in each case (as described in the paragraph above).
-
-            //FÖRST KOLLA IFALL DEN FÅR LÅNA; IFALL DEN FÅR SÅ RETURNERA TITELNAMNET
-            return ISBN;
-        }*/
-
-
-    public boolean suspendUser (int UserId){
-        object = new Getset();
-        int antaldelays =0;
-        if (getAUser(UserId).Delays <=2 || getAUser(UserId).Delays ==4 ||getAUser(UserId).Delays ==5 ||getAUser(UserId).Delays ==7 ||getAUser(UserId).Delays ==8 ){
-            return false; // kontrollerar om användaren ska suspenderas
-        }
-        if (getAUser(UserId).Delays ==9){
-            // kalla på radera användaren metoden
-            return false;
-        }
-
-        if(getAUser(UserId).Delays >2){
-            getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
-            object.suspendUser(UserId,java.sql.Date.valueOf(LocalDate.now()));//sätter suspendatum till dagens datum
-            antaldelays = getAUser(UserId).Delays +1;
-            object.setDelays(UserId,antaldelays); //Ökar delays med +1
-
-        }
-        return true;
-        //if a member delays to return library items more than twice,
-        // he/she gets suspended for 15 days.
-        // If he/she has been suspended more than twice, then the account is deleted.
-    }
-
-    public boolean checkIfSuspended(int UserId) {
-        object = new Getset();
-
-        Date datum = getAUser(UserId).getSuspendDate();
-        java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
-
-        if(getAUser(UserId).getSuspendDate() == null){
-            System.out.println("Värdet är null");
-            return false;
-        }
-
-            Calendar c = Calendar.getInstance();
-            c.setTime(datum);
-            c.add(Calendar.DATE, 15);
-            if (c.getTime().compareTo(dagensdatum) <0) {
-                //object.resetSuspend(UserId);
-                System.out.println("Det har gått 15 dagar");
-                System.out.println(dagensdatum);
-                System.out.println(datum);
-                return true;
-            }
-
-            System.out.println("Är suspenderad");
-            return false;
-    }
+        //FÖRST KOLLA IFALL DEN FÅR LÅNA; IFALL DEN FÅR SÅ RETURNERA TITELNAMNET
+        return ISBN;
+    } */
 
     public static void main(String[] args) {
-        HelpMethod hej = new HelpMethod();
-        //System.out.println(hej.suspendUser(1234));
-        System.out.println(hej.checkIfSuspended(1234));
-        /*System.out.println(hej.getAUser(1234));
-        System.out.println(hej.getABookOnId(987654));
-        System.out.println(java.sql.Date.valueOf(LocalDate.now()));
-        System.out.println(java.time.LocalDate.now());*/
+        Getset hejda = new Getset();
+        HelpMethod hej = new HelpMethod(hejda);
+       /* System.out.println(hej.getAUserOnId(1234));
+        System.out.println(hej.getABookOnId(4444));
 
-        /*DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM/dd");
-        LocalDateTime now = LocalDateTime.now();
-        System.out.println(dtf.format(now));*/
+        hej.bookLista.add(new Book(12, "Tja", 1234, null));
+        hej.bookLista.add(new Book(13, "Tja", 1235, null));
+        hej.userLista.add(new User(12, "Philip", "Nilsson", 9802, 1, 0,1,1,1,null));
 
+        System.out.println("Detta är användare: " + Arrays.toString(hej.getUsers()));
+        System.out.println("Detta är böckerna: " + Arrays.toString(hej.getBooks()));
+        //hej.addBookToUser(1234, 12);
+        System.out.println("Detta är en användares böcker: " + Arrays.toString(hej.getAUserOnId(1234).getBookLista()));
+        System.out.println(hej.generateUserId());
+        System.out.println(hej.getAUserOnId(1));*/
 
-        //hej.addBookToUser(1234, 4444);
-        //hej.removeBookFromUSer(4444);
+        System.out.println(hej.getUsers());
+        System.out.println(hej.getAUser(1234));
+
     }
 }
