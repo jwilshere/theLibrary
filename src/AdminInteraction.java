@@ -1,21 +1,15 @@
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
 
 public class AdminInteraction {
-    HelpMethod object = null;
-    Getset getSet = null;
+    Getset hoj;
 
-    AdminInteraction(){
-
+    AdminInteraction(Getset obj){
+        hoj = obj;
     }
 
-    AdminInteraction(Getset HM){
-        getSet = HM;
-    }
-
-
-    public void deleteUser(int userId){
+   /* public void deleteUser(int userId){
         getSet = new Getset();
         int nummer = object.getAUser(userId).getId();
 
@@ -26,19 +20,24 @@ public class AdminInteraction {
             System.out.println("User dosen't exist");
         }
     }
-
+*/
     public boolean checkIfSuspended(int UserId) {
-        getSet = new Getset();
-        if (object.getAUser(UserId).getSuspendDate() == null){
+        Getset hoj = new Getset();
+        HelpMethod object = new HelpMethod(hoj);
+
+        Date datum = object.getAUser(UserId).getSuspendDate();
+        System.out.println("Användarens datum: " + datum);
+        java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
+        System.out.println("Dagensdatum: " + dagensdatum);
+
+        if (datum == null){
             System.out.println("Användaren är inte suspenderad!");
             return false;
         }
-        java.util.Date datum = object.getAUser(UserId).getSuspendDate();
-        java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
 
         Calendar c = Calendar.getInstance();
         c.setTime(datum);
-        c.add(Calendar.DATE, 1);
+        c.add(Calendar.DATE, 15);
         if (c.getTime().compareTo(dagensdatum) < 0) {
             object.resetSuspend(UserId);
             System.out.println("Det har gått 15 dagar");
@@ -49,15 +48,16 @@ public class AdminInteraction {
         return false;
     }
 
+    /*
     public boolean suspendUser (int UserId){
+        object = new HelpMethod();
         getSet = new Getset();
 
         int antaldelays =0;
         if (object.getAUser(UserId).Delays <=2 || object.getAUser(UserId).Delays ==4 || object.getAUser(UserId).Delays ==5 || object.getAUser(UserId).Delays ==7 || object.getAUser(UserId).Delays ==8 ){
             return false;
         }
-        if (object.getAUser(UserId).Delays ==9){
-            // kalla på radera användaren metoden
+        else if (object.getAUser(UserId).Delays == 9){
             return false;
         }
         if(object.getAUser(UserId).Delays >2){
@@ -120,11 +120,12 @@ public class AdminInteraction {
         getSet.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
     }
 
-    public static void main(String[] args) {
-        AdminInteraction hej = new AdminInteraction();
-        hej.RegisterUser("Martin", "Nilssn", 880528, 3);
+*/
 
-        hej.checkIfSuspended(1234);
+    public static void main(String[] args) {
+        //hej.RegisterUser("Martin", "Nilssn", 880528, 3);
+
     }
+
 
 }

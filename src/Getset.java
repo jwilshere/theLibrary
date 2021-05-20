@@ -14,13 +14,11 @@ public class Getset {
         }
     }
 
-    public User[] getUsers(){
-        int index = 0;
+    public ArrayList<User> getUsers() throws SQLException{
         ArrayList<User> userLista = new ArrayList<>();
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
-            System.out.println("Connected");
 
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("Select * FROM user");
@@ -28,24 +26,19 @@ public class Getset {
             while(rs.next()){
                 User anvandare = new User(rs.getInt("id"), rs.getString("Fnamn"), rs.getString("Lnamn"), rs.getInt("personid"), rs.getInt("type"), rs.getInt("itemBorrowed"), rs.getInt("borrowlimit"), rs.getInt("active"), rs.getInt("delays"), rs.getDate("SuspendDate"));
                 userLista.add(anvandare);
-                index++;
             }
         }
         catch(SQLException ex){
             System.out.println("Something went wrong");
         }
-        User[] usLista = new User[index];
-        userLista.toArray(usLista);
-        return usLista;
+        return userLista;
     }
 
-    public Book[] getBooks(){
-        int index = 0;
+    public ArrayList<Book> getBooks() throws SQLException{
         ArrayList<Book> bookLista = new ArrayList<>();
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
-            System.out.println("Connected");
 
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("Select * FROM book");
@@ -53,24 +46,20 @@ public class Getset {
             while(rs.next()){
                 Book bok = new Book(rs.getInt("id"), rs.getString("title"), rs.getInt("ISBN"), rs.getDate("borrowedOnDate"));
                 bookLista.add(bok);
-                index++;
             }
         }
         catch(SQLException ex){
             System.out.println("Something went wrong");
         }
-        Book[] BoLista = new Book[index];
-        bookLista.toArray(BoLista);
-        return BoLista;
+        return bookLista;
     }
 
     public void deleteUser(int userId) {
 
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root", "philip98")) {
-            System.out.println("Connected");
 
-            PreparedStatement deleteAUser = conn.prepareStatement("DELETE FROM admin.User WHERE id= " + "'" + userId + "'");
+            PreparedStatement deleteAUser = conn.prepareStatement("DELETE FROM User WHERE id= " + "'" + userId + "'");
             deleteAUser.executeUpdate();
 
         }
@@ -84,7 +73,6 @@ public class Getset {
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
-            System.out.println("Connected");
 
             PreparedStatement userIn = conn.prepareStatement("INSERT INTO User VALUES (?,?,?,?,?,?,?,?,?,?)");
             userIn.setInt(1, id);
@@ -109,7 +97,6 @@ public class Getset {
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
-            System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("INSERT INTO Book VALUES (?,?,?,?)");
             bookIn.setInt(1, id);
@@ -127,7 +114,6 @@ public class Getset {
     public void addBookToUser(int userId, int bookId){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
-            System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE Book SET User_id = " + "'" + userId + "'" + "WHERE book.id = " + "'" + bookId + "'");
             bookIn.executeUpdate();
@@ -140,7 +126,6 @@ public class Getset {
     public void removeBookFromUSer(int bookId){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
-            System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE Book SET User_id = null WHERE book.id = " + "'" + bookId + "'");
             bookIn.executeUpdate();
@@ -153,7 +138,6 @@ public class Getset {
     public void updateItemBorrowed(int itemBorrowed, int userId){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
-            System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET itemBorrowed = " + "'" + itemBorrowed + "'" + "WHERE user.id = " + "'" + userId + "'");
             bookIn.executeUpdate();
@@ -166,7 +150,6 @@ public class Getset {
     public void resetSuspend(int userId){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
-            System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET suspendDate = null  WHERE User.id = " + "'" + userId + "'");
             bookIn.executeUpdate();
@@ -179,7 +162,6 @@ public class Getset {
     public void suspendUser(int userId, Date suspendDate){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
-            System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET suspendDate = " + "'" + suspendDate + "'" +  "WHERE User.id = " + "'" + userId + "'");
             bookIn.executeUpdate();
@@ -191,7 +173,6 @@ public class Getset {
     public void setDelays(int userId, int delays){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
-            System.out.println("Connected");
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET delays = " + "'" + delays + "'" +  "WHERE User.id = " + "'" + userId + "'");
             bookIn.executeUpdate();
@@ -206,25 +187,6 @@ public class Getset {
 
         hej.connectDB(); // FÖRSTA GÅNGEN MAN STARTAR BARA !!!!!!!!!!!!!!!!!
 
-        System.out.println("Detta är användare: " + Arrays.toString(hej.getUsers()));
-        System.out.println();
-        System.out.println(Arrays.toString(hej.getBooks()));
-        System.out.println();
 
-        for(User s: hej.getUsers()) {
-            if (s.getId() == 1234) {
-                System.out.println(s.getId());
-            }
-        }
-        System.out.println();
-
-
-       // hej.setUser(5555, "Rasmus", "Johansson", 980428, 2, 2, 5, 1, 0);
-        //hej.setBook(2200, "Moa's Inredningstips", 566756, null);
-        System.out.println();
-
-        for(User s: hej.getUsers()){
-            System.out.println(s.getId());
-        }
     }
 }

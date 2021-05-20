@@ -10,36 +10,34 @@ public class HelpMethod extends Getset{
     Book bok;
     Getset object;
 
-    ArrayList<User> userLista = new ArrayList<>();
-    ArrayList<Book> bookLista = new ArrayList<>();
-
-    public User[] getUsers() {
-    object = new Getset();
-    int nummer = 0;
-    User[] usLista = new User[object.getUsers().length];
-    for(User s: object.getUsers()){
-        usLista[nummer] = s;
-        nummer++;
-    }
-    return usLista;
+    public HelpMethod(Getset obj){
+        object = obj;
     }
 
-    public Book[] getBooks() {
-        object = new Getset();
-        int nummer = 0;
-        Book[] boLista = new Book[object.getBooks().length];
-        for(Book s: object.getBooks()){
-            boLista[nummer] = s;
-            nummer++;
+    public ArrayList<User> getUsers() {
+        ArrayList<User> userLista = new ArrayList<>();
+        try {
+            userLista = object.getUsers();
+        }catch (SQLException e) {
+            System.out.println("Something went wrong with database connection");
         }
-        return boLista;
+    return userLista;
+    }
+
+   public ArrayList<Book> getBooks() {
+      ArrayList<Book> bookLista = new ArrayList<>();
+       try {
+           bookLista = object.getBooks();
+       }catch (SQLException e) {
+           System.out.println("Something went wrong with database connection");
+       }
+        return bookLista;
     }
 
     public User getAUser(int UserId){
-        object = new Getset();
         anvandare = new User();
 
-        for(User s: object.getUsers()) {
+        for(User s: getUsers()) {
             if (s.getId() == UserId) {
                 anvandare = s;
             }
@@ -50,20 +48,12 @@ public class HelpMethod extends Getset{
     public void addBookToUser(int userId, int bookId) {
                 for(Book p: getBooks()){
                     if(p.getId() == bookId){
-                        getAUserOnId(userId).addBook(p);
+                        getAUser(userId).addBook(p);
                     }
                 }
             }
 
-    public User getAUserOnId(int userId){
-        anvandare = new User();
-        for(User s: userLista) {
-            if (s.getId() == userId) {
-                anvandare = s;
-            }
-        }
-        return anvandare;
-    }
+           /*
 
     public User getAUserOnPersonId(int personId){
         anvandare = new User();
@@ -101,8 +91,6 @@ public class HelpMethod extends Getset{
     public int requestBook(String title, int userId) {
         int ISBN = 0;
 
-        
-
         //Then, the system checks whether this member is an undergraduate,
         // a postgraduate, a PhD student/candidate, or a teacher (professor, etc.).
         // The number of library items that he/she has borrowed in the past ?????? SKITA I DETTA?
@@ -111,11 +99,12 @@ public class HelpMethod extends Getset{
 
         //FÖRST KOLLA IFALL DEN FÅR LÅNA; IFALL DEN FÅR SÅ RETURNERA TITELNAMNET
         return ISBN;
-    }
+    } */
 
     public static void main(String[] args) {
-        HelpMethod hej = new HelpMethod();
-        System.out.println(hej.getAUserOnId(1234));
+        Getset hejda = new Getset();
+        HelpMethod hej = new HelpMethod(hejda);
+       /* System.out.println(hej.getAUserOnId(1234));
         System.out.println(hej.getABookOnId(4444));
 
         hej.bookLista.add(new Book(12, "Tja", 1234, null));
@@ -127,5 +116,10 @@ public class HelpMethod extends Getset{
         //hej.addBookToUser(1234, 12);
         System.out.println("Detta är en användares böcker: " + Arrays.toString(hej.getAUserOnId(1234).getBookLista()));
         System.out.println(hej.generateUserId());
+        System.out.println(hej.getAUserOnId(1));*/
+
+        System.out.println(hej.getUsers());
+        System.out.println(hej.getAUser(1234));
+
     }
 }
