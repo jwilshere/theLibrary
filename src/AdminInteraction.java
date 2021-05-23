@@ -118,6 +118,26 @@ public class AdminInteraction {
             // If he/she has been suspended more than twice, then the account is deleted.
         }
 
+        public boolean removesuspend (int UserId){
+            HelpMethod HM = new HelpMethod(object);
+            User anvandare = HM.getAUser(UserId);
+
+            HM.getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
+
+                try {
+                    HM.suspendUser(UserId, java.sql.Date.valueOf(LocalDate.now()));
+                }catch (SQLException ex) {
+                    System.out.println("Something went wrong with database connection");
+
+            }
+            return true;
+            //if a member delays to return library items more than twice,
+            // he/she gets suspended for 15 days.
+            // If he/she has been suspended more than twice, then the account is deleted.
+        }
+
+
+
     public void checkIfBookIsAvaible(int ISBN)  { //inparametern blir en metod (requestForBook)
 
         //Afterward, the librarian is looking for the library title with the ISBN (an integer of 6 digits, e.g., 238103):
@@ -169,7 +189,11 @@ public class AdminInteraction {
 
     public static void main(String[] args) {
         //hej.RegisterUser("Martin", "Nilssn", 880528, 3);
-        AdminInteraction hej = new AdminInteraction(object);
+        Getset obj = new Getset();
+        AdminInteraction hoj = new AdminInteraction(obj);
+        //hoj.checkIfSuspended(666);
+
+
 
 
 
