@@ -5,12 +5,6 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
-import java.awt.desktop.UserSessionEvent;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -40,10 +34,10 @@ public class AdminInteractionTest {
 
         when(mock.getUsers())
                 .thenReturn(users);
-
-        System.out.println("Före delays är kollade: " + hoj.getAUser(3).suspendDate);
+        
+        System.out.println("Före delays är kollade: " + hoj.getAUser(3).SuspendDate);
         assertTrue(AI.suspendUser(3));
-        System.out.println("Efter delays är kollade: " + hoj.getAUser(3).suspendDate);
+        System.out.println("Efter delays är kollade: " + hoj.getAUser(3).SuspendDate);
     }
 
         @Test

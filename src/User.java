@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class User {
@@ -19,7 +17,7 @@ public class User {
     int BorrowLimit;
     int Active;
     int Delays;
-    Date suspendDate;
+    Date SuspendDate;
     Book[] bookLista = new Book[10];
 
     public User(){
@@ -35,7 +33,7 @@ public class User {
         this.BorrowLimit = borrowLimit;
         this.Active = active;
         this.Delays = delays;
-        this.suspendDate =suspendDate;
+        this.SuspendDate =suspendDate;
 
     }
 
@@ -96,7 +94,7 @@ public class User {
     }
 
     public Date getSuspendDate() {
-        return suspendDate;
+        return SuspendDate;
     }
 
     public String getFnamn() {
