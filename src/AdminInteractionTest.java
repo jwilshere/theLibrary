@@ -93,7 +93,7 @@ public class AdminInteractionTest {
         System.out.println(hejda.getAUser(1).getDelays());
     }
 
-     /*  @Test
+      @Test
         void checkIfSuspended() throws SQLException{
             Getset mock = mock(Getset.class);
             AdminInteraction AI = new AdminInteraction(mock);
@@ -105,9 +105,8 @@ public class AdminInteractionTest {
             when(mock.getUsers())
                     .thenReturn(hej);
 
-            assertFalse(AI.checkIfSuspended(1));
-            System.out.println(hejda.getAUser(1).getSuspendDate());
-        }*/
+            assertTrue(AI.checkIfSuspended(1));
+        }
 
         @Test
         void getAUser() throws SQLException {

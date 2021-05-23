@@ -38,6 +38,22 @@ public class AdminInteraction {
             System.out.println("Dagensdatum: " + dagensdatum);
             return true;}
 
+    public boolean removesuspend (int UserId){
+        HelpMethod HM = new HelpMethod(object);
+        HM.getAUser(UserId).setSuspendDate(null);
+
+        try {
+            HM.suspendUser(UserId, null);
+        }catch (SQLException ex) {
+            System.out.println("Something went wrong with database connection");
+
+        }
+        return true;
+        //if a member delays to return library items more than twice,
+        // he/she gets suspended for 15 days.
+        // If he/she has been suspended more than twice, then the account is deleted.
+    }
+
 
 
   /*  public boolean checkIfSuspended(int UserId) {
