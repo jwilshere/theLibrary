@@ -1,8 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.*;
 
 public class HelpMethod extends Getset{
@@ -74,11 +70,11 @@ public class HelpMethod extends Getset{
         }
     }
 
-           /*
 
     public User getAUserOnPersonId(int personId){
         anvandare = new User();
-        for(User s: userLista) {
+
+        for(User s: getUsers()) {
             if (s.getPersonId() == personId) {
                 anvandare = s;
             }
@@ -86,16 +82,31 @@ public class HelpMethod extends Getset{
         return anvandare;
     }
 
-    public Book getABookOnId(int bookId){
+    public ArrayList<Book> getAllBooksOnTitle(String bookTitle){
         bok = new Book();
-        for(Book s: bookLista) {
-            if (s.getId() == bookId) {
+        ArrayList<Book> books = new ArrayList<>();
+
+        for(Book s: getBooks()) {
+            if (s.getTitle().equals(bookTitle)) {
+                books.add(s);
+            }
+        }
+        return books;
+    }
+
+    public int getISBNOnTitle (String bookTitle){
+        bok = new Book();
+
+        for(Book s: getBooks()) {
+            if (s.getTitle().equals(bookTitle)) {
                 bok = s;
             }
         }
-        return bok;
+
+        return bok.getISBN();
     }
 
+    /*
     public int generateUserId(){
         Random random = new Random();
         int randomUserID = random.nextInt(8999) + 1000;
@@ -108,9 +119,62 @@ public class HelpMethod extends Getset{
         return randomUserID;
     }
 
-
+*/
     public int requestBook(String title, int userId) {
         int ISBN = 0;
+        int userType;
+        userType = getAUser(userId).getType();
+        User anvandare = getAUser(userId);
+
+        switch (userType) {
+            case 3:
+                if (userType == 3) {
+                    if(anvandare.getItemBorrowed() >= 3){
+                        System.out.print("Denna användare har lånat max antal böcker, kan låna: ");
+                        break;
+                    }
+                    else {
+                        ISBN = getISBNOnTitle(title);
+                        break;
+                    }
+                }
+
+            case 5:
+                if (userType == 5) {
+                    if(anvandare.getItemBorrowed() >= 5){
+                        System.out.print("Denna användare har lånat max antal böcker, kan låna: ");
+                        break;
+                    }
+                    else {
+                        ISBN = getISBNOnTitle(title);
+                        break;
+                    }
+                }
+
+            case 8:
+                if (userType == 8) {
+                    if(anvandare.getItemBorrowed() >= 8){
+                        System.out.println("Denna användare har lånat max antal böcker, kan låna: ");
+                        break;
+                    }
+                    else {
+                        ISBN = getISBNOnTitle(title);
+                        break;
+                    }
+                }
+
+            case 10:
+                if (userType == 10) {
+                    if(anvandare.getItemBorrowed() >= 10){
+                        System.out.print("Denna användare har lånat max antal böcker, kan lånda: ");
+                        break;
+                    }
+                    else {
+                        ISBN = getISBNOnTitle(title);
+                        break;
+                    }
+                }
+        }
 
         //Then, the system checks whether this member is an undergraduate,
         // a postgraduate, a PhD student/candidate, or a teacher (professor, etc.).
@@ -120,7 +184,7 @@ public class HelpMethod extends Getset{
 
         //FÖRST KOLLA IFALL DEN FÅR LÅNA; IFALL DEN FÅR SÅ RETURNERA TITELNAMNET
         return ISBN;
-    } */
+    }
 
     public static void main(String[] args) {
         Getset hejda = new Getset();
@@ -138,7 +202,8 @@ public class HelpMethod extends Getset{
         System.out.println("Detta är en användares böcker: " + Arrays.toString(hej.getAUserOnId(1234).getBookLista()));
         System.out.println(hej.generateUserId());
         System.out.println(hej.getAUserOnId(1));*/
-
+        //System.out.println(hej.getAUserOnPersonId(980603).getFnamn());
+        System.out.println(hej.requestBook("Jonson's Äventyr", 1234));
 
     }
 }

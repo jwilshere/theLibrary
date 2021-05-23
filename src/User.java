@@ -40,6 +40,14 @@ public class User {
         this.SuspendDate = suspendDate;
     }
 
+    public String getFnamn() {
+        return Fnamn;
+    }
+
+    public void setFnamn(String fnamn) {
+        Fnamn = fnamn;
+    }
+
     public int getId() {
         return Id;
     }

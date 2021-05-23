@@ -62,9 +62,9 @@ class AdminInteractionTest {
         Book book2 = new Book(13, "Hoj", 1111, null);
 
         //Skapar en array och lägger in de två "book"-objekten
-        Book[] excpetedBooks = new Book[10];
-        excpetedBooks[0] = book1;
-        excpetedBooks[1] = book2;
+        Book[] expetedBooks = new Book[10];
+        expetedBooks[0] = book1;
+        expetedBooks[1] = book2;
 
         //Skapar en Arraylist och lägger in en användare
         ArrayList<User> users = new ArrayList<>();
@@ -87,8 +87,8 @@ class AdminInteractionTest {
         HM.addBookToUser(4444, 13);
 
         //Testar så att vår förväntade array av användarens böcker är samma som den faktiska
-        assertArrayEquals(excpetedBooks, HM.getAUser(4444).getBookLista());
-        System.out.println("Excpected: " + Arrays.toString(excpetedBooks) + " " + "Faktiska: " + Arrays.toString(HM.getAUser(4444).getBookLista()));
+        assertArrayEquals(expetedBooks, HM.getAUser(4444).getBookLista());
+        System.out.println("Expected: " + Arrays.toString(expetedBooks) + " " + "Faktiska: " + Arrays.toString(HM.getAUser(4444).getBookLista()));
     }
 
    @Test

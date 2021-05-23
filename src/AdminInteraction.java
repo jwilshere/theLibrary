@@ -76,6 +76,8 @@ public class AdminInteraction {
         // If he/she has been suspended more than twice, then the account is deleted.
     }
 
+
+
     /*
     public void checkIfBookIsAvaible(int ISBN)  { //inparametern blir en metod (requestForBook)
 
