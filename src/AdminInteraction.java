@@ -169,7 +169,9 @@ public class AdminInteraction {
 
     public static void main(String[] args) {
         //hej.RegisterUser("Martin", "Nilssn", 880528, 3);
-        AdminInteraction hej = new AdminInteraction(hoj);
+        AdminInteraction hej = new AdminInteraction(object);
+
+
 
     }
 

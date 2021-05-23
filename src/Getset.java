@@ -147,7 +147,7 @@ public class Getset {
         }
     }
 
-    public void resetSuspend(int userId){
+    public void resetSuspend(int userId)throws SQLException{
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {
 
@@ -159,7 +159,7 @@ public class Getset {
         }
     }
 
-    public void suspendUser(int userId, Date suspendDate){
+    public void suspendUser(int userId, Date suspendDate)throws SQLException{
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {
 
