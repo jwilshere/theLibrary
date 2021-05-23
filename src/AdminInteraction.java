@@ -91,32 +91,33 @@ public class AdminInteraction {
         // he/she gets suspended for 15 days.
         // If he/she has been suspended more than twice, then the account is deleted.
     }*/
-        public boolean suspendUser (int UserId){
-            HelpMethod HM = new HelpMethod(object);
-            User anvandare = HM.getAUser(UserId);
+   public boolean suspendUser (int UserId){
+       HelpMethod HM = new HelpMethod(object);
+       User anvandare = HM.getAUser(UserId);
 
-            if (anvandare.Delays <=2 || anvandare.Delays ==4 || anvandare.Delays ==5 || anvandare.Delays ==7 || anvandare.Delays ==8 ){
-                System.out.println("Användare ska inte suspenderas");
-                return false;
-            }
-            else if (HM.getAUser(UserId).Delays == 9){
-                System.out.println("Radera denna användare");
-                return false;
-            }
+       int antaldelays = 0;
+       if (anvandare.Delays <=2 || anvandare.Delays ==4 || anvandare.Delays ==5 || anvandare.Delays ==7 || anvandare.Delays ==8 ){
+           System.out.println("Användare ska inte suspenderas");
+           return false;
+       }
+       else if (HM.getAUser(UserId).Delays == 9){
+           System.out.println("Radera denna användare");
+           return false;
+       }
+       if(anvandare.getDelays() == 3 || anvandare.getDelays() == 6 ){
+           HM.getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
 
-            if(anvandare.getDelays() == 3 || anvandare.getDelays() == 6 ){
-                HM.getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
-                System.out.println("användaren är suspended med dagens datum");
-                        try {
-                    HM.suspendUser(UserId, java.sql.Date.valueOf(LocalDate.now()));
-                }catch (SQLException e) {
-                    System.out.println("Something went wrong with database connection");
-                }
-            }
-            return true;
-
-
-            }
+           try {
+               HM.suspendUser(UserId, java.sql.Date.valueOf(LocalDate.now()));
+           }catch (SQLException e) {
+               System.out.println("Something went wrong with database connection");
+           }
+       }
+       return true;
+       //if a member delays to return library items more than twice,
+       // he/she gets suspended for 15 days.
+       // If he/she has been suspended more than twice, then the account is deleted.
+   }
 
             //if a member delays to return library items more than twice,
             // he/she gets suspended for 15 days.

@@ -163,7 +163,7 @@ public class Getset {
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {
 
-            PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET suspendDate = " + "'" + suspendDate + "'" +  "WHERE User.id = " + "'" + userId + "'");
+            PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET suspendDate = " + "'" + suspendDate + "'" +  "WHERE User.Id = " + "'" + userId + "'");
             bookIn.executeUpdate();
         }
         catch (SQLException ex) {
