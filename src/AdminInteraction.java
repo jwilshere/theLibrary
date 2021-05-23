@@ -1,4 +1,5 @@
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class AdminInteraction {
     HelpMethod object;
@@ -25,11 +26,29 @@ public class AdminInteraction {
         }
     }
 
-    public void checkIfUserDelayed(int id){
+    public void checkIfUserDelayed(int userId){
+        getSet = new Getset();
+        object = new HelpMethod();
+        Date datum;
+        java.time.LocalDate.now();
+
+        Book[] val = object.getBooks();
+        for (Book b: val) {
+       // if (userId == b.getUser_Id() && b.getBorrowed() > 0);
+        }
+
+
+
+
 
     }
 
     public void checkIfBookIsAvaible(int ISBN)  { //inparametern blir en metod (requestForBook)
+
+        getSet = new Getset();
+        object = new HelpMethod();
+
+
 
         //Afterward, the librarian is looking for the library title with the ISBN (an integer of 6 digits, e.g., 238103):
         //• If it does not exist then the member is notified (i.e., you should print a message to the librarian who uses the system).

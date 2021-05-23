@@ -134,12 +134,11 @@ public class HelpMethod extends Getset{
     }
 
     public static void main(String[] args) {
-        HelpMethod hej = new HelpMethod();
+      /*  HelpMethod hej = new HelpMethod();
         System.out.println(hej.getAUserOnId(1234));
         System.out.println(hej.getABookOnId(4444));
 
-        hej.bookLista.add(new Book(12, "Tja", 1234, null));
-        hej.bookLista.add(new Book(13, "Tja", 1235, null));
+
         hej.userLista.add(new User(12, "Philip", "Nilsson", 9802, 1, 0,1,1,1,null));
 
         System.out.println("Detta är användare: " + Arrays.toString(hej.getUsers()));
@@ -147,5 +146,9 @@ public class HelpMethod extends Getset{
         //hej.addBookToUser(1234, 12);
         System.out.println("Detta är en användares böcker: " + Arrays.toString(hej.getAUserOnId(1234).getBookLista()));
         System.out.println(hej.generateUserId());
+
+       */
+
+        System.out.println(java.time.LocalDate.now());
     }
 }

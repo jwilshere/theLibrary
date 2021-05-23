@@ -51,7 +51,7 @@ public class Getset {
             ResultSet rs = statement.executeQuery("Select * FROM book");
 
             while(rs.next()){
-                Book bok = new Book(rs.getInt("id"), rs.getString("title"), rs.getInt("ISBN"), rs.getDate("borrowedOnDate"));
+                Book bok = new Book(rs.getInt("id"), rs.getString("title"), rs.getInt("ISBN"), rs.getDate("borrowedOnDate"), rs.getInt("user_id"));
                 bookLista.add(bok);
                 index++;
             }
@@ -168,7 +168,7 @@ public class Getset {
                 "root","philip98")) {
             System.out.println("Connected");
 
-            PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET itemBorrowed = " + "'" + itemBorrowed + "'" + "WHERE user.id = " + "'" + userId + "'");
+            PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET delays = NULL " + "WHERE user.id = " + "'" + userId + "'");
             bookIn.executeUpdate();
         }
         catch (SQLException ex) {
