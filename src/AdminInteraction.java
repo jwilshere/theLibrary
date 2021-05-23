@@ -104,6 +104,7 @@ public class AdminInteraction {
                 System.out.println("Radera denna användare");
                 return false;
             }
+
             if(anvandare.getDelays() == 3 || anvandare.getDelays() == 6 ){
                 HM.getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
 
@@ -112,6 +113,7 @@ public class AdminInteraction {
                 }catch (SQLException ex) {
                     System.out.println("Something went wrong with database connection");
                 }
+
             }
             return true;
             //if a member delays to return library items more than twice,
