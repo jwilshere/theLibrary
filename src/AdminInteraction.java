@@ -105,21 +105,23 @@ public class AdminInteraction {
             }
 
             if(anvandare.getDelays() == 3 || anvandare.getDelays() == 6 ){
-                anvandare.setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
-                System.out.println("Användaren är suspenderad med dagens datum");
-
-                try {
+                HM.getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
+                System.out.println("användaren är suspended med dagens datum");
+                        try {
                     HM.suspendUser(UserId, java.sql.Date.valueOf(LocalDate.now()));
-                }catch (SQLException ex) {
+                }catch (SQLException e) {
                     System.out.println("Something went wrong with database connection");
                 }
-
             }
             return true;
+
+
+            }
+
             //if a member delays to return library items more than twice,
             // he/she gets suspended for 15 days.
             // If he/she has been suspended more than twice, then the account is deleted.
-        }
+
 
 
 
