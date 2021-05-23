@@ -6,7 +6,6 @@ public class HelpMethod extends Getset{
     Book bok;
     Getset object;
 
-
     public HelpMethod(Getset obj){
         object = obj;
     }
@@ -42,9 +41,19 @@ public class HelpMethod extends Getset{
         return anvandare;
     }
 
-    public void addBookToUser(int userId, int bookId) {
+    public void addBookToAUser(int userId, int bookId) {
                 for(Book p: getBooks()){
                     if(p.getId() == bookId){
+
+                       try {
+                           for(Book s: object.getBooksBorrowedByUser(userId)){
+                               getAUser(userId).addBook(s);
+                           }
+                           object.addBookToUser(userId, bookId);
+                           object.updateItemBorrowed(getAUser(userId).getItemBorrowed() + 1, userId);
+                        }catch (SQLException e) {
+                            System.out.println("Something went wrong with database connection");
+                        }
                         getAUser(userId).addBook(p);
                     }
                 }
@@ -70,7 +79,6 @@ public class HelpMethod extends Getset{
         }
     }
 
-
     public User getAUserOnPersonId(int personId){
         anvandare = new User();
 
@@ -82,12 +90,12 @@ public class HelpMethod extends Getset{
         return anvandare;
     }
 
-    public ArrayList<Book> getAllBooksOnTitle(String bookTitle){
+    public ArrayList<Book> getAllBooksOnISBN(int bookISBN){
         bok = new Book();
         ArrayList<Book> books = new ArrayList<>();
 
         for(Book s: getBooks()) {
-            if (s.getTitle().equals(bookTitle)) {
+            if (s.getISBN() == bookISBN) {
                 books.add(s);
             }
         }

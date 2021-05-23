@@ -76,10 +76,21 @@ public class AdminInteraction {
         // If he/she has been suspended more than twice, then the account is deleted.
     }
 
+    public void checkIfUserCanLend(int ISBN, int userId)  { //inparametern blir en metod (requestForBook)
+        HelpMethod HM = new HelpMethod(object);
+        int nmrBooks = HM.getAllBooksOnISBN(ISBN).size();
 
+        for(int i = 0; i < nmrBooks; i++){
+            Book bok;
+            bok = HM.getAllBooksOnISBN(ISBN).get(i);
+            if(bok.getBorrowed() == null){
+                System.out.println("Bok med detta ISBN på ID: " + bok.getId() + " är ledig");
+                HM.addBookToAUser(userId, bok.getId());
+                bok.setBorrowed(java.sql.Date.valueOf(LocalDate.now()));
+                break;
+            }
+        }
 
-    /*
-    public void checkIfBookIsAvaible(int ISBN)  { //inparametern blir en metod (requestForBook)
 
         //Afterward, the librarian is looking for the library title with the ISBN (an integer of 6 digits, e.g., 238103):
         //• If it does not exist then the member is notified (i.e., you should print a message to the librarian who uses the system).
@@ -91,6 +102,7 @@ public class AdminInteraction {
         // and the system updates the number of the member’s borrowed items appropriately and the available items of this title.
     }
 
+    /*
     public void ReturnBook (int userId, int bookId) {
         getSet = new Getset();
         object = new HelpMethod();
@@ -132,9 +144,7 @@ public class AdminInteraction {
         //hej.RegisterUser("Martin", "Nilssn", 880528, 3);
         Getset obj = new Getset();
         AdminInteraction hoj = new AdminInteraction(obj);
-        hoj.checkIfSuspended(1234);
+        hoj.checkIfUserCanLend(987654, 1234);
 
     }
-
-
 }

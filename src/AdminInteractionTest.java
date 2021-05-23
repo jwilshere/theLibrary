@@ -59,7 +59,7 @@ class AdminInteractionTest {
 
         //Skapar två "book"-objekt, samma objekt som förs i den förväntade arrayen som förs in i användarens lånade.
         Book book1 = new Book(12, "Hoj", 1111, null);
-        Book book2 = new Book(13, "Hoj", 1111, null);
+        Book book2 = new Book(13, "Hoj", 2222, null);
 
         //Skapar en array och lägger in de två "book"-objekten
         Book[] expetedBooks = new Book[10];
@@ -83,8 +83,8 @@ class AdminInteractionTest {
                 .thenReturn(books);
 
         //Addar de två "book"-objekten till användaren
-        HM.addBookToUser(4444, 12);
-        HM.addBookToUser(4444, 13);
+        HM.addBookToUser(4444, 1111);
+        HM.addBookToUser(4444, 2222);
 
         //Testar så att vår förväntade array av användarens böcker är samma som den faktiska
         assertArrayEquals(expetedBooks, HM.getAUser(4444).getBookLista());

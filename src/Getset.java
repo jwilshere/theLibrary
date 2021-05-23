@@ -69,7 +69,7 @@ public class Getset {
         System.out.println("User deleted successfully!");
     }
 
-    public void setUser(int id, String fnamn, String lnamn, int personId, int typ, int itemBorrowed, int borrowLimit, int active, int delays, Date suspendDate){
+    public void addUser(int id, String fnamn, String lnamn, int personId, int typ, int itemBorrowed, int borrowLimit, int active, int delays, Date suspendDate){
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
@@ -93,7 +93,7 @@ public class Getset {
         }
     }
 
-    public void setBook(int id, String title, int ISBN, Date borrowed){
+    public void addBook(int id, String title, int ISBN, Date borrowed){
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
@@ -111,7 +111,7 @@ public class Getset {
         }
     }
 
-    public void addBookToUser(int userId, int bookId){
+    public void addBookToUser(int userId, int bookId) throws SQLException{
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
 
@@ -133,6 +133,29 @@ public class Getset {
         catch (SQLException ex) {
             System.out.println("Something went wrong" + ex.getMessage());
         }
+    }
+
+   public Book[] getBooksBorrowedByUser(int userId) throws SQLException{
+        Book[] booksLendedByUser = new Book[10];
+        int nmr = 0;
+
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
+                "root","philip98")) {
+
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * from book WHERE book.User_id = " + "'" + userId + "'");
+
+            while(rs.next()){
+                Book bok = new Book(rs.getInt("id"), rs.getString("title"), rs.getInt("ISBN"), rs.getDate("borrowedOnDate"));
+                booksLendedByUser[nmr] = bok;
+                nmr++;
+            }
+        }
+        catch (SQLException ex) {
+            System.out.println("Something went wrong" + ex.getMessage());
+        }
+
+        return booksLendedByUser;
     }
 
     public void updateItemBorrowed(int itemBorrowed, int userId){

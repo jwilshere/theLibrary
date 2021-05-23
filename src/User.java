@@ -117,7 +117,7 @@ public class User {
     }
 
     public void addBook(Book newBook){
-        if(ItemsBorrowed <= BorrowLimit){
+        if(ItemsBorrowed < BorrowLimit){
             bookLista[getItemBorrowed()] = newBook;
             setItemBorrowed(getItemBorrowed() + 1);
         }
