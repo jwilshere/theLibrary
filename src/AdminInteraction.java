@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.util.Calendar;
 
 public class AdminInteraction {
-    Getset hoj;
+    Getset object;
 
-    AdminInteraction(Getset obj){
-        hoj = obj;
+    AdminInteraction(Getset object){
+        object = object;
     }
 
      public void deleteUser(int userId){
-         getSet = new Getset();
+         object = new Getset();
          int nummer = object.getAUser(userId).getId();
 
          if (nummer == userId) {
@@ -25,37 +25,18 @@ public class AdminInteraction {
         HelpMethod HM = new HelpMethod(object);
 
         Date datum = HM.getAUser(UserId).getSuspendDate();
-        System.out.println("Användarens datum: " + datum);
         java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
-        System.out.println("Dagensdatum: " + dagensdatum);
 
         if (datum == null){
             System.out.println("Användaren är inte suspenderad!");
             return false;
         }
+        else
+            System.out.println("Användaren är suspendad");
+            System.out.println("Användarens suspend datum: " + datum);
+            System.out.println("Dagensdatum: " + dagensdatum);
 
-        Calendar c = Calendar.getInstance();
-        c.setTime(datum);
-        c.add(Calendar.DATE, 15);
 
-        System.out.println(HM.getAUser(UserId).getSuspendDate().compareTo(dagensdatum));
-
-        if (HM.getAUser(UserId).getSuspendDate().compareTo(dagensdatum) >= 0) {
-            HM.getAUser(UserId).setSuspendDate(null);
-
-            try {
-                object.resetSuspend(UserId);
-            }catch (SQLException e) {
-                System.out.println("Something went wrong with database connection");
-            }
-
-            System.out.println("Det har gått 15 dagar");
-            return true;
-        }
-
-        System.out.println("Är suspenderad");
-        return false;
-    }
 
   /*  public boolean checkIfSuspended(int UserId) {
         Getset hoj = new Getset();
