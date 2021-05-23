@@ -35,6 +35,7 @@ public class AdminInteraction {
             System.out.println("Användaren är suspendad");
             System.out.println("Användarens suspend datum: " + datum);
             System.out.println("Dagensdatum: " + dagensdatum);
+            return true;}
 
 
 
@@ -66,7 +67,7 @@ public class AdminInteraction {
     } */
 
 
-    public boolean suspendUser (int UserId){
+   /* public boolean suspendUser (int UserId){
         object = new HelpMethod();
         getSet = new Getset();
 
@@ -88,7 +89,34 @@ public class AdminInteraction {
         //if a member delays to return library items more than twice,
         // he/she gets suspended for 15 days.
         // If he/she has been suspended more than twice, then the account is deleted.
-    }
+    }*/
+        public boolean suspendUser (int UserId){
+            HelpMethod HM = new HelpMethod(object);
+            User anvandare = HM.getAUser(UserId);
+
+            int antaldelays = 0;
+            if (anvandare.Delays <=2 || anvandare.Delays ==4 || anvandare.Delays ==5 || anvandare.Delays ==7 || anvandare.Delays ==8 ){
+                System.out.println("Användare ska inte suspenderas");
+                return false;
+            }
+            else if (HM.getAUser(UserId).Delays == 9){
+                System.out.println("Radera denna användare");
+                return false;
+            }
+            if(anvandare.getDelays() == 3 || anvandare.getDelays() == 6 ){
+                HM.getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
+
+                try {
+                    HM.suspendUser(UserId, java.sql.Date.valueOf(LocalDate.now()));
+                }catch (SQLException ex) {
+                    System.out.println("Something went wrong with database connection");
+                }
+            }
+            return true;
+            //if a member delays to return library items more than twice,
+            // he/she gets suspended for 15 days.
+            // If he/she has been suspended more than twice, then the account is deleted.
+        }
 
     public void checkIfBookIsAvaible(int ISBN)  { //inparametern blir en metod (requestForBook)
 
@@ -102,7 +130,7 @@ public class AdminInteraction {
         // and the system updates the number of the member’s borrowed items appropriately and the available items of this title.
     }
 
-    public void ReturnBook (int userId, int bookId) {
+   /* public void ReturnBook (int userId, int bookId) {
         getSet = new Getset();
         object = new HelpMethod();
 
@@ -135,7 +163,7 @@ public class AdminInteraction {
         }
         int Id = object.generateUserId();
         getSet.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
-    }
+    }*/
 
 
 
