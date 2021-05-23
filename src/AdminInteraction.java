@@ -9,7 +9,7 @@ public class AdminInteraction {
         hoj = obj;
     }
 
-    /* public void deleteUser(int userId){
+     public void deleteUser(int userId){
          getSet = new Getset();
          int nummer = object.getAUser(userId).getId();
 
@@ -20,7 +20,7 @@ public class AdminInteraction {
              System.out.println("User dosen't exist");
          }
      }
- */
+
     public boolean checkIfSuspended(int UserId) {
         Getset hoj = new Getset();
         HelpMethod object = new HelpMethod(hoj);
@@ -48,7 +48,7 @@ public class AdminInteraction {
         return false;
     }
 
-    /*
+
     public boolean suspendUser (int UserId){
         object = new HelpMethod();
         getSet = new Getset();
@@ -120,10 +120,11 @@ public class AdminInteraction {
         getSet.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
     }
 
-*/
+
 
     public static void main(String[] args) {
         //hej.RegisterUser("Martin", "Nilssn", 880528, 3);
+        AdminInteraction hej = new AdminInteraction(hoj);
 
     }
 

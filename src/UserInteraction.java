@@ -3,7 +3,7 @@ public class UserInteraction {
 
 
     public int requestForBook(String title, int id) {
-        object = new HelpMethod();
+       // object = new HelpMethod();
         int antalBockerFarLanas;
         int ISBN = 0;
 

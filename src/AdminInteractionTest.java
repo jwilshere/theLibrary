@@ -58,20 +58,20 @@ public class AdminInteractionTest {
             assertArrayEquals(excpetedBooks, HM.getAUser(4444).getBookLista());
         }
 
-        @Test
+       @Test
         void checkIfSuspended() throws SQLException{
             Getset mock = mock(Getset.class);
-            HelpMethod AI = new AdminInteraction(mock);
+            AdminInteraction AI = new AdminInteraction(mock);
             HelpMethod hejda = new HelpMethod(mock);
 
             ArrayList<User> hej = new ArrayList<>();
-            hej.add(new User(4444, "Flaska", "Jonson", 980603, 2, 0,3,1,0, new Date(1990, 4,18)));
+            hej.add(new User(1, "Flaska", "Jonson", 980603, 2, 0,3,1,0, new Date(2021,04,17)));
 
             when(mock.getUsers())
                     .thenReturn(hej);
 
-            assertFalse(AI.checkIfSuspended(4444));
-            System.out.println(hejda.getAUser(4444).getSuspendDate());
+            assertFalse(AI.checkIfSuspended(1));
+            System.out.println(hejda.getAUser(1).getSuspendDate());
         }
 
         @Test
@@ -107,4 +107,4 @@ public class AdminInteractionTest {
     }*/
     }
 
-}
+
