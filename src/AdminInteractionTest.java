@@ -108,6 +108,7 @@ public class AdminInteractionTest {
             assertTrue(AI.checkIfSuspended(1));
         }
 
+
         @Test
         void getAUser() throws SQLException {
             Getset mock = mock(Getset.class);
@@ -123,7 +124,6 @@ public class AdminInteractionTest {
             assertEquals(expected.getId(), HM.getAUser(1234).getId());
 
         }
-
 
 
    /* @Test

@@ -22,6 +22,8 @@ public class AdminInteraction {
          }
      }*/
 
+
+
     public boolean checkIfSuspended(int UserId) {
         HelpMethod HM = new HelpMethod(object);
 
@@ -156,6 +158,8 @@ public class AdminInteraction {
         // and the system updates the number of the member’s borrowed items appropriately and the available items of this title.
     }
 
+
+
    /* public void ReturnBook (int userId, int bookId) {
         getSet = new Getset();
         object = new HelpMethod();
@@ -173,23 +177,25 @@ public class AdminInteraction {
         else {
             System.out.println("User dosen't exist");
         }
-    }
+    } */
 
     public void RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ){
-        getSet = new Getset();
-        object = new HelpMethod();
+        object = new Getset();
+        HelpMethod HM = new HelpMethod(object);
 
-        for(User s: object.getUsers()){
+        for(User s: HM.getUsers()){
             if(s.getPersonId() == PersonID){
                 System.out.println("Användare är redan registrerad!");
             }
             if(s.getSuspendDate() != null){
                 System.out.println("Användare är suspenderad");
             }
+
         }
-        int Id = object.generateUserId();
-        getSet.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
-    }*/
+        int Id = HM.generateUserId();
+
+        object.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
+    }
 
     public boolean updateDelays (int UserId){
         HelpMethod HM = new HelpMethod(object);

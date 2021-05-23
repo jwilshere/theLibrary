@@ -109,7 +109,7 @@ public class HelpMethod extends Getset{
             }
         }
         return bok;
-    }
+    } */
 
     public int generateUserId(){
         Random random = new Random();
@@ -135,7 +135,7 @@ public class HelpMethod extends Getset{
 
         //FÖRST KOLLA IFALL DEN FÅR LÅNA; IFALL DEN FÅR SÅ RETURNERA TITELNAMNET
         return ISBN;
-    } */
+    }
 
     public static void main(String[] args) {
         Getset hejda = new Getset();
