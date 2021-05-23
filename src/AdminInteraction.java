@@ -106,7 +106,7 @@ public class AdminInteraction {
        }
        if(anvandare.getDelays() == 3 || anvandare.getDelays() == 6 ){
            HM.getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
-
+           System.out.println("Användaren är suspend med dagens datum");
            try {
                HM.suspendUser(UserId, java.sql.Date.valueOf(LocalDate.now()));
            }catch (SQLException e) {
@@ -178,7 +178,6 @@ public class AdminInteraction {
     public boolean updateDelays (int UserId){
         HelpMethod HM = new HelpMethod(object);
         int antaldelays = 0;
-        User anvandare = HM.getAUser(UserId);
         antaldelays = HM.getAUser(UserId).Delays +1;
         // getAUser(UserId).setDelays(antaldelays);
         //getAUser(UserId).setDelays(+1);

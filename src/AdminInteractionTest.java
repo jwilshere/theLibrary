@@ -85,10 +85,10 @@ public class AdminInteractionTest {
         HelpMethod hejda = new HelpMethod(mock);
 
         ArrayList<User> hej = new ArrayList<>();
-        hej.add(new User(1, "Flaska", "Jonson", 980603, 2, 0,3,1,0, new Date(2021,04,17)));
+        hej.add(new User(1, "Flaska", "Jonson", 980603, 2, 0,3,1,2, new Date(2021,04,17)));
         when(mock.getUsers())
                 .thenReturn(hej);
-
+        System.out.println(hejda.getAUser(1).getDelays());
         assertTrue(AI.updateDelays(1));
         System.out.println(hejda.getAUser(1).getDelays());
     }
