@@ -128,6 +128,7 @@ public class AdminInteraction {
        if(anvandare.getDelays() == 3 || anvandare.getDelays() == 6 ){
            HM.getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
            System.out.println("Användaren är suspend med dagens datum");
+           System.out.println(anvandare.getSuspendDate());
            try {
                HM.suspendUser(UserId, java.sql.Date.valueOf(LocalDate.now()));
            }catch (SQLException ex) {
@@ -225,8 +226,6 @@ public class AdminInteraction {
         //hoj.checkIfSuspended(666);
         hoj.suspendUser(666);
 
-
-        
 
     }
 
