@@ -10,7 +10,7 @@ public class AdminInteraction {
         object = object;
     }
 
-     public void deleteUser(int userId){
+   /*  public void deleteUser(int userId){
          object = new Getset();
          int nummer = object.getAUser(userId).getId();
 
@@ -20,7 +20,7 @@ public class AdminInteraction {
          else {
              System.out.println("User dosen't exist");
          }
-     }
+     }*/
     public boolean checkIfSuspended(int UserId) {
         HelpMethod HM = new HelpMethod(object);
 
