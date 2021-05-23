@@ -170,7 +170,7 @@ public class Getset {
             System.out.println("Something went wrong" + ex.getMessage());
         }
     }
-    public void setDelays(int userId, int delays){
+    public void setDelays(int userId, int delays)throws SQLException{
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {
 

@@ -118,23 +118,7 @@ public class AdminInteraction {
             // If he/she has been suspended more than twice, then the account is deleted.
         }
 
-        public boolean removesuspend (int UserId){
-            HelpMethod HM = new HelpMethod(object);
-            User anvandare = HM.getAUser(UserId);
 
-            HM.getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
-
-                try {
-                    HM.suspendUser(UserId, java.sql.Date.valueOf(LocalDate.now()));
-                }catch (SQLException ex) {
-                    System.out.println("Something went wrong with database connection");
-
-            }
-            return true;
-            //if a member delays to return library items more than twice,
-            // he/she gets suspended for 15 days.
-            // If he/she has been suspended more than twice, then the account is deleted.
-        }
 
 
 
@@ -184,6 +168,26 @@ public class AdminInteraction {
         int Id = object.generateUserId();
         getSet.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
     }*/
+
+    public boolean updateDelays (int UserId){
+        HelpMethod HM = new HelpMethod(object);
+        int antaldelays = 0;
+        User anvandare = HM.getAUser(UserId);
+        antaldelays = HM.getAUser(UserId).Delays +1;
+        // getAUser(UserId).setDelays(antaldelays);
+        //getAUser(UserId).setDelays(+1);
+        //  HM.getAUser(UserId).setDelays());
+        try {
+            HM.setDelays(UserId, antaldelays);
+        }catch (SQLException ex) {
+            System.out.println("Something went wrong with database connection");
+
+        }
+        return true;
+        //if a member delays to return library items more than twice,
+        // he/she gets suspended for 15 days.
+        // If he/she has been suspended more than twice, then the account is deleted.
+    }
 
 
 
