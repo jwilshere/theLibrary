@@ -99,6 +99,38 @@ public class User {
         return suspendDate;
     }
 
+    public String getFnamn() {
+        return Fnamn;
+    }
+
+    public void setFnamn(String fnamn) {
+        Fnamn = fnamn;
+    }
+
+    public String getLnamn() {
+        return Lnamn;
+    }
+
+    public void setLnamn(String lnamn) {
+        Lnamn = lnamn;
+    }
+
+    public int getItemsBorrowed() {
+        return ItemsBorrowed;
+    }
+
+    public void setItemsBorrowed(int itemsBorrowed) {
+        ItemsBorrowed = itemsBorrowed;
+    }
+
+    public int getActive() {
+        return Active;
+    }
+
+    public void setBookLista(Book[] bookLista) {
+        this.bookLista = bookLista;
+    }
+
     public void setSuspendDate(Date suspendDate) {
         suspendDate = suspendDate;
     }

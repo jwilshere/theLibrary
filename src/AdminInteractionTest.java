@@ -36,13 +36,13 @@ public class AdminInteractionTest {
         ArrayList<User> users = new ArrayList<>();
         users.add(new User(3, "Marre", "Jonson", 980103, 3, 0,3,1,3, null));
         users.add(new User(4444, "Philip", "Lindquist", 980606, 3, 0,3,1,0, null));
-        users.add(new User(6666, "Philip", "Lindquist", 980606, 3, 0,3,1,0, null));
+        users.add(new User(6666, "Philip", "Lindquist", 980606, 3, 0,3,1,3, null));
 
         when(mock.getUsers())
                 .thenReturn(users);
 
         System.out.println("Före delays är kollade: " + hoj.getAUser(3).suspendDate);
-        assertTrue(AI.suspendUser(3));
+        assertTrue(AI.suspendUser(6666));
         System.out.println("Efter delays är kollade: " + hoj.getAUser(3).suspendDate);
     }
 
