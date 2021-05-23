@@ -114,6 +114,7 @@ public class AdminInteraction {
        User anvandare = HM.getAUser(UserId);
 
        int antaldelays = 0;
+
        if (anvandare.Delays <=2 || anvandare.Delays ==4 || anvandare.Delays ==5 || anvandare.Delays ==7 || anvandare.Delays ==8 ){
            System.out.println("Användare ska inte suspenderas");
            return false;
@@ -122,6 +123,7 @@ public class AdminInteraction {
            System.out.println("Radera denna användare");
            return false;
        }
+
        if(anvandare.getDelays() == 3 || anvandare.getDelays() == 6 ){
            HM.getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
            System.out.println("Användaren är suspend med dagens datum");
@@ -132,6 +134,7 @@ public class AdminInteraction {
            }
        }
        return true;
+
        //if a member delays to return library items more than twice,
        // he/she gets suspended for 15 days.
        // If he/she has been suspended more than twice, then the account is deleted.
@@ -140,10 +143,6 @@ public class AdminInteraction {
             //if a member delays to return library items more than twice,
             // he/she gets suspended for 15 days.
             // If he/she has been suspended more than twice, then the account is deleted.
-
-
-
-
 
 
     public void checkIfBookIsAvaible(int ISBN)  { //inparametern blir en metod (requestForBook)
