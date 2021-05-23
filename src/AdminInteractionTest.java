@@ -26,6 +26,26 @@ public class AdminInteractionTest {
         void deleteUser() {
         }
 
+    @Test
+    void suspendUser() throws SQLException{ //KLAR !!!!!!!!!!!!!!!
+        Getset mock = mock(Getset.class);
+        AdminInteraction AI = new AdminInteraction(mock);
+        HelpMethod hoj = new HelpMethod(mock);
+
+        //Skapar en Arraylist och lägger in en användare
+        ArrayList<User> users = new ArrayList<>();
+        users.add(new User(3, "Marre", "Jonson", 980103, 3, 0,3,1,3, null));
+        users.add(new User(4444, "Philip", "Lindquist", 980606, 3, 0,3,1,0, null));
+        users.add(new User(6666, "Philip", "Lindquist", 980606, 3, 0,3,1,0, null));
+
+        when(mock.getUsers())
+                .thenReturn(users);
+
+        System.out.println("Före delays är kollade: " + hoj.getAUser(3).suspendDate);
+        assertTrue(AI.suspendUser(3));
+        System.out.println("Efter delays är kollade: " + hoj.getAUser(3).suspendDate);
+    }
+
         @Test
         void addABookToUser() throws SQLException {
             Getset mock = mock(Getset.class);

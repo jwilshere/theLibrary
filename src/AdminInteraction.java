@@ -21,6 +21,7 @@ public class AdminInteraction {
              System.out.println("User dosen't exist");
          }
      }*/
+
     public boolean checkIfSuspended(int UserId) {
         HelpMethod HM = new HelpMethod(object);
 
