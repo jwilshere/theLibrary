@@ -30,6 +30,7 @@ public class AdminInteraction {
         Date datum = HM.getAUser(UserId).getSuspendDate();
         java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
 
+
         if (datum == null){
             System.out.println("Användaren är inte suspenderad!");
             return false;
@@ -129,7 +130,7 @@ public class AdminInteraction {
            System.out.println("Användaren är suspend med dagens datum");
            try {
                HM.suspendUser(UserId, java.sql.Date.valueOf(LocalDate.now()));
-           }catch (SQLException e) {
+           }catch (SQLException ex) {
                System.out.println("Something went wrong with database connection");
            }
        }
@@ -158,7 +159,6 @@ public class AdminInteraction {
     }
 
 
-
    /* public void ReturnBook (int userId, int bookId) {
         getSet = new Getset();
         object = new HelpMethod();
@@ -182,6 +182,7 @@ public class AdminInteraction {
         object = new Getset();
         HelpMethod HM = new HelpMethod(object);
 
+
         for(User s: HM.getUsers()){
             if(s.getPersonId() == PersonID){
                 System.out.println("Användare är redan registrerad!");
@@ -189,9 +190,9 @@ public class AdminInteraction {
             if(s.getSuspendDate() != null){
                 System.out.println("Användare är suspenderad");
             }
-
         }
         int Id = HM.generateUserId();
+
 
         object.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
     }
