@@ -42,7 +42,7 @@ public class AdminInteractionTest {
                 .thenReturn(users);
 
         System.out.println("Före delays är kollade: " + hoj.getAUser(3).suspendDate);
-        assertTrue(AI.suspendUser(6666));
+        assertTrue(AI.suspendUser(3));
         System.out.println("Efter delays är kollade: " + hoj.getAUser(3).suspendDate);
     }
 

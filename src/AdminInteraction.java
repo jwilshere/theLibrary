@@ -6,8 +6,8 @@ import java.util.Calendar;
 public class AdminInteraction {
     Getset object;
 
-    AdminInteraction(Getset object){
-        object = object;
+    AdminInteraction(Getset obj){
+        object = obj;
     }
 
    /*  public void deleteUser(int userId){
