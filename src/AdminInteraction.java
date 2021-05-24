@@ -114,8 +114,6 @@ public class AdminInteraction {
        HelpMethod HM = new HelpMethod(object);
        User anvandare = HM.getAUser(UserId);
 
-
-
        if (anvandare.Delays <=2 || anvandare.Delays ==4 || anvandare.Delays ==5 || anvandare.Delays ==7 || anvandare.Delays ==8 ){
            System.out.println("Användare ska inte suspenderas");
            return false;
@@ -187,7 +185,9 @@ public class AdminInteraction {
             if (s.getPersonId() == PersonID) {
                 System.out.println("Användare är redan registrerad!");
                 return false;
+
             }
+        }
 
             int Id = HM.generateUserId();
 
@@ -200,7 +200,7 @@ public class AdminInteraction {
             System.out.println("användaren är registrerad");
             return true;
         }
-    }
+
 
         public boolean updateDelays ( int UserId){
             HelpMethod HM = new HelpMethod(object);
@@ -227,9 +227,9 @@ public class AdminInteraction {
             //hej.RegisterUser("Martin", "Nilssn", 880528, 3);
             Getset obj = new Getset();
             AdminInteraction hoj = new AdminInteraction(obj);
-            hoj.checkIfSuspended(1234);
+          //  hoj.checkIfSuspended(1234);
             // hoj.suspendUser(666);
-            //hoj.RegisterUser("zebastian", "andersson", 900402, 3);
+            hoj.RegisterUser("zebastian", "andersson", 900402, 3);
             //System.out.println(hoj.RegisterUser( "Karl", "Manhem", 950302,3);
 
         }
