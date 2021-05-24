@@ -114,12 +114,13 @@ public class AdminInteraction {
        HelpMethod HM = new HelpMethod(object);
        User anvandare = HM.getAUser(UserId);
 
-       int antaldelays = 0;
+
 
        if (anvandare.Delays <=2 || anvandare.Delays ==4 || anvandare.Delays ==5 || anvandare.Delays ==7 || anvandare.Delays ==8 ){
            System.out.println("Användare ska inte suspenderas");
            return false;
        }
+
        else if (HM.getAUser(UserId).Delays == 9){
            System.out.println("Radera denna användare");
            return false;
@@ -127,8 +128,7 @@ public class AdminInteraction {
 
        if(anvandare.getDelays() == 3 || anvandare.getDelays() == 6 ){
            HM.getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
-           System.out.println("Användaren är suspend med dagens datum");
-           System.out.println(anvandare.getSuspendDate());
+
            try {
                HM.suspendUser(UserId, java.sql.Date.valueOf(LocalDate.now()));
            }catch (SQLException ex) {
@@ -179,55 +179,63 @@ public class AdminInteraction {
         }
     } */
 
-    public void RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ){
+    public boolean RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ) throws SQLException {
         object = new Getset();
         HelpMethod HM = new HelpMethod(object);
 
-
-        for(User s: HM.getUsers()){
-            if(s.getPersonId() == PersonID){
+        for (User s : HM.getUsers()) {
+            if (s.getPersonId() == PersonID) {
                 System.out.println("Användare är redan registrerad!");
+                return false;
             }
-            if(s.getSuspendDate() != null){
-                System.out.println("Användare är suspenderad");
+            /*if (s.getSuspendDate() != null) {
+                    System.out.println("Användare är suspenderad");
+                }*/ //Behövs nog inte, kollar redan om användaren är reggad
             }
-        }
-        int Id = HM.generateUserId();
+            int Id = HM.generateUserId();
 
 
-        object.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
-    }
-
-    public boolean updateDelays (int UserId){
-        HelpMethod HM = new HelpMethod(object);
-        int antaldelays = 0;
-        antaldelays = HM.getAUser(UserId).Delays +1;
-        // getAUser(UserId).setDelays(antaldelays);
-        //getAUser(UserId).setDelays(+1);
-        //  HM.getAUser(UserId).setDelays());
-        try {
-            HM.setDelays(UserId, antaldelays);
-        }catch (SQLException ex) {
-            System.out.println("Something went wrong with database connection");
-
-        }
+        //  object.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
+            try {
+                HM.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1, 0, null);
+            } catch (SQLException ex) {
+                System.out.println("Something went wrong with database connection");
+            }
+        System.out.println("användaren är registrerad");
         return true;
-        //if a member delays to return library items more than twice,
-        // he/she gets suspended for 15 days.
-        // If he/she has been suspended more than twice, then the account is deleted.
-    }
-
-
-
-    public static void main(String[] args) {
-        //hej.RegisterUser("Martin", "Nilssn", 880528, 3);
-        Getset obj = new Getset();
-        AdminInteraction hoj = new AdminInteraction(obj);
-        //hoj.checkIfSuspended(666);
-        hoj.suspendUser(666);
-
 
     }
 
+        public boolean updateDelays ( int UserId){
+            HelpMethod HM = new HelpMethod(object);
+            int antaldelays = 0;
+            antaldelays = HM.getAUser(UserId).Delays + 1;
+            // getAUser(UserId).setDelays(antaldelays);
+            //getAUser(UserId).setDelays(+1);
+            //  HM.getAUser(UserId).setDelays());
+            try {
+                HM.setDelays(UserId, antaldelays);
+            } catch (SQLException ex) {
+                System.out.println("Something went wrong with database connection");
 
-}
+            }
+            return true;
+            //if a member delays to return library items more than twice,
+            // he/she gets suspended for 15 days.
+            // If he/she has been suspended more than twice, then the account is deleted.
+        }
+
+
+        public static void main (String[]args) throws SQLException {
+            //hej.RegisterUser("Martin", "Nilssn", 880528, 3);
+            Getset obj = new Getset();
+            AdminInteraction hoj = new AdminInteraction(obj);
+            //hoj.checkIfSuspended(666);
+            // hoj.suspendUser(666);
+            hoj.RegisterUser("zebastian", "andersson", 900402, 3);
+            //System.out.println(hoj.RegisterUser( "Karl", "Manhem", 950302,3);
+
+        }
+
+
+    }

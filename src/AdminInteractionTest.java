@@ -1,5 +1,6 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 
@@ -19,6 +20,7 @@ public class AdminInteractionTest {
         @Test
         void deleteUser() {
         }
+
 
     @Test
     void suspendUser() throws SQLException{ //KLAR !!!!!!!!!!!!!!!
@@ -70,6 +72,7 @@ public class AdminInteractionTest {
             HM.addBookToUser(4444, 13);
 
             assertArrayEquals(excpetedBooks, HM.getAUser(4444).getBookLista());
+            System.out.println(Arrays.toString(HM.getAUser(4444).getBookLista()));
         }
 
     @Test
@@ -118,6 +121,35 @@ public class AdminInteractionTest {
             assertEquals(expected.getId(), HM.getAUser(1234).getId());
 
         }
+
+    @Test
+    void RegisterUser() throws SQLException{
+        Getset mock = mock(Getset.class);
+        AdminInteraction AI = new AdminInteraction(mock);
+        HelpMethod hejda = new HelpMethod(mock);
+
+        ArrayList<User> hej = new ArrayList<>();
+        hej.add(new User(1, "Flaska", "Jonson", 910403, 3, 0,3,1,0, null));
+        hej.add(new User(3, "TJena", "Jonson", 950302, 3, 0,3,1,0, null));
+
+        when(mock.getUsers())
+                .thenReturn(hej);
+
+        for(User s: hej){
+            System.out.println(s.getId());
+        }
+
+        AI.RegisterUser("Philip", "Nilsson",0000,3);
+
+        System.out.println();
+        for(User s: hej){
+            System.out.println(s.getId());
+        }
+        System.out.println(hejda.getAUserOnPersonId(910403));
+    }
+
+
+
 
 
    /* @Test

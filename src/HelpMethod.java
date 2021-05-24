@@ -58,11 +58,25 @@ public class HelpMethod extends Getset{
         return anvandare;
 
     }
+    public ArrayList<User> setUser(int pesonId) throws SQLException{
+        ArrayList<User> anvLista = new ArrayList<>();
+        try {
+            anvLista = object.getUsers();
+        }catch (SQLException e) {
+            System.out.println("Something went wrong with database connection");
+        }
+        return anvLista;
+            }
+
+
+
+
 
     public void addBookToUser(int userId, int bookId) {
         for(Book p: getBooks()){
             if(p.getId() == bookId){
                 getAUser(userId).addBook(p);
+
             }
         }
     }
@@ -90,18 +104,18 @@ public class HelpMethod extends Getset{
 
 
 
-           /*
+
 
     public User getAUserOnPersonId(int personId){
         anvandare = new User();
-        for(User s: userLista) {
+        for(User s: getUsers()) {
             if (s.getPersonId() == personId) {
                 anvandare = s;
             }
         }
         return anvandare;
     }
-
+/*
     public Book getABookOnId(int bookId){
         bok = new Book();
         for(Book s: bookLista) {

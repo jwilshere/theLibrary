@@ -130,7 +130,7 @@ public class User {
     }
 
     public void setSuspendDate(Date suspendDate) {
-        suspendDate = suspendDate;
+        this.SuspendDate = suspendDate;
     }
 
     public Book[] getBookLista(){
