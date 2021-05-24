@@ -52,7 +52,6 @@ public class AdminInteraction {
         HelpMethod HM = new HelpMethod(object);
         User anvandare = HM.getAUser(UserId);
 
-        int antaldelays = 0;
         if (anvandare.Delays <=2 || anvandare.Delays ==4 || anvandare.Delays ==5 || anvandare.Delays ==7 || anvandare.Delays ==8 ){
             System.out.println("Användare ska inte suspenderas");
             return false;
@@ -84,11 +83,11 @@ public class AdminInteraction {
             Book bok;
             bok = HM.getAllBooksOnISBN(ISBN).get(i);
             if(bok.getBorrowed() == null){
-                System.out.println("Bok med detta ISBN på ID: " + bok.getId() + " är ledig");
+                System.out.println("Bok med detta ISBN på ID: " + bok.getId() + " är ledig och kommer att lånas ut till användare med iD " + userId);
                 HM.addBookToAUser(userId, bok.getId());
-                bok.setBorrowed(java.sql.Date.valueOf(LocalDate.now()));
                 break;
             }
+            else System.out.println("Bok med detta ISBN på ID: " + bok.getId() + " är tyvärr inte ledig och kommer INTE att lånas ut");
         }
 
 
@@ -145,6 +144,5 @@ public class AdminInteraction {
         Getset obj = new Getset();
         AdminInteraction hoj = new AdminInteraction(obj);
         hoj.checkIfUserCanLend(987654, 1234);
-
     }
 }

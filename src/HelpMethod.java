@@ -1,4 +1,5 @@
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class HelpMethod extends Getset{
@@ -42,22 +43,19 @@ public class HelpMethod extends Getset{
     }
 
     public void addBookToAUser(int userId, int bookId) {
-                for(Book p: getBooks()){
-                    if(p.getId() == bookId){
-
-                       try {
-                           for(Book s: object.getBooksBorrowedByUser(userId)){
-                               getAUser(userId).addBook(s);
-                           }
-                           object.addBookToUser(userId, bookId);
-                           object.updateItemBorrowed(getAUser(userId).getItemBorrowed() + 1, userId);
+                for(Book p: getBooks()) {
+                    if (p.getId() == bookId) {
+                        getAUser(userId).addBook(p);
+                        getAUser(userId).setItemsBorrowed(getAUser(userId).getItemsBorrowed() + 1);
+                        try {
+                            object.addBookToUser(userId, bookId, getAUser(userId).getItemsBorrowed() + 1, java.sql.Date.valueOf(LocalDate.now()));
                         }catch (SQLException e) {
                             System.out.println("Something went wrong with database connection");
                         }
-                        getAUser(userId).addBook(p);
                     }
                 }
-            }
+    }
+
 
     public void deleteUser(int userId){
         int nummer = getAUser(userId).getId();
@@ -137,7 +135,7 @@ public class HelpMethod extends Getset{
         switch (userType) {
             case 3:
                 if (userType == 3) {
-                    if(anvandare.getItemBorrowed() >= 3){
+                    if(anvandare.getItemsBorrowed() >= 3){
                         System.out.print("Denna användare har lånat max antal böcker, kan låna: ");
                         break;
                     }
@@ -149,7 +147,7 @@ public class HelpMethod extends Getset{
 
             case 5:
                 if (userType == 5) {
-                    if(anvandare.getItemBorrowed() >= 5){
+                    if(anvandare.getItemsBorrowed() >= 5){
                         System.out.print("Denna användare har lånat max antal böcker, kan låna: ");
                         break;
                     }
@@ -161,7 +159,7 @@ public class HelpMethod extends Getset{
 
             case 8:
                 if (userType == 8) {
-                    if(anvandare.getItemBorrowed() >= 8){
+                    if(anvandare.getItemsBorrowed() >= 8){
                         System.out.println("Denna användare har lånat max antal böcker, kan låna: ");
                         break;
                     }
@@ -173,7 +171,7 @@ public class HelpMethod extends Getset{
 
             case 10:
                 if (userType == 10) {
-                    if(anvandare.getItemBorrowed() >= 10){
+                    if(anvandare.getItemsBorrowed() >= 10){
                         System.out.print("Denna användare har lånat max antal böcker, kan lånda: ");
                         break;
                     }
@@ -211,7 +209,7 @@ public class HelpMethod extends Getset{
         System.out.println(hej.generateUserId());
         System.out.println(hej.getAUserOnId(1));*/
         //System.out.println(hej.getAUserOnPersonId(980603).getFnamn());
-        System.out.println(hej.requestBook("Jonson's Äventyr", 1234));
+        hej.addBookToAUser(1234, 1235);
 
     }
 }

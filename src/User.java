@@ -64,12 +64,12 @@ public class User {
         Type = type;
     }
 
-    public int getItemBorrowed() {
+    public int getItemsBorrowed() {
         return ItemsBorrowed;
     }
 
-    public void setItemBorrowed(int itemBorrowed) {
-        ItemsBorrowed = itemBorrowed;
+    public void setItemsBorrowed(int itemsBorrowed) {
+        ItemsBorrowed = itemsBorrowed;
     }
 
     public int getBorrowLimit() {
@@ -117,9 +117,8 @@ public class User {
     }
 
     public void addBook(Book newBook){
-        if(ItemsBorrowed < BorrowLimit){
-            bookLista[getItemBorrowed()] = newBook;
-            setItemBorrowed(getItemBorrowed() + 1);
+        if(ItemsBorrowed <= BorrowLimit){
+           bookLista[ItemsBorrowed] = newBook;
         }
     }
 }

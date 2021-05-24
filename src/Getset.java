@@ -111,12 +111,19 @@ public class Getset {
         }
     }
 
-    public void addBookToUser(int userId, int bookId) throws SQLException{
+    public void addBookToUser(int userId, int bookId, int itemBorrowed, Date datum ) throws SQLException{
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE Book SET User_id = " + "'" + userId + "'" + "WHERE book.id = " + "'" + bookId + "'");
             bookIn.executeUpdate();
+
+            PreparedStatement itemsborrowedIn = conn.prepareStatement("UPDATE user SET itemBorrowed = " + "'" + itemBorrowed + "'" + "WHERE user.id = " + "'" + userId + "'");
+            itemsborrowedIn.executeUpdate();
+
+            PreparedStatement borrowedDateIn = conn.prepareStatement("UPDATE Book SET BorrowedOnDate = " + "'" + datum + "'" + "WHERE book.id = " + "'" + bookId + "'");
+            borrowedDateIn.executeUpdate();
+
         }
         catch (SQLException ex) {
             System.out.println("Something went wrong" + ex.getMessage());
@@ -158,12 +165,12 @@ public class Getset {
         return booksLendedByUser;
     }
 
-    public void updateItemBorrowed(int itemBorrowed, int userId){
+    public void updateItemBorrowed(int itemBorrowed, int userId) throws SQLException{
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
 
-            PreparedStatement bookIn = conn.prepareStatement("UPDATE User SET itemBorrowed = " + "'" + itemBorrowed + "'" + "WHERE user.id = " + "'" + userId + "'");
-            bookIn.executeUpdate();
+            PreparedStatement itemsborrowedIn = conn.prepareStatement("UPDATE User SET itemBorrowed = " + "'" + itemBorrowed + "'" + "WHERE user.id = " + "'" + userId + "'");
+            itemsborrowedIn.executeUpdate();
         }
         catch (SQLException ex) {
             System.out.println("Something went wrong" + ex.getMessage());
