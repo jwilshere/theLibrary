@@ -132,15 +132,18 @@ public class AdminInteractionTest {
         hej.add(new User(1, "Flaska", "Jonson", 910403, 3, 0,3,1,0, null));
         hej.add(new User(3, "TJena", "Jonson", 950302, 3, 0,3,1,0, null));
 
+
         when(mock.getUsers())
                 .thenReturn(hej);
 
-
-        for(User s: hej){
+       /* for(User s: hej){
             System.out.println(s.getId());
-        }
+        }*/
 
-        AI.RegisterUser("Philip", "Nilsson",0000,3);
+        AI.RegisterUser("Ingmar", "Nilsson",940214,3);
+
+        assertArrayEquals(hej, hejda.setUser(940214);
+        System.out.println("Expected: " + Arrays.toString(hej) + "\nFaktiska: " + Arrays.toString(HM.getAUser(4444).getBookLista()));
 
         System.out.println();
         for(User s: hej){
@@ -148,6 +151,7 @@ public class AdminInteractionTest {
         }
         System.out.println(hejda.getAUserOnPersonId(910403));
     }
+
     @Test
     void checkIfUserCanLend() throws SQLException{
         Getset mock = mock(Getset.class);
@@ -179,8 +183,8 @@ public class AdminInteractionTest {
         when(mock.getBooks())
                 .thenReturn(books);
 
-        AI.checkIfUserCanLend(22, 4444);
-        AI.checkIfUserCanLend(33, 4444);
+        //AI.checkIfUserCanLend(22, 4444);
+      //  AI.checkIfUserCanLend(33, 4444);
 
         //Testar så att vår förväntade array av användarens böcker är samma som den faktiska
         assertArrayEquals(expectedBooks, HM.getAUser(4444).getBookLista());

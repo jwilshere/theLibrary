@@ -147,7 +147,7 @@ public class Getset {
         }
     }
 
-    public void resetSuspend(int userId)throws SQLException{
+    public void resetSuspend(int userId){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Bibbla?serverTimezone=UTC",
                 "root","hammarby")) {
 

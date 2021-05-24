@@ -24,7 +24,7 @@ public class AdminInteraction {
 
 
 
-    public boolean checkIfSuspended(int UserId) {
+   /* public boolean checkIfSuspended(int UserId) {
         HelpMethod HM = new HelpMethod(object);
 
         Date datum = HM.getAUser(UserId).getSuspendDate();
@@ -40,6 +40,7 @@ public class AdminInteraction {
             System.out.println("Användarens suspend datum: " + datum);
             System.out.println("Dagensdatum: " + dagensdatum);
             return true;}
+            */
 
     public boolean removesuspend (int UserId){
         HelpMethod HM = new HelpMethod(object);
@@ -59,14 +60,13 @@ public class AdminInteraction {
 
 
 
-  /*  public boolean checkIfSuspended(int UserId) {
+    public boolean checkIfSuspended(int UserId) {
         Getset hoj = new Getset();
         HelpMethod object = new HelpMethod(hoj);
 
         Date datum = object.getAUser(UserId).getSuspendDate();
-        System.out.println("Användarens datum: " + datum);
+
         java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
-        System.out.println("Dagensdatum: " + dagensdatum);
 
         if (datum == null){
             System.out.println("Användaren är inte suspenderad!");
@@ -78,13 +78,13 @@ public class AdminInteraction {
         c.add(Calendar.DATE, 15);
         if (c.getTime().compareTo(dagensdatum) < 0) {
             object.resetSuspend(UserId);
-            System.out.println("Det har gått 15 dagar");
+            System.out.println("Det har gått 15 dagar, användaren är inte suspenderad längre");
             return true;
         }
 
         System.out.println("Är suspenderad");
         return false;
-    } */
+    }
 
 
    /* public boolean suspendUser (int UserId){
@@ -230,9 +230,9 @@ public class AdminInteraction {
             //hej.RegisterUser("Martin", "Nilssn", 880528, 3);
             Getset obj = new Getset();
             AdminInteraction hoj = new AdminInteraction(obj);
-            //hoj.checkIfSuspended(666);
+            hoj.checkIfSuspended(1234);
             // hoj.suspendUser(666);
-            hoj.RegisterUser("zebastian", "andersson", 900402, 3);
+            //hoj.RegisterUser("zebastian", "andersson", 900402, 3);
             //System.out.println(hoj.RegisterUser( "Karl", "Manhem", 950302,3);
 
         }
