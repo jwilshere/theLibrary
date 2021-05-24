@@ -29,7 +29,7 @@ public class AdminInteraction {
         c.setTime(datum);
         c.add(Calendar.DATE, 15);
 
-        System.out.println(HM.getAUser(UserId).getSuspendDate().compareTo(dagensdatum));
+       // System.out.println(HM.getAUser(UserId).getSuspendDate().compareTo(dagensdatum))
 
         if (HM.getAUser(UserId).getSuspendDate().compareTo(dagensdatum) >= 0) {
             HM.getAUser(UserId).setSuspendDate(null);

@@ -67,10 +67,11 @@ public class HelpMethod extends Getset{
             System.out.println("Something went wrong with database connection");
         }
 
-        //ifall userId stämmer så hämtas indexet som användaren ligger på i arrayn, sedan tags denna bort med remove
         if (nummer == userId) {
-           int index = getUsers().indexOf(user);
-           getUsers().remove(index);
+            int index = getUsers().indexOf(user);
+            getUsers().remove(index);
+
+        //ifall userId stämmer så hämtas indexet som användaren ligger på i arrayn, sedan tags denna bort med remove
         }
         else {
             System.out.println("User dosen't exist");
@@ -209,7 +210,6 @@ public class HelpMethod extends Getset{
         System.out.println(hej.generateUserId());
         System.out.println(hej.getAUserOnId(1));*/
         //System.out.println(hej.getAUserOnPersonId(980603).getFnamn());
-        hej.addBookToAUser(1234, 1235);
-
+        //hej.addBookToAUser(1234, 1235);
     }
 }

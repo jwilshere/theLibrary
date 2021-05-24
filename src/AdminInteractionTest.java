@@ -103,8 +103,8 @@ class AdminInteractionTest {
 
         when(mock.getUsers())
                 .thenReturn(hej);
-
-      AI.checkIfSuspended(4444);
+        
+        AI.checkIfSuspended(4444);
         System.out.println(hejda.getAUser(4444).getSuspendDate());
     }
 
