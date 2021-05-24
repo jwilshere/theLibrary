@@ -171,4 +171,32 @@ class AdminInteractionTest {
         System.out.println("Önskad bok med ISBN: " + HM.requestBook("Äventyr", 4444) + " går att låna!");
         assertEquals(22, HM.requestBook("Äventyr", 4444));
     }
+
+    @Test
+    void ReturnBook() throws SQLException {
+        Getset mock = mock(Getset.class);
+        HelpMethod HM = new HelpMethod(mock);
+        AdminInteraction AI = new AdminInteraction(mock);
+
+        Book book1 = new Book(1, "Äventyr", 22, null);
+        Book book2 = new Book(2, "Trädgård", 33, null);
+        ArrayList<Book> books = new ArrayList<>();
+        books.add(book1);
+        books.add(book2);
+
+        ArrayList<User> users = new ArrayList<>();
+        users.add(new User(4444, "jogel", "Jonson", 1111, 3, 0, 3, 1, 0, null));
+
+        when(mock.getUsers())
+                .thenReturn(users);
+
+        when(mock.getBooks())
+                .thenReturn(books);
+
+        HM.addBookToAUser(4444, 1);
+        HM.addBookToAUser(4444, 2);
+        System.out.println(Arrays.toString(HM.getAUser(4444).getBookLista()));
+
+        AI.ReturnBook(4444, 1);
+    }
 }

@@ -180,34 +180,11 @@ public class HelpMethod extends Getset{
                     }
                 }
         }
-
-        //Then, the system checks whether this member is an undergraduate,
-        // a postgraduate, a PhD student/candidate, or a teacher (professor, etc.).
-        // The number of library items that he/she has borrowed in the past ?????? SKITA I DETTA?
-        // is being checked and then whether he or she has the permission to borrow a new one according
-        // to the limitation applicable in each case (as described in the paragraph above).
-
-        //FÖRST KOLLA IFALL DEN FÅR LÅNA; IFALL DEN FÅR SÅ RETURNERA TITELNAMNET
         return ISBN;
     }
 
     public static void main(String[] args) {
         Getset hejda = new Getset();
         HelpMethod hej = new HelpMethod(hejda);
-       /* System.out.println(hej.getAUserOnId(1234));
-        System.out.println(hej.getABookOnId(4444));
-
-        hej.bookLista.add(new Book(12, "Tja", 1234, null));
-        hej.bookLista.add(new Book(13, "Tja", 1235, null));
-        hej.userLista.add(new User(12, "Philip", "Nilsson", 9802, 1, 0,1,1,1,null));
-
-        System.out.println("Detta är användare: " + Arrays.toString(hej.getUsers()));
-        System.out.println("Detta är böckerna: " + Arrays.toString(hej.getBooks()));
-        //hej.addBookToUser(1234, 12);
-        System.out.println("Detta är en användares böcker: " + Arrays.toString(hej.getAUserOnId(1234).getBookLista()));
-        System.out.println(hej.generateUserId());
-        System.out.println(hej.getAUserOnId(1));*/
-        //System.out.println(hej.getAUserOnPersonId(980603).getFnamn());
-        //hej.addBookToAUser(1234, 1235);
     }
 }

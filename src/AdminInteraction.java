@@ -1,6 +1,8 @@
 import com.sun.security.jgss.GSSUtil;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -83,26 +85,25 @@ public class AdminInteraction {
         }
     }
 
-    /*
     public void ReturnBook (int userId, int bookId) {
-        getSet = new Getset();
-        object = new HelpMethod();
+        HelpMethod HM = new HelpMethod(object);
+        Book[] bokLista = HM.getAUser(userId).getBookLista();
+        Book[] newBokLista = new Book[10];
 
-        int lanadeBocker;
-        int nummer = object.getAUser(userId).getId();
-
-        if (nummer == userId) {
-            lanadeBocker = object.getAUser(userId).getItemBorrowed();
-            lanadeBocker = lanadeBocker - 1;
-            getSet.removeBookFromUSer(bookId);
-            getSet.updateItemBorrowed(lanadeBocker, userId);
+        for(int i = 0; i < bokLista.length; i++){
+            if(bokLista[i].getId() == bookId){
+                bokLista[i] = null;
+            }
+            HM.addBookToAUser(userId,bokLista[i].getId());
         }
 
-        else {
-            System.out.println("User dosen't exist");
+        try {
+            object.removeBookFromUSer(bookId);
+        } catch (SQLException ex) {
+            System.out.println("Something went wrong with database connection");
         }
+
     }
-*/
 
     public boolean RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ) {
         object = new Getset();
@@ -127,5 +128,7 @@ public class AdminInteraction {
     public static void main(String[] args) {
         Getset obj = new Getset();
         AdminInteraction hoj = new AdminInteraction(obj);
+        hoj.ReturnBook(1234, 1234);
+
     }
 }

@@ -129,12 +129,15 @@ public class Getset {
         }
     }
 
-    public void removeBookFromUSer(int bookId){
+    public void removeBookFromUSer(int bookId) throws SQLException{
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
 
             PreparedStatement bookIn = conn.prepareStatement("UPDATE Book SET User_id = null WHERE book.id = " + "'" + bookId + "'");
             bookIn.executeUpdate();
+
+            PreparedStatement bookDateIn = conn.prepareStatement("UPDATE Book SET BorrowedOnDate = null WHERE book.id = " + "'" + bookId + "'");
+            bookDateIn.executeUpdate();
         }
         catch (SQLException ex) {
             System.out.println("Something went wrong" + ex.getMessage());
@@ -201,9 +204,6 @@ public class Getset {
 
     public static void main(String[] args) {
         Getset hej = new Getset();
-
         hej.connectDB(); // FÖRSTA GÅNGEN MAN STARTAR BARA !!!!!!!!!!!!!!!!!
-        hej.addBook(2222, "Hej", 767676, null);
-
     }
 }
