@@ -50,8 +50,8 @@ public class AdminInteraction {
             HM.suspendUser(UserId, null);
         }catch (SQLException ex) {
             System.out.println("Something went wrong with database connection");
-
         }
+
         return true;
         //if a member delays to return library items more than twice,
         // he/she gets suspended for 15 days.
@@ -188,22 +188,18 @@ public class AdminInteraction {
                 System.out.println("Användare är redan registrerad!");
                 return false;
             }
-            /*if (s.getSuspendDate() != null) {
-                    System.out.println("Användare är suspenderad");
-                }*/ //Behövs nog inte, kollar redan om användaren är reggad
-            }
+
             int Id = HM.generateUserId();
 
-
-        //  object.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
+            //  object.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
             try {
                 HM.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1, 0, null);
             } catch (SQLException ex) {
                 System.out.println("Something went wrong with database connection");
             }
-        System.out.println("användaren är registrerad");
-        return true;
-
+            System.out.println("användaren är registrerad");
+            return true;
+        }
     }
 
         public boolean updateDelays ( int UserId){
@@ -213,6 +209,7 @@ public class AdminInteraction {
             // getAUser(UserId).setDelays(antaldelays);
             //getAUser(UserId).setDelays(+1);
             //  HM.getAUser(UserId).setDelays());
+
             try {
                 HM.setDelays(UserId, antaldelays);
             } catch (SQLException ex) {

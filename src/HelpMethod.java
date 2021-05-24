@@ -58,15 +58,7 @@ public class HelpMethod extends Getset{
         return anvandare;
 
     }
-    public ArrayList<User> setUser(int pesonId) throws SQLException{
-        ArrayList<User> anvLista = new ArrayList<>();
-        try {
-            anvLista = object.getUsers();
-        }catch (SQLException e) {
-            System.out.println("Something went wrong with database connection");
-        }
-        return anvLista;
-            }
+
 
 
 
