@@ -77,6 +77,8 @@ public class HelpMethod extends Getset{
         else {
             System.out.println("User dosen't exist");
         }
+
+
     }
 
     public User getAUserOnPersonId(int personId){
@@ -197,6 +199,7 @@ public class HelpMethod extends Getset{
     public static void main(String[] args) {
         Getset hejda = new Getset();
         HelpMethod hej = new HelpMethod(hejda);
+
        /* System.out.println(hej.getAUserOnId(1234));
         System.out.println(hej.getABookOnId(4444));
 

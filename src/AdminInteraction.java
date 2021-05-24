@@ -1,6 +1,7 @@
 import com.sun.security.jgss.GSSUtil;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -10,6 +11,10 @@ public class AdminInteraction {
 
     public AdminInteraction(Getset obj){
         object = obj;
+    }
+
+    public void addBook() {
+
     }
 
     public boolean checkIfSuspended(int UserId) {

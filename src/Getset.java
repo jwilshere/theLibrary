@@ -49,7 +49,7 @@ public class Getset {
             }
         }
         catch(SQLException ex){
-            System.out.println("Something went wrong");
+            System.out.println("Something went freggin wrong");
         }
         return bookLista;
     }
@@ -93,18 +93,18 @@ public class Getset {
         }
     }
 
-    public void addBook(int id, String title, int ISBN, Date borrowed){
-
+    public void addBook(int id, String title, int ISBN){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
 
-            PreparedStatement bookIn = conn.prepareStatement("INSERT INTO Book VALUES (?,?,?,?)");
+            PreparedStatement bookIn = conn.prepareStatement("INSERT INTO Book (id, title, ISBN) VALUES (?,?,?)");
             bookIn.setInt(1, id);
             bookIn.setString(2, title);
             bookIn.setInt(3, ISBN);
-            bookIn.setDate(4, borrowed);
+
 
             bookIn.executeUpdate();
+            System.out.println(title + " är nu tillagd i bibliotek");
         }
         catch (SQLException ex) {
             System.out.println("Something went wrong" + ex.getMessage());
@@ -207,7 +207,7 @@ public class Getset {
 
     public static void main(String[] args) {
         Getset hej = new Getset();
-
+        hej.addBook(3333,"Bamseboy" ,77777);
         hej.connectDB(); // FÖRSTA GÅNGEN MAN STARTAR BARA !!!!!!!!!!!!!!!!!
 
 
