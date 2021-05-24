@@ -139,10 +139,30 @@ public class AdminInteraction {
 
 */
 
+    public boolean RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ) {
+        object = new Getset();
+        HelpMethod HM = new HelpMethod(object);
+
+        int Id = HM.generateUserId();
+
+        for (User s : HM.getUsers()) {
+            if (s.getPersonId() == PersonID) {
+                System.out.println("Användare är redan registrerad!");
+                return false;
+            }
+        }
+        try {
+            object.addUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1, 0, null);
+        } catch (SQLException ex) {
+            System.out.println("Something went wrong with database connection");
+        }
+            return true;
+    }
+
     public static void main(String[] args) {
-        //hej.RegisterUser("Martin", "Nilssn", 880528, 3);
+        //hej.RegisterUser("Martin", "Nilsson", 880528, 3);
         Getset obj = new Getset();
         AdminInteraction hoj = new AdminInteraction(obj);
-        hoj.checkIfUserCanLend(987654, 1234);
+        hoj.RegisterUser("Jogge", "Jonson", 999, 3);
     }
 }

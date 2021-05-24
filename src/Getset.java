@@ -69,7 +69,7 @@ public class Getset {
         System.out.println("User deleted successfully!");
     }
 
-    public void addUser(int id, String fnamn, String lnamn, int personId, int typ, int itemBorrowed, int borrowLimit, int active, int delays, Date suspendDate){
+    public void addUser(int id, String fnamn, String lnamn, int personId, int typ, int itemBorrowed, int borrowLimit, int active, int delays, Date suspendDate) throws SQLException{
 
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
@@ -94,11 +94,10 @@ public class Getset {
     }
 
     public void addBook(int id, String title, int ISBN, Date borrowed){
-
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
 
-            PreparedStatement bookIn = conn.prepareStatement("INSERT INTO Book VALUES (?,?,?,?)");
+            PreparedStatement bookIn = conn.prepareStatement("INSERT INTO Book VALUES (?,?,?,?,null)");
             bookIn.setInt(1, id);
             bookIn.setString(2, title);
             bookIn.setInt(3, ISBN);
@@ -216,7 +215,7 @@ public class Getset {
         Getset hej = new Getset();
 
         hej.connectDB(); // FÖRSTA GÅNGEN MAN STARTAR BARA !!!!!!!!!!!!!!!!!
-
+        hej.addBook(2222, "Hej", 767676, null);
 
     }
 }

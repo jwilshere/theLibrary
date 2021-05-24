@@ -163,4 +163,28 @@ class AdminInteractionTest {
         assertArrayEquals(expectedBooks, HM.getAUser(4444).getBookLista());
         System.out.println("Expected: " + Arrays.toString(expectedBooks) + "\nFaktiska: " + Arrays.toString(HM.getAUser(4444).getBookLista()));
     }
+
+    @Test
+    void requestBook() throws SQLException{
+        Getset mock = mock(Getset.class);
+        HelpMethod HM = new HelpMethod(mock);
+
+        Book book1 = new Book(1, "Äventyr", 22, null);
+        Book book2 = new Book(2, "Trädgård", 33, null);
+        ArrayList<Book> books = new ArrayList<>();
+        books.add(book1);
+        books.add(book2);
+
+        ArrayList<User> users = new ArrayList<>();
+        users.add(new User(4444, "jogel", "Jonson", 1111, 3, 2, 3, 1, 0, null));
+
+        when(mock.getUsers())
+                .thenReturn(users);
+
+        when(mock.getBooks())
+                .thenReturn(books);
+
+        System.out.println("ISBN på bok som går att låna: " + HM.requestBook("Äventyr", 4444));
+        assertEquals(22, HM.requestBook("Äventyr", 4444));
+    }
 }
