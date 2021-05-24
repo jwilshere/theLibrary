@@ -113,7 +113,6 @@ public class HelpMethod extends Getset{
         return bok.getISBN();
     }
 
-
     public int generateUserId(){
         Random random = new Random();
         int randomUserID = random.nextInt(8999) + 1000;

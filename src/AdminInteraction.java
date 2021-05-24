@@ -13,12 +13,12 @@ public class AdminInteraction {
     }
 
     public boolean checkIfSuspended(int UserId) {
-        HelpMethod HM = new HelpMethod(object);
+        Getset hoj = new Getset();
+        HelpMethod object = new HelpMethod(hoj);
 
-        Date datum = HM.getAUser(UserId).getSuspendDate();
-        System.out.println("Användarens datum: " + datum);
+        Date datum = object.getAUser(UserId).getSuspendDate();
+
         java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
-        System.out.println("Dagensdatum: " + dagensdatum);
 
         if (datum == null){
             System.out.println("Användaren är inte suspenderad!");
@@ -28,19 +28,14 @@ public class AdminInteraction {
         Calendar c = Calendar.getInstance();
         c.setTime(datum);
         c.add(Calendar.DATE, 15);
-
-       // System.out.println(HM.getAUser(UserId).getSuspendDate().compareTo(dagensdatum))
-
-        if (HM.getAUser(UserId).getSuspendDate().compareTo(dagensdatum) >= 0) {
-            HM.getAUser(UserId).setSuspendDate(null);
+        if (c.getTime().compareTo(dagensdatum) < 0) {
 
             try {
                 object.resetSuspend(UserId);
             }catch (SQLException e) {
                 System.out.println("Something went wrong with database connection");
             }
-
-            System.out.println("Det har gått 15 dagar");
+            System.out.println("Det har gått 15 dagar, användaren är inte suspenderad längre");
             return true;
         }
 
@@ -70,9 +65,6 @@ public class AdminInteraction {
             }
         }
         return true;
-        //if a member delays to return library items more than twice,
-        // he/she gets suspended for 15 days.
-        // If he/she has been suspended more than twice, then the account is deleted.
     }
 
     public void checkIfUserCanLend(int ISBN, int userId)  { //inparametern blir en metod (requestForBook)
@@ -89,16 +81,6 @@ public class AdminInteraction {
             }
             else System.out.println("Bok med detta ISBN på ID: " + bok.getId() + " är tyvärr inte ledig och kommer INTE att lånas ut");
         }
-
-
-        //Afterward, the librarian is looking for the library title with the ISBN (an integer of 6 digits, e.g., 238103):
-        //• If it does not exist then the member is notified (i.e., you should print a message to the librarian who uses the system).
-
-        //• If the library title is found, then the librarian checks if there is an available item for borrowing
-        // and in case there is not an available item you notify the librarian (i.e., you should print a message to the librarian who uses the system).
-
-        //• If there is an available item, then the item is given to the member,
-        // and the system updates the number of the member’s borrowed items appropriately and the available items of this title.
     }
 
     /*
@@ -120,23 +102,6 @@ public class AdminInteraction {
             System.out.println("User dosen't exist");
         }
     }
-
-    public void RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ){
-        getSet = new Getset();
-        object = new HelpMethod();
-
-        for(User s: object.getUsers()){
-            if(s.getPersonId() == PersonID){
-                System.out.println("Användare är redan registrerad!");
-            }
-            if(s.getSuspendDate() != null){
-                System.out.println("Användare är suspenderad");
-            }
-        }
-        int Id = object.generateUserId();
-        getSet.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
-    }
-
 */
 
     public boolean RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ) {
@@ -160,9 +125,7 @@ public class AdminInteraction {
     }
 
     public static void main(String[] args) {
-        //hej.RegisterUser("Martin", "Nilsson", 880528, 3);
         Getset obj = new Getset();
         AdminInteraction hoj = new AdminInteraction(obj);
-        hoj.RegisterUser("Jogge", "Jonson", 999, 3);
     }
 }

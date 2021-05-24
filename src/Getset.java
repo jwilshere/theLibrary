@@ -164,18 +164,6 @@ public class Getset {
         return booksLendedByUser;
     }
 
-    public void updateItemBorrowed(int itemBorrowed, int userId) throws SQLException{
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
-                "root","philip98")) {
-
-            PreparedStatement itemsborrowedIn = conn.prepareStatement("UPDATE User SET itemBorrowed = " + "'" + itemBorrowed + "'" + "WHERE user.id = " + "'" + userId + "'");
-            itemsborrowedIn.executeUpdate();
-        }
-        catch (SQLException ex) {
-            System.out.println("Something went wrong" + ex.getMessage());
-        }
-    }
-
     public void resetSuspend(int userId) throws SQLException{
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {

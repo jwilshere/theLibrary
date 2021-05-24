@@ -92,22 +92,6 @@ class AdminInteractionTest {
         System.out.println(HM.getAUser(4444).getItemsBorrowed());
     }
 
-   @Test
-    void checkIfSuspended() throws SQLException{
-        Getset mock = mock(Getset.class);
-        AdminInteraction AI = new AdminInteraction(mock);
-        HelpMethod hejda = new HelpMethod(mock);
-
-        ArrayList<User> hej = new ArrayList<>();
-        hej.add(new User(4444, "Jogge", "Jonson", 980603, 2, 0,3,1,0, new Date(2021, 4,21)));
-
-        when(mock.getUsers())
-                .thenReturn(hej);
-        
-        AI.checkIfSuspended(4444);
-        System.out.println(hejda.getAUser(4444).getSuspendDate());
-    }
-
     @Test
     void getAUser() throws SQLException { //KLAR !!!!!!!!!!!!!!!
         Getset mock = mock(Getset.class);
@@ -126,7 +110,7 @@ class AdminInteractionTest {
     }
 
     @Test
-    void checkIfUserCanLend() throws SQLException{
+    void checkIfUserCanLend() throws SQLException{ //KLAR !!!!!!!!!!!!!!!
         Getset mock = mock(Getset.class);
         AdminInteraction AI = new AdminInteraction(mock);
         HelpMethod HM = new HelpMethod(mock);
@@ -165,7 +149,7 @@ class AdminInteractionTest {
     }
 
     @Test
-    void requestBook() throws SQLException{
+    void requestBook() throws SQLException{ //KLAR !!!!!!!!!!!!!!!
         Getset mock = mock(Getset.class);
         HelpMethod HM = new HelpMethod(mock);
 
@@ -184,7 +168,7 @@ class AdminInteractionTest {
         when(mock.getBooks())
                 .thenReturn(books);
 
-        System.out.println("ISBN på bok som går att låna: " + HM.requestBook("Äventyr", 4444));
+        System.out.println("Önskad bok med ISBN: " + HM.requestBook("Äventyr", 4444) + " går att låna!");
         assertEquals(22, HM.requestBook("Äventyr", 4444));
     }
 }
