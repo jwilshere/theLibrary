@@ -89,13 +89,24 @@ public class AdminInteraction {
         HelpMethod HM = new HelpMethod(object);
         Book[] bokLista = HM.getAUser(userId).getBookLista();
         Book[] newBokLista = new Book[10];
+        int nmr = 0;
 
-        for(int i = 0; i < bokLista.length; i++){
-            if(bokLista[i].getId() == bookId){
-                bokLista[i] = null;
+        int i = 0;
+        int x = 0;
+        while(i < bokLista.length){
+            if(bokLista[i] == null){
+                newBokLista[x] = bokLista[i];
+                i++;
+                x++;
             }
-            HM.addBookToAUser(userId,bokLista[i].getId());
+            else if(bokLista[i].getId() == bookId) {
+                i++;
+            }
+            newBokLista[x] = bokLista[i];
+            i++;
+            x++;
         }
+        HM.getAUser(userId).bookLista = newBokLista;
 
         try {
             object.removeBookFromUSer(bookId);
@@ -105,7 +116,7 @@ public class AdminInteraction {
 
     }
 
-    public boolean RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ) {
+    public boolean RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ) { //Går inte att testa pga random UserID
         object = new Getset();
         HelpMethod HM = new HelpMethod(object);
 

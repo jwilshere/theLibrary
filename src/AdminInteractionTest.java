@@ -195,8 +195,12 @@ class AdminInteractionTest {
 
         HM.addBookToAUser(4444, 1);
         HM.addBookToAUser(4444, 2);
-        System.out.println(Arrays.toString(HM.getAUser(4444).getBookLista()));
+
+        Book[] expected = {book2, null, null, null, null, null, null, null, null, null};
+        System.out.println("Före borttagning: " + Arrays.toString(HM.getAUser(4444).getBookLista()));
 
         AI.ReturnBook(4444, 1);
+        assertArrayEquals(HM.getAUser(4444).getBookLista(), expected);
+        System.out.println("Efter borttagning: " + Arrays.toString(HM.getAUser(4444).getBookLista()));
     }
 }
