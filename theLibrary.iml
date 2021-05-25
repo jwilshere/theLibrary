@@ -25,5 +25,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="MockitoLib" level="project" />
+    <orderEntry type="library" name="Log4j2Lib" level="project" />
   </component>
 </module>
