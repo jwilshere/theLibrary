@@ -1,4 +1,5 @@
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class HelpMethod extends Getset{
@@ -8,6 +9,48 @@ public class HelpMethod extends Getset{
 
     public HelpMethod(Getset obj){
         object = obj;
+    }
+
+    public ArrayList<Book> getDelayBooks() {
+        /*
+        ArrayList<Book> senaBocker = new ArrayList<>();
+
+        java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
+        Date da = bok.getBorrowed();
+        for (Book b: getBooks()) {
+            if (da.compareTo(dagensdatum))
+        }
+
+
+        System.out.println("Dagensdatum: " + dagensdatum);
+
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(datum);
+        c.add(Calendar.DATE, 15);
+
+        System.out.println(HM.getAUser(UserId).getSuspendDate().compareTo(dagensdatum));
+
+
+
+        if (HM.getAUser(UserId).getSuspendDate().compareTo(dagensdatum) >= 0) {
+            HM.getAUser(UserId).setSuspendDate(null);
+
+            try {
+                object.resetSuspend(UserId);
+            }catch (SQLException e) {
+                System.out.println("Something went wrong with database connection");
+            }
+
+            System.out.println("Det har gått 15 dagar");
+            return true;
+        }
+
+        System.out.println("Är suspenderad");
+        return false;
+
+         */
+        return null;
     }
 
     public ArrayList<User> getUsers() {

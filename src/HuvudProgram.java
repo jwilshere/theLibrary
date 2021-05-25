@@ -14,28 +14,32 @@ public class HuvudProgram {
         Scanner scan = new Scanner(System.in);
 
         int val = 0;
+        int val2 = 0;
+        int val3 = 0;
         boolean fortsatt = false;
         gs.connectDB();
 
         do {
             System.out.println("Välkommen till Tygelbys Bibliotek");
-            System.out.println("¨¨¨¨¨¨¨¨¨¨¨ MENY ¨¨¨¨¨¨¨¨¨¨¨");
-            System.out.println(" 1 - Sök på en bok");
-            System.out.println(" 2 - Låna en bok");
-            System.out.println(" 3 - Lämna tillbaka en bok");
+            System.out.println("¨¨¨¨¨¨¨¨¨¨¨ HUVUDMENY ¨¨¨¨¨¨¨¨¨¨¨");
+            System.out.println(" 1 - Hantera böcker");
+            System.out.println(" 2 - Hantera användare");
+            System.out.println(" 3 - Återlämna bok");
             System.out.println(" 4 - Kolla om användare får låna");
-            System.out.println(" 5 - Visa alla böcker");
-            System.out.println(" 6 - Lägg till bok");
-            System.out.println(" 7 - Ta bort bok");
-            System.out.println(" 8 - Lägg till ny användare");
-            System.out.println(" 9 - Ta bort användare");
+            System.out.println(" 5 - Visa alla försenade böcker");
+           /* System.out.println(" 6 - ");
+            System.out.println(" 7 - ");
+            System.out.println(" 8 - ");
+            System.out.println(" 9 - ");
+            */
             System.out.println(" 0 - Exit");
             System.out.println("-----------------------------");
             System.out.println("Skriv in en siffra och tryck enter:");
-
+            boolean fortsatt2 = false;
+            boolean fortsatt3 = false;
 
             while (!fortsatt) {
-
+                String gedd;
                 val = Integer.parseInt(scan.nextLine());
                 if (val <= 9) {
                     fortsatt = true;
@@ -49,23 +53,144 @@ public class HuvudProgram {
             switch (val) {
 
                 case 1:
-                    //System.out.println("Skriv in titel på boken:");
-                    //String title = scan.nextLine();
-                    System.out.println("Skriv in användarID:");
-                    int userid = Integer.parseInt(scan.nextLine());
+                    do {
+                        System.out.println();
+                        System.out.println("¨¨¨¨¨¨¨¨¨¨¨ Hantera böcker ¨¨¨¨¨¨¨¨¨¨¨");
+                        System.out.println(" 1 - Lägg till ny bok");
+                        System.out.println(" 2 - Radera en bok");
+                        System.out.println(" 3 - Hämta ISBN på boktitel");
+                        System.out.println(" 4 - Visa alla böcker");
+                        System.out.println(" 0 - Gå till huvudmeny");
 
-                    ai.checkIfSuspended(userid);//<--
+                        while (!fortsatt2) {
+
+                            val2 = Integer.parseInt(scan.nextLine());
+
+                            if (val2 <= 4) {
+                                fortsatt2 = true;
+                            } else {
+                                System.out.println("Välj ett nummer mellan 0 - 4");
+                                System.out.println("Skriv in ett nummer: ");
+                            }
+                        }
+                        switch (val2) {
+                            case 1: // Lägg till ny bok
+                                System.out.println("Skriv in boktitel:");
+                                String titel1 = scan.nextLine();
+                                System.out.println("Skriv in ISBN:");
+                                int bid = Integer.parseInt(scan.nextLine());
+                                System.out.println("Skriv in bokID:");
+                                int isbn1 = Integer.parseInt(scan.nextLine());
+                                try {
+                                    gs.addBook(bid,titel1,isbn1);
+                                    System.out.println();
+                                }
+                                catch (Exception n) {}
+
+                                fortsatt2 = false;
+                                break;
+                            case 2: // Radera bok
+                                System.out.println("Skriv in bokID:");
+                                int bokid = Integer.parseInt(scan.nextLine());
+                                System.out.println("Vill du radera bok med ID: " + bokid + " ?");
+                                char yOn2 = scan.nextLine().charAt(0);
+                                if (yOn2 == 'Y' || yOn2 == 'y') {
+                                    gs.deleteBook(bokid);
+                                    System.out.println();
+                                    System.out.println();
+                                }
+                                else {
+                                    System.out.println("Bok ej borttagen");
+                                }
+
+                                fortsatt2 = false;
+                                break;
+                            case 3: // Sök på boktitel
+                                System.out.println("Skriv in boktitel:");
+                                try {
+                                    String titel = scan.nextLine();
+                                    if (hm.getISBNOnTitle(titel) > 0) {
+                                        System.out.println(titel + " har ISBN: " + hm.getISBNOnTitle(titel)); }
+
+                                    else {
+                                        System.out.println("Ingen bok med denna titel existerar");
+                                    }
+                                }
+                                catch (NumberFormatException n) {}
+
+                                fortsatt2 = false;
+                                break;
+                            case 4: // Visa alla böcker
+                                System.out.println("Vill du visa alla böcker? Y/N");
+                                char yOn = scan.nextLine().charAt(0);
+                                if (yOn == 'Y' || yOn == 'y') {
+                                    ArrayList<Book> visa;
+                                    visa = hm.getBooks(); //<--
+                                    System.out.println();
+                                    System.out.println("---:Alla böcker:---");
+                                    for (Book b : visa) {
+                                        System.out.println(b.getTitle());
+
+                                    }
+                                    System.out.println();
+                                }
+
+                                fortsatt2 = false;
+                                break;
+
+                        }
+
+                    }
+                    while (val2 != 0);
                     fortsatt = false;
                     break;
 
                 case 2:
-                    System.out.println("Skriv in ISBN:");
-                    int isbn = Integer.parseInt(scan.nextLine());
-                    System.out.println("Skriv in användarID:");
-                    int uid = Integer.parseInt(scan.nextLine());
-                    ai.checkIfUserCanLend(isbn,uid); // <--
+                    do {
+                        System.out.println();
+                        System.out.println("¨¨¨¨¨¨¨¨¨¨¨ Hantera användare ¨¨¨¨¨¨¨¨¨¨¨");
+                        System.out.println(" 1 - Lägg till ny användare");
+                        System.out.println(" 2 - Radera en användare");
+                        System.out.println(" 3 - Suspendera en användare");
+                        System.out.println(" 4 - Uppdatera sen inlämning på användare");
+                        System.out.println(" 0 - Gå till huvudmeny");
+
+                        while (!fortsatt3) {
+                            val3 = Integer.parseInt(scan.nextLine());
+                            if (val3 <= 4) {
+                                fortsatt3 = true;
+                            } else {
+                                System.out.println("Välj ett nummer mellan 0 - 4");
+                                System.out.println("Skriv in ett nummer: ");
+                            }
+                        }
+                        switch (val3) {
+                            case 1: // Lägg till ny bok
+
+                                fortsatt3 = false;
+                                break;
+                            case 2: // Radera bok
+
+                                fortsatt3 = false;
+                                break;
+                            case 3: // Sök på boktitel
+
+                                fortsatt3 = false;
+                                break;
+                            case 4: // Visa alla böcker
+
+                                fortsatt3 = false;
+                                break;
+
+                        }
+
+                    }
+                    while (val3 != 0);
                     fortsatt = false;
                     break;
+
+
+
 
                 case 3:
                     System.out.println("Skriv in användarID:");
@@ -76,20 +201,11 @@ public class HuvudProgram {
                     break;
 
                 case 4:
-                    System.out.println("Vill du visa alla böcker? Y/N");
-                    char yOn = scan.nextLine().charAt(0);
-                    if (yOn == 'Y' || yOn == 'y') {
-                        ArrayList<Book> visa;
-                        visa = hm.getBooks(); //<--
-                        System.out.println();
-                        System.out.println("---:Alla böcker:---");
-                        for (Book b : visa) {
-                            System.out.println(b.getTitle());
-
-                        }
-                        System.out.println();
-                    }
-
+                    System.out.println("Skriv in ISBN:");
+                    int isbn = Integer.parseInt(scan.nextLine());
+                    System.out.println("Skriv in användarID:");
+                    int uid = Integer.parseInt(scan.nextLine());
+                    ai.checkIfUserCanLend(isbn,uid); // <--
                     fortsatt = false;
                     break;
 
@@ -118,7 +234,7 @@ public class HuvudProgram {
                     fortsatt = false;
                     break;
                 case 6:
-                System.out.println("Skriv in boktitel:");
+                /*System.out.println("Skriv in boktitel:");
                 try {
                 String titel = scan.nextLine();
                 if (hm.getISBNOnTitle(titel) > 0) {
@@ -132,8 +248,10 @@ public class HuvudProgram {
 
                 fortsatt = false;
                 break;
+
+                 */
                 case 7:
-                    System.out.println("Skriv in boktitel:");
+                   /* System.out.println("Skriv in boktitel:");
                     String titel1 = scan.nextLine();
                     System.out.println("Skriv in ISBN:");
                     int bid = Integer.parseInt(scan.nextLine());
@@ -147,8 +265,18 @@ public class HuvudProgram {
 
                     fortsatt = false;
                     break;
-            }
 
+                    */
+                case 8:
+                    //System.out.println("Skriv in titel på boken:");
+                    //String title = scan.nextLine();
+                    //System.out.println("Skriv in användarID:");
+                    //int userid = Integer.parseInt(scan.nextLine());
+
+                    //ai.checkIfSuspended(userid);//<--
+                    fortsatt = false;
+                    break;
+            }
         }
         while (val != 0);
         {
