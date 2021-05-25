@@ -186,7 +186,7 @@ public class Getset {
         }
     }
 
-    public void resetSuspend(int userId) throws SQLException{
+    public void resetSuspend(int userId){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
 
@@ -220,6 +220,7 @@ public class Getset {
             System.out.println("Something went wrong" + ex.getMessage());
         }
     }
+
 
     public static void main(String[] args) {
         Getset hej = new Getset();

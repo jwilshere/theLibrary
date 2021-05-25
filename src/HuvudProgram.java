@@ -152,12 +152,13 @@ public class HuvudProgram {
                         System.out.println(" 1 - Lägg till ny användare");
                         System.out.println(" 2 - Radera en användare");
                         System.out.println(" 3 - Suspendera en användare");
-                        System.out.println(" 4 - Uppdatera sen inlämning på användare");
+                        System.out.println(" 4 - Kolla om en användare är suspenderad");
+                        System.out.println(" 5 - Uppdatera sen inlämning på användare");
                         System.out.println(" 0 - Gå till huvudmeny");
 
                         while (!fortsatt3) {
                             val3 = Integer.parseInt(scan.nextLine());
-                            if (val3 <= 4) {
+                            if (val3 <= 5) {
                                 fortsatt3 = true;
                             } else {
                                 System.out.println("Välj ett nummer mellan 0 - 4");
@@ -178,6 +179,12 @@ public class HuvudProgram {
                                 fortsatt3 = false;
                                 break;
                             case 4: // Visa alla böcker
+                                System.out.println("Skriv in användarID: ");
+                                int banvID = Integer.parseInt(scan.nextLine());
+                                ai.checkIfSuspended(banvID);
+                                fortsatt3 = false;
+                                break;
+                            case 5: // Visa alla böcker
 
                                 fortsatt3 = false;
                                 break;
