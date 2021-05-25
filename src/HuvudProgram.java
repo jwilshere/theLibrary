@@ -167,6 +167,15 @@ public class HuvudProgram {
                         }
                         switch (val3) {
                             case 1: //
+                                System.out.println("Ange förnamn:");
+                                String fnamn = scan.nextLine();
+                                System.out.println("Ange efternamn:");
+                                String lnamn = scan.nextLine();
+                                System.out.println("Ange personnummer:");
+                                int pid = Integer.parseInt(scan.nextLine());
+                                System.out.println("Ange typ:");
+                                int typ = Integer.parseInt(scan.nextLine());
+                                ai.RegisterUser(fnamn, lnamn, pid, typ);
 
                                 fortsatt3 = false;
                                 break;
@@ -174,7 +183,10 @@ public class HuvudProgram {
 
                                 fortsatt3 = false;
                                 break;
-                            case 3: //
+                            case 3: // suspend user
+                                System.out.println("Skriv in användarID:");
+                                int busig = Integer.parseInt(scan.nextLine());
+                                ai.suspendUser(busig);
 
                                 fortsatt3 = false;
                                 break;

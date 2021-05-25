@@ -13,9 +13,6 @@ public class AdminInteraction {
         object = obj;
     }
 
-    public void addBook() {
-
-    }
 
     public boolean checkIfSuspended(int UserId) {
         Getset hoj = new Getset();
@@ -57,10 +54,10 @@ public class AdminInteraction {
             return false;
         }
         if(anvandare.getDelays() == 3 || anvandare.getDelays() == 6 ){
-            HM.getAUser(UserId).setSuspendDate(java.sql.Date.valueOf(LocalDate.now()));
 
             try {
                 HM.suspendUser(UserId, java.sql.Date.valueOf(LocalDate.now()));
+                System.out.println(UserId + " är nu suspenderad:");
             }catch (SQLException e) {
                 System.out.println("Something went wrong with database connection");
             }
@@ -117,7 +114,7 @@ public class AdminInteraction {
         }
     }
     */
-    public boolean RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ) throws SQLException {
+    public boolean RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ) {
         object = new Getset();
         HelpMethod HM = new HelpMethod(object);
 
