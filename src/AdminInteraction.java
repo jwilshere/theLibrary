@@ -18,12 +18,12 @@ public class AdminInteraction {
     }
 
     public boolean checkIfSuspended(int UserId) {
-        HelpMethod HM = new HelpMethod(object);
+        Getset hoj = new Getset();
+        HelpMethod object = new HelpMethod(hoj);
 
-        Date datum = HM.getAUser(UserId).getSuspendDate();
-        System.out.println("Användarens datum: " + datum);
+        Date datum = object.getAUser(UserId).getSuspendDate();
+
         java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
-        System.out.println("Dagensdatum: " + dagensdatum);
 
         if (datum == null){
             System.out.println("Användaren är inte suspenderad!");
@@ -33,19 +33,9 @@ public class AdminInteraction {
         Calendar c = Calendar.getInstance();
         c.setTime(datum);
         c.add(Calendar.DATE, 15);
-
-        System.out.println(HM.getAUser(UserId).getSuspendDate().compareTo(dagensdatum));
-
-        if (HM.getAUser(UserId).getSuspendDate().compareTo(dagensdatum) >= 0) {
-            HM.getAUser(UserId).setSuspendDate(null);
-
-            try {
-                object.resetSuspend(UserId);
-            }catch (SQLException e) {
-                System.out.println("Something went wrong with database connection");
-            }
-
-            System.out.println("Det har gått 15 dagar");
+        if (c.getTime().compareTo(dagensdatum) < 0) {
+            object.resetSuspend(UserId);
+            System.out.println("Det har gått 15 dagar, användaren är inte suspenderad längre");
             return true;
         }
 
