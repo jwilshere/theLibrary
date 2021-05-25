@@ -113,7 +113,6 @@ public class Getset {
 
 
     public void deleteBook(int id){
-
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root", "philip98")) {
 

@@ -232,11 +232,13 @@ public class HuvudProgram {
 
 
 
-                case 3:
+                case 3: //återlämna bok
                     System.out.println("Skriv in användarID:");
-                    int uiid = Integer.parseInt(scan.nextLine());
+                    int libid = Integer.parseInt(scan.nextLine());
+                    System.out.println("Skriv in bokID:");
+                    int klibid = Integer.parseInt(scan.nextLine());
 
-                    ai.suspendUser(uiid);//<--
+                    //<--
                     fortsatt = false;
                     break;
 
