@@ -103,6 +103,17 @@ public class HelpMethod extends Getset{
         }
         return anvandare;
     }
+    public int generateUserId(){
+        Random random = new Random();
+        int randomUserID = random.nextInt(8999) + 1000;
+
+        for(User s: getUsers()){
+            if(s.getId() == randomUserID){
+                generateUserId();
+            }
+        }
+        return randomUserID;
+    }
 
     public void addBookToAUser(int userId, int bookId) {
                 for(Book p: getBooks()){
