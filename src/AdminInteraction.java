@@ -116,24 +116,31 @@ public class AdminInteraction {
             System.out.println("User dosen't exist");
         }
     }
+    */
+    public boolean RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ) throws SQLException {
+        object = new Getset();
+        HelpMethod HM = new HelpMethod(object);
 
-    public void RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ){
-        getSet = new Getset();
-        object = new HelpMethod();
-
-        for(User s: object.getUsers()){
-            if(s.getPersonId() == PersonID){
+        for (User s : HM.getUsers()) {
+            if (s.getPersonId() == PersonID) {
                 System.out.println("Användare är redan registrerad!");
-            }
-            if(s.getSuspendDate() != null){
-                System.out.println("Användare är suspenderad");
+                return false;
+
             }
         }
-        int Id = object.generateUserId();
-        getSet.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
+
+        int Id = HM.generateUserId();
+
+        //  object.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
+        try {
+            HM.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1, 0, null);
+        } catch (SQLException ex) {
+            System.out.println("Something went wrong with database connection");
+        }
+        System.out.println("användaren är registrerad");
+        return true;
     }
 
-*/
 
     public static void main(String[] args) {
         //hej.RegisterUser("Martin", "Nilssn", 880528, 3);
