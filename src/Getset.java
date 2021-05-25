@@ -166,6 +166,20 @@ public class Getset {
         return itemsBorrowed;
     }
 
+    public void deleteBook(int id){
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
+                "root", "philip98")) {
+
+            PreparedStatement deleteBok = conn.prepareStatement("DELETE FROM Book WHERE id= " + "'" + id + "'");
+            deleteBok.executeUpdate();
+
+        }
+        catch(SQLException ex){
+            System.out.println("Something went wrong");
+        }
+        System.out.println("Bok raderad!");
+    }
+
    public Book[] getBooksBorrowedByUser(int userId) throws SQLException{
         Book[] booksLendedByUser = new Book[10];
         int nmr = 0;

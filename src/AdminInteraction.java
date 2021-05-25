@@ -62,6 +62,7 @@ public class AdminInteraction {
 
             try {
                 HM.suspendUser(UserId, java.sql.Date.valueOf(LocalDate.now()));
+                System.out.println("Användaren är härmed suspenderad!");
             }catch (SQLException e) {
                 System.out.println("Something went wrong with database connection");
             }

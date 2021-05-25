@@ -77,9 +77,9 @@ public class Huvudprogram {
                             case 1: // Lägg till ny bok
                                 System.out.println("Skriv in boktitel:");
                                 String titel1 = scan.nextLine();
-                                System.out.println("Skriv in ISBN:");
+                                System.out.println("Skriv in bokId:");
                                 int bid = Integer.parseInt(scan.nextLine());
-                                System.out.println("Skriv in bokID:");
+                                System.out.println("Skriv in ISBN:");
                                 int isbn1 = Integer.parseInt(scan.nextLine());
                                 try {
                                     gs.addBook(bid,titel1,isbn1);
@@ -92,7 +92,7 @@ public class Huvudprogram {
                             case 2: // Radera bok
                                 System.out.println("Skriv in bokID:");
                                 int bokid = Integer.parseInt(scan.nextLine());
-                                System.out.println("Vill du radera bok med ID: " + bokid + " ?");
+                                System.out.println("Vill du radera bok med ID: " + bokid + " Y/N ?");
                                 char yOn2 = scan.nextLine().charAt(0);
                                 if (yOn2 == 'Y' || yOn2 == 'y') {
                                     gs.deleteBook(bokid);
