@@ -180,7 +180,26 @@ public class HuvudProgram {
                                 fortsatt3 = false;
                                 break;
                             case 2: //
+                                System.out.println("Skriv in användarID:");
+                                int uiiid = Integer.parseInt(scan.nextLine());
+                                if (uiiid == hm.getAUser(uiiid).Id) {
+                                    System.out.println("Vill du verkligen radera användaren? Y/N");
+                                    char yOn1 = scan.nextLine().charAt(0);
+                                    if (yOn1 == 'Y' || yOn1 == 'y') {
+                                        try {
+                                            hm.deleteUser(uiiid); }
 
+                                        catch (IndexOutOfBoundsException i) {};
+
+                                        System.out.println("Användare med ID " + uiiid + " är borttagen");
+                                    }
+                                    else {
+                                        System.out.println("Användaren är inte borttagen");
+                                    }
+                                }
+                                else {
+                                    System.out.println("Användare existerar inte");
+                                }
                                 fortsatt3 = false;
                                 break;
                             case 3: // suspend user
@@ -231,26 +250,6 @@ public class HuvudProgram {
                     break;
 
                 case 5:
-                    System.out.println("Skriv in användarID:");
-                    int uiiid = Integer.parseInt(scan.nextLine());
-                    if (uiiid == hm.getAUser(uiiid).Id) {
-                    System.out.println("Vill du verkligen radera användaren? Y/N");
-                    char yOn1 = scan.nextLine().charAt(0);
-                    if (yOn1 == 'Y' || yOn1 == 'y') {
-                        try {
-                        hm.deleteUser(uiiid); }
-
-                        catch (IndexOutOfBoundsException i) {};
-
-                        System.out.println("Användare med ID " + uiiid + " är borttagen");
-                    }
-                    else {
-                        System.out.println("Användaren är inte borttagen");
-                        }
-                    }
-                    else {
-                    System.out.println("Användare existerar inte");
-                }
 
                     fortsatt = false;
                     break;

@@ -11,46 +11,10 @@ public class HelpMethod extends Getset{
         object = obj;
     }
 
+
+
     public ArrayList<Book> getDelayBooks() {
-        /*
-        ArrayList<Book> senaBocker = new ArrayList<>();
-
-        java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
-        Date da = bok.getBorrowed();
-        for (Book b: getBooks()) {
-            if (da.compareTo(dagensdatum))
-        }
-
-
-        System.out.println("Dagensdatum: " + dagensdatum);
-
-
-        Calendar c = Calendar.getInstance();
-        c.setTime(datum);
-        c.add(Calendar.DATE, 15);
-
-        System.out.println(HM.getAUser(UserId).getSuspendDate().compareTo(dagensdatum));
-
-
-
-        if (HM.getAUser(UserId).getSuspendDate().compareTo(dagensdatum) >= 0) {
-            HM.getAUser(UserId).setSuspendDate(null);
-
-            try {
-                object.resetSuspend(UserId);
-            }catch (SQLException e) {
-                System.out.println("Something went wrong with database connection");
-            }
-
-            System.out.println("Det har gått 15 dagar");
-            return true;
-        }
-
-        System.out.println("Är suspenderad");
-        return false;
-
-         */
-        return null;
+       return null;
     }
 
     public boolean updateDelays (int UserId) {
@@ -133,6 +97,7 @@ public class HelpMethod extends Getset{
                 }
             }
 
+
     public void deleteUser(int userId){
         int nummer = getAUser(userId).getId();
         User user = getAUser(userId);
@@ -143,17 +108,17 @@ public class HelpMethod extends Getset{
             System.out.println("Something went wrong with database connection");
         }
 
-        //ifall userId stämmer så hämtas indexet som användaren ligger på i arrayn, sedan tags denna bort med remove
         if (nummer == userId) {
-           int index = getUsers().indexOf(user);
-           getUsers().remove(index);
+            int index = getUsers().indexOf(user);
+            getUsers().remove(index);
+
+            //ifall userId stämmer så hämtas indexet som användaren ligger på i arrayn, sedan tags denna bort med remove
         }
         else {
             System.out.println("User dosen't exist");
         }
-
-
     }
+
 
     public User getAUserOnPersonId(int personId){
         anvandare = new User();
