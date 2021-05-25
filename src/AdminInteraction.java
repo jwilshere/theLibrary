@@ -1,3 +1,6 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.SQLException;
 import java.util.Date;
 import java.time.LocalDate;
@@ -5,6 +8,7 @@ import java.util.Calendar;
 
 public class AdminInteraction {
     Getset object;
+    private static Logger logger = LogManager.getLogger(AdminInteraction.class.getName());
 
     AdminInteraction(Getset obj){
         object = obj;
@@ -61,16 +65,19 @@ public class AdminInteraction {
 
 
     public boolean checkIfSuspended(int UserId) {
+        logger.info("Starting");
         Getset hoj = new Getset();
         HelpMethod object = new HelpMethod(hoj);
 
         Date datum = object.getAUser(UserId).getSuspendDate();
 
         java.util.Date dagensdatum = java.sql.Date.valueOf(LocalDate.now());
+        logger.debug("Användare med id " + object.getAUser(UserId).getSuspendDate() == null + " är inte suspenderad");
 
         if (datum == null){
             System.out.println("Användaren är inte suspenderad!");
             return false;
+
         }
 
         Calendar c = Calendar.getInstance();
@@ -84,6 +91,7 @@ public class AdminInteraction {
 
         System.out.println("Är suspenderad");
         return false;
+
     }
 
 
@@ -111,6 +119,7 @@ public class AdminInteraction {
         // If he/she has been suspended more than twice, then the account is deleted.
     }*/
    public boolean suspendUser (int UserId){
+
        HelpMethod HM = new HelpMethod(object);
        User anvandare = HM.getAUser(UserId);
 
@@ -227,9 +236,9 @@ public class AdminInteraction {
             //hej.RegisterUser("Martin", "Nilssn", 880528, 3);
             Getset obj = new Getset();
             AdminInteraction hoj = new AdminInteraction(obj);
-          //  hoj.checkIfSuspended(1234);
+            hoj.checkIfSuspended(1234);
             // hoj.suspendUser(666);
-            hoj.RegisterUser("zebastian", "andersson", 900402, 3);
+           // hoj.RegisterUser("zebastian", "andersson", 900402, 3);
             //System.out.println(hoj.RegisterUser( "Karl", "Manhem", 950302,3);
 
         }

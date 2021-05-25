@@ -35,7 +35,6 @@ public class HelpMethod extends Getset{
         }
         return userLista;
     }
-    
 
     public ArrayList<Book> getBooks() {
         ArrayList<Book> bookLista = new ArrayList<>();
@@ -59,11 +58,6 @@ public class HelpMethod extends Getset{
 
     }
 
-
-
-
-
-
     public void addBookToUser(int userId, int bookId) {
         for(Book p: getBooks()){
             if(p.getId() == bookId){
@@ -73,7 +67,7 @@ public class HelpMethod extends Getset{
         }
     }
 
-   /* public boolean updateDelays (int UserId){
+    public boolean updateDelays (int UserId){
         HelpMethod HM = new HelpMethod(object);
         int antaldelays = 0;
         User anvandare = HM.getAUser(UserId);
@@ -91,7 +85,7 @@ public class HelpMethod extends Getset{
         //if a member delays to return library items more than twice,
         // he/she gets suspended for 15 days.
         // If he/she has been suspended more than twice, then the account is deleted.
-    }*/
+    }
 
 
 
