@@ -1,8 +1,12 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Getset {
+    private static Logger logger = LogManager.getLogger(Getset.class.getName());
 
     public void connectDB(){
         try{
@@ -94,6 +98,8 @@ public class Getset {
     }
 
     public void addBook(int id, String title, int ISBN){
+        logger.trace("---> addBok");
+
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
 
@@ -106,7 +112,9 @@ public class Getset {
         }
         catch (SQLException ex) {
             System.out.println("Something went wrong" + ex.getMessage());
+            logger.info("Metoden gick inte igenom!");
         }
+        logger.trace("<--- addBok");
     }
 
     public void addBookToUser(int userId, int bookId, int itemBorrowed, Date datum ) throws SQLException{

@@ -14,8 +14,8 @@
 	</Appenders>
 	
 	<Loggers>
-		<Root level="debug">
-			<AppenderRef ref="Console" level="debug"/>
+		<Root level="trace">
+		<!--	<AppenderRef ref="Console" level="debug"/> (ADDA IFALL MAN VILL SKRIVA UT I CONSOL OCKSÅ)-->
 			<AppenderRef ref="MyFile" level="trace"/>
 		</Root>
 	</Loggers>

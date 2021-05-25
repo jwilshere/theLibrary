@@ -2,11 +2,13 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Huvudprogram {
-
+    private static Logger logger = LogManager.getLogger(Huvudprogram.class.getName());
     public static void main(String[] args) {
+        logger.info("Starting");
 
         Getset gs = new Getset();
         HelpMethod hm = new HelpMethod(gs);
@@ -81,6 +83,9 @@ public class Huvudprogram {
                                 int bid = Integer.parseInt(scan.nextLine());
                                 System.out.println("Skriv in ISBN:");
                                 int isbn1 = Integer.parseInt(scan.nextLine());
+
+                                logger.debug(String.format("titel1=%s, bid=%d, isbn1=%d", titel1, bid, isbn1));
+
                                 try {
                                     gs.addBook(bid,titel1,isbn1);
                                     System.out.println();
@@ -300,6 +305,8 @@ public class Huvudprogram {
         {
             System.out.println("Välkommen åter!");
         }
+        logger.info("Ending");
     }
 }
+
 

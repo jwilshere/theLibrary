@@ -1,0 +1,24 @@
+2021-05-25 16:26:24,828 INFO Huvudprogram [main] Starting
+2021-05-25 16:26:30,260 INFO Huvudprogram [main] Ending
+2021-05-25 16:37:07,187 INFO Huvudprogram [main] Starting
+2021-05-25 16:37:30,736 DEBUG Huvudprogram [main] titel1=Måns bravader, bid=6969, isbn1=777666
+2021-05-25 16:37:36,544 INFO Huvudprogram [main] Ending
+2021-05-25 16:38:56,447 INFO Huvudprogram [main] Starting
+2021-05-25 16:39:27,669 TRACE Getset [main] ---> addBok
+2021-05-25 16:39:28,283 TRACE Getset [main] <--- addBok
+2021-05-25 16:39:28,284 DEBUG Huvudprogram [main] titel1=Simons kulor, bid=2121, isbn1=456789
+2021-05-25 16:39:43,720 INFO Huvudprogram [main] Ending
+2021-05-25 16:45:33,322 INFO Huvudprogram [main] Starting
+2021-05-25 16:45:50,541 DEBUG Huvudprogram [main] titel1=Hata koda, bid=1212, isbn1=234567
+2021-05-25 16:45:50,541 TRACE Getset [main] ---> addBok
+2021-05-25 16:45:51,103 TRACE Getset [main] <--- addBok
+2021-05-25 16:46:27,239 DEBUG Huvudprogram [main] titel1=Hata kod igen, bid=1010, isbn1=10101
+2021-05-25 16:46:27,241 TRACE Getset [main] ---> addBok
+2021-05-25 16:46:27,297 TRACE Getset [main] <--- addBok
+2021-05-25 16:46:43,372 INFO Huvudprogram [main] Ending
+2021-05-25 16:48:06,837 INFO Huvudprogram [main] Starting
+2021-05-25 16:48:26,136 DEBUG Huvudprogram [main] titel1=1212, bid=1212, isbn1=849393
+2021-05-25 16:48:26,136 TRACE Getset [main] ---> addBok
+2021-05-25 16:48:26,662 INFO Getset [main] Metoden gick inte igenom!
+2021-05-25 16:48:26,662 TRACE Getset [main] <--- addBok
+2021-05-25 16:48:30,875 INFO Huvudprogram [main] Ending
