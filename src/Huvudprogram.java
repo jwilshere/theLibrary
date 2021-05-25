@@ -221,16 +221,12 @@ public class HuvudProgram {
                                 hm.updateDelays(banID);
                                 fortsatt3 = false;
                                 break;
-
                         }
 
                     }
                     while (val3 != 0);
                     fortsatt = false;
                     break;
-
-
-
 
                 case 3: //återlämna bok
                     System.out.println("Skriv in användarID:");
