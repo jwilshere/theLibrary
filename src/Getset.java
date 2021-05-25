@@ -93,15 +93,14 @@ public class Getset {
         }
     }
 
-    public void addBook(int id, String title, int ISBN, Date borrowed){
+    public void addBook(int id, String title, int ISBN){
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
 
-            PreparedStatement bookIn = conn.prepareStatement("INSERT INTO Book VALUES (?,?,?,?,null)");
+            PreparedStatement bookIn = conn.prepareStatement("INSERT INTO Book VALUES (?,?,?,null,null)");
             bookIn.setInt(1, id);
             bookIn.setString(2, title);
             bookIn.setInt(3, ISBN);
-            bookIn.setDate(4, borrowed);
 
             bookIn.executeUpdate();
         }
