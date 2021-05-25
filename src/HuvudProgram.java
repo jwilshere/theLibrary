@@ -166,26 +166,28 @@ public class HuvudProgram {
                             }
                         }
                         switch (val3) {
-                            case 1: // Lägg till ny bok
+                            case 1: //
 
                                 fortsatt3 = false;
                                 break;
-                            case 2: // Radera bok
+                            case 2: //
 
                                 fortsatt3 = false;
                                 break;
-                            case 3: // Sök på boktitel
+                            case 3: //
 
                                 fortsatt3 = false;
                                 break;
-                            case 4: // Visa alla böcker
+                            case 4: // kolla om användare är susp
                                 System.out.println("Skriv in användarID: ");
                                 int banvID = Integer.parseInt(scan.nextLine());
                                 ai.checkIfSuspended(banvID);
                                 fortsatt3 = false;
                                 break;
-                            case 5: // Visa alla böcker
-
+                            case 5: // Öka en delay på användare
+                                System.out.println("Skriv in användarID: ");
+                                int banID = Integer.parseInt(scan.nextLine());
+                                hm.updateDelays(banID);
                                 fortsatt3 = false;
                                 break;
 

@@ -53,6 +53,21 @@ public class HelpMethod extends Getset{
         return null;
     }
 
+    public boolean updateDelays (int UserId) {
+        HelpMethod HM = new HelpMethod(object);
+        int antaldelays = 0;
+        User anvandare = HM.getAUser(UserId);
+        antaldelays = getAUser(UserId).Delays + 1;
+        try {
+            HM.setDelays(UserId, antaldelays);
+            System.out.println("Delay är uppdaterad på användaren med ID: " + UserId);
+        } catch (SQLException ex) {
+            System.out.println("Something went wrong with database connection");
+
+        }
+        return true;
+    }
+
     public ArrayList<User> getUsers() {
         ArrayList<User> userLista = new ArrayList<>();
         try {
