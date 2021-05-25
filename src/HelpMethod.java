@@ -59,8 +59,13 @@ public class HelpMethod extends Getset{
         User anvandare = HM.getAUser(UserId);
         antaldelays = getAUser(UserId).Delays + 1;
         try {
-            HM.setDelays(UserId, antaldelays);
-            System.out.println("Delay är uppdaterad på användaren med ID: " + UserId);
+            if (HM.getAUser(UserId).getId() == UserId) {
+                HM.setDelays(UserId, antaldelays);
+                System.out.println("Delay är uppdaterad på användaren med ID: " + UserId);
+            }
+            else {
+                System.out.println("Användaren finns ej"); }
+
         } catch (SQLException ex) {
             System.out.println("Something went wrong with database connection");
 
