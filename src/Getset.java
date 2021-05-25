@@ -129,7 +129,7 @@ public class Getset {
         }
     }
 
-    public void removeBookFromUSer(int bookId) throws SQLException{
+    public void removeBookFromUSer(int bookId, int userId) throws SQLException{
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root","philip98")) {
 
@@ -138,10 +138,33 @@ public class Getset {
 
             PreparedStatement bookDateIn = conn.prepareStatement("UPDATE Book SET BorrowedOnDate = null WHERE book.id = " + "'" + bookId + "'");
             bookDateIn.executeUpdate();
+
+            int itemsBorrowed = getItemsborrowed(userId) - 1;
+
+            PreparedStatement itemsBorrowedIn = conn.prepareStatement("UPDATE user SET ItemBorrowed = " + "'" + itemsBorrowed + "'" + "WHERE user.id = " + "'" + userId + "'");
+            itemsBorrowedIn.executeUpdate();
         }
         catch (SQLException ex) {
             System.out.println("Something went wrong" + ex.getMessage());
         }
+    }
+
+    public int getItemsborrowed(int userId){
+        int itemsBorrowed = 0;
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
+                "root","philip98")) {
+
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT user.ItemBorrowed from user WHERE user.Id = " + "'" + userId + "'");
+
+            while(rs.next()){
+                itemsBorrowed = rs.getInt("ItemBorrowed");
+            }
+        }
+        catch (SQLException ex) {
+            System.out.println("Something went wrong" + ex.getMessage());
+        }
+        return itemsBorrowed;
     }
 
    public Book[] getBooksBorrowedByUser(int userId) throws SQLException{
@@ -163,7 +186,6 @@ public class Getset {
         catch (SQLException ex) {
             System.out.println("Something went wrong" + ex.getMessage());
         }
-
         return booksLendedByUser;
     }
 
@@ -202,8 +224,12 @@ public class Getset {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException{
         Getset hej = new Getset();
         hej.connectDB(); // FÖRSTA GÅNGEN MAN STARTAR BARA !!!!!!!!!!!!!!!!!
+
+        hej.removeBookFromUSer(1234,1234);
+
+
     }
 }

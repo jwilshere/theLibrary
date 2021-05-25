@@ -109,7 +109,7 @@ public class AdminInteraction {
         HM.getAUser(userId).bookLista = newBokLista;
 
         try {
-            object.removeBookFromUSer(bookId);
+            object.removeBookFromUSer(bookId, userId);
         } catch (SQLException ex) {
             System.out.println("Something went wrong with database connection");
         }
