@@ -183,8 +183,31 @@ public class HelpMethod extends Getset{
         return ISBN;
     }
 
+    public ArrayList<Book> getDelayedBooks(){
+        ArrayList<Book> delayedBooks = new ArrayList<>();
+
+        java.util.Date dagensDatum = java.sql.Date.valueOf(LocalDate.now());
+
+        for(Book s: getBooks()){
+            if(s.getBorrowed() != null){
+                Calendar c = Calendar.getInstance();
+                c.setTime(s.getBorrowed());
+                c.add(Calendar.DATE, 15);
+                if(c.getTime().compareTo(dagensDatum) < 0){
+                    delayedBooks.add(s);
+                }
+            }
+        }
+        return delayedBooks;
+    }
+
     public static void main(String[] args) {
         Getset hejda = new Getset();
         HelpMethod hej = new HelpMethod(hejda);
+
+        for(Book s: hej.getDelayedBooks()){
+            System.out.println(s.getId());
+        }
+
     }
 }
