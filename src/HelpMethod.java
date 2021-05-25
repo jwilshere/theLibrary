@@ -201,6 +201,21 @@ public class HelpMethod extends Getset{
         return delayedBooks;
     }
 
+    public boolean updateDelays (int UserId){
+        HelpMethod HM = new HelpMethod(object);
+        int antaldelays;
+        antaldelays = getAUser(UserId).Delays +1;
+
+        try {
+            HM.setDelays(UserId, antaldelays);
+            System.out.println("Delays uppdaterades på användaren!");
+        }catch (SQLException ex) {
+            System.out.println("Something went wrong with database connection");
+
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         Getset hejda = new Getset();
         HelpMethod hej = new HelpMethod(hejda);

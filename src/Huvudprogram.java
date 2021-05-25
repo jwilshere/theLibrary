@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 
-public class HuvudProgram {
+public class Huvudprogram {
 
     public static void main(String[] args) {
 
