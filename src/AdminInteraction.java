@@ -14,7 +14,7 @@ public class AdminInteraction {
         object = obj;
     }
 
-   /*  public void deleteUser(int userId){
+   /* public void deleteUser(int userId){
          object = new Getset();
          int nummer = object.getAUser(userId).getId();
 
@@ -194,12 +194,10 @@ public class AdminInteraction {
             if (s.getPersonId() == PersonID) {
                 System.out.println("Användare är redan registrerad!");
                 return false;
-
             }
         }
 
             int Id = HM.generateUserId();
-
             //  object.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1,0, null);
             try {
                 HM.setUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1, 0, null);
