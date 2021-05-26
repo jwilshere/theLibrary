@@ -45,12 +45,12 @@ public class AdminInteraction {
                 logger.error("Kollade inte ifall användaren var suspenderad, metodfel!");
             }
             System.out.println("Det har gått 15 dagar, användaren är inte suspenderad längre");
-            return true;
+            return false;
         }
 
         System.out.println("Är suspenderad");
         logger.trace("<--- checkIdSuspended");
-        return false;
+        return true;
     }
 
     public boolean suspendUser (int UserId){
@@ -86,26 +86,31 @@ public class AdminInteraction {
     }
 
     public void checkIfUserCanLend(int ISBN, int userId)  { //inparametern blir en metod (requestForBook)
+        logger.trace("---> checkIfUserLend");
+
         HelpMethod HM = new HelpMethod(object);
         int nmrBooks = HM.getAllBooksOnISBN(ISBN).size();
 
-        for(int i = 0; i < nmrBooks; i++){
-            Book bok;
-            bok = HM.getAllBooksOnISBN(ISBN).get(i);
-            if(bok.getBorrowed() == null){
-                System.out.println("Bok med detta ISBN på ID: " + bok.getId() + " är ledig och kommer att lånas ut till användare med iD " + userId);
-                HM.addBookToAUser(userId, bok.getId());
-                break;
+            for (int i = 0; i < nmrBooks; i++) {
+                Book bok;
+                bok = HM.getAllBooksOnISBN(ISBN).get(i);
+                if (bok.getBorrowed() == null) {
+                    System.out.println("Bok med detta ISBN på ID: " + bok.getId() + " är ledig och kommer att lånas ut till användare med ID: " + userId);
+                    HM.addBookToAUser(userId, bok.getId());
+                    logger.info("Bok med ID: " + bok.getId() + " lånades ut till användare med ID: " + userId);
+                    break;
+                } else
+                    System.out.println("Bok med detta ISBN på ID: " + bok.getId() + " är tyvärr inte ledig och kommer INTE att lånas ut");
             }
-            else System.out.println("Bok med detta ISBN på ID: " + bok.getId() + " är tyvärr inte ledig och kommer INTE att lånas ut");
-        }
+        logger.trace("<--- checkIfUserLend");
     }
 
     public void ReturnBook (int userId, int bookId) {
+        logger.trace("---> ReturnBook");
+
         HelpMethod HM = new HelpMethod(object);
         Book[] bokLista = HM.getAUser(userId).getBookLista();
         Book[] newBokLista = new Book[10];
-        int nmr = 0;
 
         int i = 0;
         int x = 0;
@@ -128,8 +133,9 @@ public class AdminInteraction {
             object.removeBookFromUSer(bookId, userId);
         } catch (SQLException ex) {
             System.out.println("Something went wrong with database connection");
+            logger.error("Användare lades inte till i databasen, metodfel");
         }
-
+        logger.trace("<--- ReturnBook");
     }
 
     public boolean RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ) { //Går inte att testa pga random UserID

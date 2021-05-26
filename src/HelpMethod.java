@@ -138,60 +138,71 @@ public class HelpMethod extends Getset{
     }
 
     public int requestBook(String title, int userId) {
+        logger.trace("---> requestBook");
+        AdminInteraction AI = new AdminInteraction(object);
+
+        Boolean checkIf = AI.checkIfSuspended(userId);
         int ISBN = 0;
         int userType;
         userType = getAUser(userId).getType();
         User anvandare = getAUser(userId);
 
-        switch (userType) {
-            case 3:
-                if (userType == 3) {
-                    if(anvandare.getItemsBorrowed() >= 3){
-                        System.out.print("Denna användare har lånat max antal böcker, kan låna: ");
-                        break;
-                    }
-                    else {
-                        ISBN = getISBNOnTitle(title);
-                        break;
-                    }
-                }
+        if(checkIf.equals(false)) {
 
-            case 5:
-                if (userType == 5) {
-                    if(anvandare.getItemsBorrowed() >= 5){
-                        System.out.print("Denna användare har lånat max antal böcker, kan låna: ");
-                        break;
+            switch (userType) {
+                case 3:
+                    if (userType == 3) {
+                        if (anvandare.getItemsBorrowed() >= 3) {
+                            System.out.print("Denna användare har lånat max antal böcker, kan låna: ");
+                            break;
+                        } else {
+                            ISBN = getISBNOnTitle(title);
+                            logger.info("Användare med ID: " + userId + " kan låna bok med ISBN: " + ISBN);
+                            break;
+                        }
                     }
-                    else {
-                        ISBN = getISBNOnTitle(title);
-                        break;
-                    }
-                }
 
-            case 8:
-                if (userType == 8) {
-                    if(anvandare.getItemsBorrowed() >= 8){
-                        System.out.println("Denna användare har lånat max antal böcker, kan låna: ");
-                        break;
+                case 5:
+                    if (userType == 5) {
+                        if (anvandare.getItemsBorrowed() >= 5) {
+                            System.out.print("Denna användare har lånat max antal böcker, kan låna: ");
+                            break;
+                        } else {
+                            ISBN = getISBNOnTitle(title);
+                            logger.info("Användare med ID: " + userId + " kan låna bok med ISBN: " + ISBN);
+                            break;
+                        }
                     }
-                    else {
-                        ISBN = getISBNOnTitle(title);
-                        break;
-                    }
-                }
 
-            case 10:
-                if (userType == 10) {
-                    if(anvandare.getItemsBorrowed() >= 10){
-                        System.out.print("Denna användare har lånat max antal böcker, kan lånda: ");
-                        break;
+                case 8:
+                    if (userType == 8) {
+                        if (anvandare.getItemsBorrowed() >= 8) {
+                            System.out.println("Denna användare har lånat max antal böcker, kan låna: ");
+                            break;
+                        } else {
+                            ISBN = getISBNOnTitle(title);
+                            logger.info("Användare med ID: " + userId + " kan låna bok med ISBN: " + ISBN);
+                            break;
+                        }
                     }
-                    else {
-                        ISBN = getISBNOnTitle(title);
-                        break;
+
+                case 10:
+                    if (userType == 10) {
+                        if (anvandare.getItemsBorrowed() >= 10) {
+                            System.out.print("Denna användare har lånat max antal böcker, kan lånda: ");
+                            break;
+                        } else {
+                            ISBN = getISBNOnTitle(title);
+                            logger.info("Användare med ID: " + userId + " kan låna bok med ISBN: " + ISBN);
+                            break;
+                        }
                     }
-                }
+            }
         }
+        System.out.println("Användare får lov att låna bok med ISBN : " + ISBN);
+        System.out.println();
+
+        logger.trace("<--- requestBook");
         return ISBN;
     }
 
@@ -214,6 +225,8 @@ public class HelpMethod extends Getset{
     }
 
     public boolean updateDelays (int UserId){
+        logger.trace("---> updateDelays");
+
         HelpMethod HM = new HelpMethod(object);
         int antaldelays;
         antaldelays = getAUser(UserId).Delays +1;
@@ -223,8 +236,10 @@ public class HelpMethod extends Getset{
             System.out.println("Delays uppdaterades på användaren!");
         }catch (SQLException ex) {
             System.out.println("Something went wrong with database connection");
+            logger.error("Delays uppdaterades inte, metodfel");
 
         }
+        logger.trace("<--- updateDelays");
         return true;
     }
 

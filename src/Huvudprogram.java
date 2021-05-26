@@ -27,9 +27,10 @@ public class Huvudprogram {
             System.out.println("¨¨¨¨¨¨¨¨¨¨¨ HUVUDMENY ¨¨¨¨¨¨¨¨¨¨¨");
             System.out.println(" 1 - Hantera böcker");
             System.out.println(" 2 - Hantera användare");
-            System.out.println(" 3 - Återlämna bok");
-            System.out.println(" 4 - Kolla om användare får låna");
-            System.out.println(" 5 - Visa alla försenade böcker");
+            System.out.println(" 3 - Kolla ifall användare kan låna bok");
+            System.out.println(" 4 - Låna bok till användare");
+            System.out.println(" 5 - Återlämna bok");
+            System.out.println(" 6 - Visa alla försenade böcker");
            /* System.out.println(" 6 - ");
             System.out.println(" 7 - ");
             System.out.println(" 8 - ");
@@ -230,8 +231,11 @@ public class Huvudprogram {
                                 break;
                             case 5: // Öka en delay på användare
                                 System.out.println("Skriv in användarID: ");
-                                int banID = Integer.parseInt(scan.nextLine());
-                                hm.updateDelays(banID);
+                                int delay = Integer.parseInt(scan.nextLine());
+
+                                logger.debug(String.format("delay=%d", delay));
+
+                                hm.updateDelays(delay);
                                 fortsatt3 = false;
                                 break;
                         }
@@ -241,13 +245,12 @@ public class Huvudprogram {
                     fortsatt = false;
                     break;
 
-                case 3: //återlämna bok
-                    System.out.println("Skriv in användarID:");
-                    int libid = Integer.parseInt(scan.nextLine());
-                    System.out.println("Skriv in bokID:");
-                    int klibid = Integer.parseInt(scan.nextLine());
-
-                    //<--
+                case 3:
+                    System.out.println("Skriv in boktitel: ");
+                    String bTitel = scan.nextLine();
+                    System.out.println("Skriv in användarID: ");
+                    int userid = Integer.parseInt(scan.nextLine());
+                    hm.requestBook(bTitel, userid);
                     fortsatt = false;
                     break;
 
@@ -256,62 +259,46 @@ public class Huvudprogram {
                     int isbn = Integer.parseInt(scan.nextLine());
                     System.out.println("Skriv in användarID:");
                     int uid = Integer.parseInt(scan.nextLine());
+
+                    logger.debug(String.format("uid=%d, isbn=%d", uid, isbn));
+
                     ai.checkIfUserCanLend(isbn,uid); // <--
                     fortsatt = false;
                     break;
 
-                case 5:
-
-                    fortsatt = false;
-                    break;
-                case 6:
-                /*System.out.println("Skriv in boktitel:");
-                try {
-                String titel = scan.nextLine();
-                if (hm.getISBNOnTitle(titel) > 0) {
-                System.out.println(titel + " har ISBN: " + hm.getISBNOnTitle(titel)); }
-
-                else {
-                    System.out.println("Ingen bok med denna titel existerar");
-                    }
-                }
-                catch (NumberFormatException n) {}
-
-                fortsatt = false;
-                break;
-
-                 */
-                case 7:
-                   /* System.out.println("Skriv in boktitel:");
-                    String titel1 = scan.nextLine();
-                    System.out.println("Skriv in ISBN:");
-                    int bid = Integer.parseInt(scan.nextLine());
+                case 5: //återlämna bok
+                    System.out.println("Skriv in användarID:");
+                    int useId = Integer.parseInt(scan.nextLine());
                     System.out.println("Skriv in bokID:");
-                    int isbn1 = Integer.parseInt(scan.nextLine());
-                    try {
-                       gs.addBook(bid,titel1,isbn1);
-                        System.out.println();
+                    int bookId = Integer.parseInt(scan.nextLine());
+
+                    logger.debug(String.format("useId=%d, bookId=%d", useId, bookId));
+
+                    ai.ReturnBook(useId, bookId);
+                    //<--
+                    fortsatt = false;
+                    break;
+
+                case 6:
+                    System.out.println("-----Böcker som inte är lämnade i tid-----");
+                    for (Book b: hm.getDelayedBooks()) {
+                        System.out.println(b.getTitle() + " med bokID: " + b.getId());
                     }
-                    catch (Exception n) {}
-
+                    System.out.println();
                     fortsatt = false;
                     break;
 
-                    */
-                case 8:
-                    //System.out.println("Skriv in titel på boken:");
-                    //String title = scan.nextLine();
-                    //System.out.println("Skriv in användarID:");
-                    //int userid = Integer.parseInt(scan.nextLine());
 
-                    //ai.checkIfSuspended(userid);//<--
-                    fortsatt = false;
-                    break;
             }
         }
         while (val != 0);
         {
-            System.out.println("Välkommen åter!");
+            System.out.println();
+            System.out.println("\t\t  Välkommen åter!");
+            System.out.println("----------------------------------");
+            System.out.println("| ©Copyright: Håkan's Pågar 2021 |");
+            System.out.println("----------------------------------");
+            System.out.println();
         }
         logger.info("Ending");
     }
