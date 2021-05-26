@@ -1,0 +1,63 @@
+2021-05-26 15:24:22,626 INFO Huvudprogram [main] Starting
+2021-05-26 15:25:08,895 DEBUG Huvudprogram [main] titel1=Marres padelhall, bid=9589, isbn1=987654
+2021-05-26 15:25:08,895 TRACE Getset [main] ---> addBok
+2021-05-26 15:25:09,421 TRACE Getset [main] <--- addBok
+2021-05-26 15:25:58,982 DEBUG Huvudprogram [main] bokid=9589
+2021-05-26 15:25:58,982 TRACE Getset [main] ---> deleteBok
+2021-05-26 15:25:59,036 TRACE Getset [main] <--- deleteBok
+2021-05-26 15:26:30,277 DEBUG Huvudprogram [main] bokid=0
+2021-05-26 15:26:30,277 TRACE Getset [main] ---> deleteBok
+2021-05-26 15:26:30,320 TRACE Getset [main] <--- deleteBok
+2021-05-26 15:26:44,048 DEBUG Huvudprogram [main] bokid=93123781
+2021-05-26 15:26:44,048 TRACE Getset [main] ---> deleteBok
+2021-05-26 15:26:44,086 TRACE Getset [main] <--- deleteBok
+2021-05-26 15:28:45,984 TRACE HelpMethod [main] ---> getISBNOnTitle
+2021-05-26 15:28:46,045 TRACE HelpMethod [main] <--- getISBNOnTitle
+2021-05-26 15:29:10,113 INFO Huvudprogram [main] Starting
+2021-05-26 15:29:19,905 TRACE HelpMethod [main] ---> getISBNOnTitle
+2021-05-26 15:29:20,412 TRACE HelpMethod [main] <--- getISBNOnTitle
+2021-05-26 15:29:20,412 DEBUG Huvudprogram [main] titel=KaffeKaos
+2021-05-26 15:29:20,412 TRACE HelpMethod [main] ---> getISBNOnTitle
+2021-05-26 15:29:20,457 TRACE HelpMethod [main] <--- getISBNOnTitle
+2021-05-26 15:29:59,191 TRACE HelpMethod [main] ---> requestBook
+2021-05-26 15:29:59,192 TRACE AdminInteraction [main] ---> checkIdSuspended
+2021-05-26 15:29:59,245 TRACE AdminInteraction [main] <--- checkIdSuspended
+2021-05-26 15:29:59,328 TRACE HelpMethod [main] <--- requestBook
+2021-05-26 15:31:34,210 DEBUG Huvudprogram [main] uid=1234, isbn=282828
+2021-05-26 15:31:34,210 TRACE AdminInteraction [main] ---> checkIfUserLend
+2021-05-26 15:31:34,568 INFO AdminInteraction [main] Bok med ID: 4444 lånades ut till användare med ID: 1234
+2021-05-26 15:31:34,568 TRACE AdminInteraction [main] <--- checkIfUserLend
+2021-05-26 15:33:47,897 DEBUG Huvudprogram [main] useId=1234, bookId=4444
+2021-05-26 15:33:47,897 TRACE AdminInteraction [main] ---> ReturnBook
+2021-05-26 15:33:48,046 TRACE AdminInteraction [main] <--- ReturnBook
+2021-05-26 15:35:43,134 INFO Huvudprogram [main] Ending
+2021-05-26 15:39:17,622 TRACE AdminInteraction [main] ---> suspendUser
+2021-05-26 15:39:19,057 TRACE AdminInteraction [main] <--- suspendUser
+2021-05-26 15:39:24,475 TRACE AdminInteraction [main] ---> ReturnBook
+2021-05-26 15:39:24,481 TRACE AdminInteraction [main] <--- ReturnBook
+2021-05-26 15:39:24,495 TRACE AdminInteraction [main] ---> suspendUser
+2021-05-26 15:39:25,116 TRACE AdminInteraction [main] <--- suspendUser
+2021-05-26 15:39:25,122 TRACE HelpMethod [main] ---> requestBook
+2021-05-26 15:39:25,123 TRACE AdminInteraction [main] ---> checkIdSuspended
+2021-05-26 15:39:25,238 TRACE AdminInteraction [main] <--- checkIdSuspended
+2021-05-26 15:39:25,239 TRACE HelpMethod [main] ---> getISBNOnTitle
+2021-05-26 15:39:25,239 TRACE HelpMethod [main] <--- getISBNOnTitle
+2021-05-26 15:39:25,244 INFO HelpMethod [main] Användare med ID: 4444 kan låna bok med ISBN: 22
+2021-05-26 15:39:25,245 TRACE HelpMethod [main] <--- requestBook
+2021-05-26 15:39:25,246 TRACE HelpMethod [main] ---> requestBook
+2021-05-26 15:39:25,246 TRACE AdminInteraction [main] ---> checkIdSuspended
+2021-05-26 15:39:25,308 TRACE AdminInteraction [main] <--- checkIdSuspended
+2021-05-26 15:39:25,309 TRACE HelpMethod [main] ---> getISBNOnTitle
+2021-05-26 15:39:25,309 TRACE HelpMethod [main] <--- getISBNOnTitle
+2021-05-26 15:39:25,309 INFO HelpMethod [main] Användare med ID: 4444 kan låna bok med ISBN: 22
+2021-05-26 15:39:25,310 TRACE HelpMethod [main] <--- requestBook
+2021-05-26 15:39:25,320 TRACE HelpMethod [main] ---> deleteUser
+2021-05-26 15:39:25,325 TRACE HelpMethod [main] <--- deleteUser
+2021-05-26 15:39:25,356 TRACE AdminInteraction [main] ---> checkIfUserLend
+2021-05-26 15:39:25,389 INFO AdminInteraction [main] Bok med ID: 1 lånades ut till användare med ID: 4444
+2021-05-26 15:39:25,390 TRACE AdminInteraction [main] <--- checkIfUserLend
+2021-05-26 15:39:25,390 TRACE AdminInteraction [main] ---> checkIfUserLend
+2021-05-26 15:39:25,394 INFO AdminInteraction [main] Bok med ID: 2 lånades ut till användare med ID: 4444
+2021-05-26 15:39:25,394 TRACE AdminInteraction [main] <--- checkIfUserLend
+2021-05-26 15:40:43,888 INFO Huvudprogram [main] Starting
+2021-05-26 15:40:51,727 INFO Huvudprogram [main] Ending
