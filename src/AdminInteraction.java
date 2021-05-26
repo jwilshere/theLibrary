@@ -1,4 +1,6 @@
 import com.sun.security.jgss.GSSUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 
 public class AdminInteraction {
+    private static Logger logger = LogManager.getLogger(AdminInteraction.class.getName());
     Getset object;
 
     public AdminInteraction(Getset obj){
@@ -15,6 +18,8 @@ public class AdminInteraction {
     }
 
     public boolean checkIfSuspended(int UserId) {
+        logger.trace("---> checkIdSuspended");
+
         Getset hoj = new Getset();
         HelpMethod object = new HelpMethod(hoj);
 
@@ -24,6 +29,7 @@ public class AdminInteraction {
 
         if (datum == null){
             System.out.println("Användaren är inte suspenderad!");
+            logger.trace("<--- checkIdSuspended");
             return false;
         }
 
@@ -36,25 +42,32 @@ public class AdminInteraction {
                 object.resetSuspend(UserId);
             }catch (SQLException e) {
                 System.out.println("Something went wrong with database connection");
+                logger.error("Kollade inte ifall användaren var suspenderad, metodfel!");
             }
             System.out.println("Det har gått 15 dagar, användaren är inte suspenderad längre");
             return true;
         }
 
         System.out.println("Är suspenderad");
+        logger.trace("<--- checkIdSuspended");
         return false;
     }
 
     public boolean suspendUser (int UserId){
+        logger.trace("---> suspendUser");
+
         HelpMethod HM = new HelpMethod(object);
         User anvandare = HM.getAUser(UserId);
 
         if (anvandare.Delays <=2 || anvandare.Delays ==4 || anvandare.Delays ==5 || anvandare.Delays ==7 || anvandare.Delays ==8 ){
             System.out.println("Användare ska inte suspenderas");
+            logger.error("Användaren suspenderades inte pga för lite Delays");
+            logger.trace("<--- suspendUser");
             return false;
         }
         else if (HM.getAUser(UserId).Delays == 9){
             System.out.println("Radera denna användare");
+            logger.trace("<--- suspendUser");
             return false;
         }
         if(anvandare.getDelays() == 3 || anvandare.getDelays() == 6 ){
@@ -65,8 +78,10 @@ public class AdminInteraction {
                 System.out.println("Användaren är härmed suspenderad!");
             }catch (SQLException e) {
                 System.out.println("Something went wrong with database connection");
+                logger.error("Användaren suspenderades inte, metodfel!");
             }
         }
+        logger.trace("<--- suspendUser");
         return true;
     }
 
@@ -118,6 +133,8 @@ public class AdminInteraction {
     }
 
     public boolean RegisterUser(String Fnamn, String Lnamn, int PersonID, int Typ) { //Går inte att testa pga random UserID
+        logger.trace("---> RegisterUser");
+
         object = new Getset();
         HelpMethod HM = new HelpMethod(object);
 
@@ -133,7 +150,9 @@ public class AdminInteraction {
             object.addUser(Id, Fnamn, Lnamn, PersonID, Typ, 0, Typ, 1, 0, null);
         } catch (SQLException ex) {
             System.out.println("Something went wrong with database connection");
+            logger.error("Användaren lades inte till, metodfel!");
         }
+        logger.trace("<--- RegisterUser");
             return true;
     }
 
@@ -141,6 +160,5 @@ public class AdminInteraction {
         Getset obj = new Getset();
         AdminInteraction hoj = new AdminInteraction(obj);
         hoj.ReturnBook(1234, 1234);
-
     }
 }

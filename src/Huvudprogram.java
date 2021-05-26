@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Huvudprogram {
     private static Logger logger = LogManager.getLogger(Huvudprogram.class.getName());
+
     public static void main(String[] args) {
         logger.info("Starting");
 
@@ -100,6 +101,7 @@ public class Huvudprogram {
                                 System.out.println("Vill du radera bok med ID: " + bokid + " Y/N ?");
                                 char yOn2 = scan.nextLine().charAt(0);
                                 if (yOn2 == 'Y' || yOn2 == 'y') {
+                                    logger.debug(String.format("bokid=%d", bokid));
                                     gs.deleteBook(bokid);
                                     System.out.println();
                                     System.out.println();
@@ -115,8 +117,8 @@ public class Huvudprogram {
                                 try {
                                     String titel = scan.nextLine();
                                     if (hm.getISBNOnTitle(titel) > 0) {
+                                        logger.debug(String.format("titel=%s", titel));
                                         System.out.println(titel + " har ISBN: " + hm.getISBNOnTitle(titel)); }
-
                                     else {
                                         System.out.println("Ingen bok med denna titel existerar");
                                     }
@@ -180,23 +182,27 @@ public class Huvudprogram {
                                 int pid = Integer.parseInt(scan.nextLine());
                                 System.out.println("Ange typ:");
                                 int typ = Integer.parseInt(scan.nextLine());
+
+                                logger.debug(String.format("fnamn=%s, lnamn=%s", fnamn, lnamn));
+
                                 ai.RegisterUser(fnamn, lnamn, pid, typ);
 
                                 fortsatt3 = false;
                                 break;
                             case 2: //
                                 System.out.println("Skriv in användarID:");
-                                int uiiid = Integer.parseInt(scan.nextLine());
-                                if (uiiid == hm.getAUser(uiiid).Id) {
+                                int userId = Integer.parseInt(scan.nextLine());
+                                if (userId == hm.getAUser(userId).Id) {
                                     System.out.println("Vill du verkligen radera användaren? Y/N");
                                     char yOn1 = scan.nextLine().charAt(0);
                                     if (yOn1 == 'Y' || yOn1 == 'y') {
                                         try {
-                                            hm.deleteUser(uiiid); }
-
+                                            logger.debug(String.format("userId=%d", userId));
+                                            hm.deleteUser(userId);
+                                        }
                                         catch (IndexOutOfBoundsException i) {};
 
-                                        System.out.println("Användare med ID " + uiiid + " är borttagen");
+                                        System.out.println("Användare med ID " + userId + " är borttagen");
                                     }
                                     else {
                                         System.out.println("Användaren är inte borttagen");
@@ -209,9 +215,11 @@ public class Huvudprogram {
                                 break;
                             case 3: // suspend user
                                 System.out.println("Skriv in användarID:");
-                                int busig = Integer.parseInt(scan.nextLine());
-                                ai.suspendUser(busig);
+                                int usId = Integer.parseInt(scan.nextLine());
 
+                                logger.debug(String.format("usId=%d", usId));
+
+                                ai.suspendUser(usId);
                                 fortsatt3 = false;
                                 break;
                             case 4: // kolla om användare är susp

@@ -59,7 +59,6 @@ public class Getset {
     }
 
     public void deleteUser(int userId) throws SQLException {
-
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root", "philip98")) {
 
@@ -109,10 +108,11 @@ public class Getset {
             bookIn.setInt(3, ISBN);
 
             bookIn.executeUpdate();
+            System.out.println("Bok med ID: " + id + " är tillagd!");
         }
         catch (SQLException ex) {
             System.out.println("Something went wrong" + ex.getMessage());
-            logger.info("Metoden gick inte igenom!");
+            logger.error("Ingen bok lades till, metodfel!");
         }
         logger.trace("<--- addBok");
     }
@@ -175,6 +175,8 @@ public class Getset {
     }
 
     public void deleteBook(int id){
+        logger.trace("---> deleteBok");
+
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Admin?serverTimezone=UTC",
                 "root", "philip98")) {
 
@@ -184,8 +186,10 @@ public class Getset {
         }
         catch(SQLException ex){
             System.out.println("Something went wrong");
+            logger.error("Ingen bok raderades, metodfel!");
         }
         System.out.println("Bok raderad!");
+        logger.trace("<--- deleteBok");
     }
 
    public Book[] getBooksBorrowedByUser(int userId) throws SQLException{

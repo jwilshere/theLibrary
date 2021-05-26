@@ -1,8 +1,13 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 
 public class HelpMethod extends Getset{
+    private static Logger logger = LogManager.getLogger(HelpMethod.class.getName());
+
     User anvandare;
     Book bok;
     Getset object;
@@ -58,6 +63,8 @@ public class HelpMethod extends Getset{
 
 
     public void deleteUser(int userId){
+        logger.trace("---> deleteUser");
+
         int nummer = getAUser(userId).getId();
         User user = getAUser(userId);
 
@@ -65,6 +72,7 @@ public class HelpMethod extends Getset{
             object.deleteUser(userId);
         }catch (SQLException e) {
             System.out.println("Something went wrong with database connection");
+            logger.error("Användaren raderades inte, metodfel!");
         }
 
         if (nummer == userId) {
@@ -75,7 +83,9 @@ public class HelpMethod extends Getset{
         }
         else {
             System.out.println("User dosen't exist");
+            logger.error("Användaren som skulle raderats fanns inte, orsak: användare fanns inte!");
         }
+        logger.trace("<--- deleteUser");
     }
 
     public User getAUserOnPersonId(int personId){
@@ -102,6 +112,8 @@ public class HelpMethod extends Getset{
     }
 
     public int getISBNOnTitle (String bookTitle){
+        logger.trace("---> getISBNOnTitle");
+
         bok = new Book();
 
         for(Book s: getBooks()) {
@@ -109,7 +121,7 @@ public class HelpMethod extends Getset{
                 bok = s;
             }
         }
-
+        logger.trace("<--- getISBNOnTitle");
         return bok.getISBN();
     }
 
