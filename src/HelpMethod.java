@@ -155,20 +155,25 @@ public class HelpMethod extends Getset{
         return bok.getISBN();
     }
 
-    /*
-    public int generateUserId(){
-        Random random = new Random();
-        int randomUserID = random.nextInt(8999) + 1000;
 
-        for(User s: getUsers()){
-            if(s.getId() == randomUserID){
-                generateUserId();
+    public ArrayList<Book> getDelayedBooks(){
+        ArrayList<Book> delayedBooks = new ArrayList<>();
+
+        java.util.Date dagensDatum = java.sql.Date.valueOf(LocalDate.now());
+
+        for(Book s: getBooks()){
+            if(s.getBorrowed() != null){
+                Calendar c = Calendar.getInstance();
+                c.setTime(s.getBorrowed());
+                c.add(Calendar.DATE, 15);
+                if(c.getTime().compareTo(dagensDatum) < 0){
+                    delayedBooks.add(s);
+                }
             }
         }
-        return randomUserID;
+        return delayedBooks;
     }
 
-*/
     public int requestBook(String title, int userId) {
         int ISBN = 0;
         int userType;

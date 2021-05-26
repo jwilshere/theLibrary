@@ -238,7 +238,7 @@ public class HuvudProgram {
                     System.out.println("Skriv in bokID:");
                     int klibid = Integer.parseInt(scan.nextLine());
 
-                    //<--
+
                     fortsatt = false;
                     break;
 
@@ -252,7 +252,11 @@ public class HuvudProgram {
                     break;
 
                 case 5:
-
+                    System.out.println("-----Böcker som inte är lämnade i tid-----");
+                    for (Book b: hm.getDelayedBooks()) {
+                        System.out.println(b.getTitle() + " lånad av användarID: " + b.getId());
+                    }
+                    System.out.println();
                     fortsatt = false;
                     break;
                 case 6:
